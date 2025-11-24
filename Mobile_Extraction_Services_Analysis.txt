@@ -1,0 +1,226 @@
+================================================================================
+NZIFDA - Mobile Extraction Services Legal Analysis
+New Zealand Insoluble Fuel Disposal Agency
+================================================================================
+
+ANALYSIS: Mobile Extraction Services - Legal and Compliance Issues
+
+Date: December 2024
+Prepared by: NZIFDA Regulatory Analysis
+
+================================================================================
+EXECUTIVE SUMMARY
+================================================================================
+
+After reviewing the website content, New Zealand regulations, and compliance 
+requirements, mobile extraction services for misfueled vehicles are likely 
+ILLEGAL or NON-COMPLIANT with New Zealand law. All remediation must occur at 
+certified fixed facilities.
+
+================================================================================
+KEY FINDINGS
+================================================================================
+
+1. DANGEROUS GOODS ACT 1974 - TRANSPORTATION REQUIREMENTS
+--------------------------------------------------------------------------------
+
+The website states: "Operators must hold a valid Dangerous Goods License to 
+transport and handle contaminated fuel."
+
+Critical Issues:
+• Contaminated fuel is classified as a hazardous substance
+• Transporting contaminated fuel requires:
+  - Dangerous Goods License (specifically for transport)
+  - Approved transport vehicles/containers
+  - Proper labeling and packaging per EPA standards
+  - Route planning and safety protocols
+
+Mobile Service Problem:
+Mobile extraction services would need to transport contaminated fuel from 
+customer locations (fuel stations, roadsides, customer premises) back to 
+disposal facilities. This triggers full Dangerous Goods transportation 
+requirements, which are extremely difficult to comply with for mobile operations.
+
+2. WASTE TRACKING DOCUMENTATION - POINT OF GENERATION
+--------------------------------------------------------------------------------
+
+MfE Guidelines require complete tracking from generation to disposal.
+
+Critical Issues:
+• Waste tracking must begin at the point where contaminated fuel is generated
+• Mobile extraction creates contaminated fuel at the customer location 
+  (not a licensed facility)
+• Transport must be documented immediately with proper forms
+• Operator must be present at generation point to sign tracking documentation
+
+Mobile Service Problem:
+When mobile extraction occurs at a fuel station or customer location, the 
+contaminated fuel is "generated" at that uncontrolled location. This creates 
+significant compliance challenges:
+- Generation occurs at unlicensed, uncontrolled locations
+- Waste tracking forms must be completed on-site
+- Transport documentation must begin immediately
+- All parties must sign at the generation point
+
+Fixed Facility Advantage:
+When vehicles are towed to fixed facilities, the contaminated fuel generation 
+can be properly documented at a licensed, controlled facility with proper 
+containment and documentation systems.
+
+3. EPA HAZARDOUS SUBSTANCES REGULATIONS
+--------------------------------------------------------------------------------
+
+EPA requires proper storage, handling, and labeling of hazardous substances.
+
+Critical Issues:
+• Contaminated fuel must be stored in approved containers
+• Proper labeling required at point of extraction
+• Safety Data Sheets must be available
+• Emergency response capability required
+
+Mobile Service Problem:
+Mobile operations would need:
+- Approved storage containers on mobile vehicles
+- Proper labeling at point of extraction (customer location)
+- Safety Data Sheets available on-site
+- Emergency response capability at variable, uncontrolled locations
+
+Fixed Facility Advantage:
+Fixed facilities provide controlled environments with proper containment, 
+labeling systems, and emergency response equipment readily available.
+
+4. CURRENT WEBSITE GUIDANCE IMPLIES FIXED FACILITIES
+--------------------------------------------------------------------------------
+
+Evidence from website content:
+
+Emergency Response Page states:
+"Step 3: Arrange Safe Transport - If the vehicle is at a fuel station, arrange 
+for towing to the operator's facility."
+
+Certification Page states:
+"Step 3: Site Inspection - We conduct an on-site inspection of your facilities 
+and equipment to verify equipment meets certification standards, facilities are 
+properly maintained..."
+
+Standards Page states:
+"Fuel Extraction Protocol - Complete contaminated fuel removal using certified 
+vacuum extraction systems per industry specifications."
+
+These references all point to FIXED FACILITIES, not mobile services.
+
+5. HEALTH AND SAFETY AT WORK REGULATIONS 2017
+--------------------------------------------------------------------------------
+
+Workplace safety requirements for handling hazardous substances.
+
+Critical Issues:
+• Risk assessments required for all work locations
+• Proper PPE and safety protocols
+• Emergency response procedures
+• Controlled work environments
+
+Mobile Service Problem:
+Mobile work at variable locations creates:
+- Uncontrolled environmental conditions
+- Variable site safety factors
+- Difficult emergency response planning
+- Harder to enforce PPE and safety protocols
+- Higher risk of accidents and spills
+
+6. ENVIRONMENTAL PROTECTION CONCERNS
+--------------------------------------------------------------------------------
+
+Resource Management Act 1991 requires environmental protection.
+
+Critical Issues:
+• Spill containment and response
+• Proper drainage and containment
+• Environmental impact mitigation
+
+Mobile Service Problem:
+Mobile extraction at uncontrolled locations increases:
+- Risk of spills at fuel stations, roadsides, customer premises
+- Difficulty containing spills at variable locations
+- Environmental contamination risk
+- Compliance with Resource Management Act harder to ensure
+
+7. PRACTICAL COMPLIANCE BARRIERS
+--------------------------------------------------------------------------------
+
+Even if technically possible, mobile services face:
+
+Insurance:
+- Higher insurance costs for mobile operations
+- More complex liability coverage requirements
+
+Licensing:
+- Need both Dangerous Goods License for transport AND handling
+- More complex licensing requirements
+
+Waste Tracking:
+- Must complete tracking forms at customer location
+- More complex documentation requirements
+- Harder to ensure compliance
+
+Equipment:
+- Mobile equipment harder to certify
+- More complex maintenance and calibration
+- Harder to ensure proper containment
+
+Compliance Monitoring:
+- NZIFDA must monitor operations at variable locations
+- Harder to conduct inspections
+- More difficult to verify compliance
+
+================================================================================
+LEGAL CONCLUSION
+================================================================================
+
+Mobile extraction services are likely ILLEGAL or NON-COMPLIANT because:
+
+1. They require transporting hazardous waste (contaminated fuel) from 
+   uncontrolled locations, which triggers full Dangerous Goods transportation 
+   requirements that are extremely difficult to comply with for mobile operations.
+
+2. Waste tracking must begin at the point of generation (customer location), 
+   creating significant compliance challenges at uncontrolled, unlicensed locations.
+
+3. Fixed facilities provide better control, safety, and regulatory compliance 
+   - which is why the website already directs customers to fixed facilities.
+
+4. The proper, compliant process is: Vehicle towed → Fixed facility → Extraction 
+   → Proper disposal.
+
+================================================================================
+RECOMMENDATIONS
+================================================================================
+
+1. Update website to explicitly state that mobile extraction services are 
+   NON-COMPLIANT
+
+2. Clarify that all remediation must occur at certified fixed facilities
+
+3. Update emergency response guidance to emphasize towing to facilities
+
+4. Add to certification requirements that operators must have fixed facilities
+
+5. Update standards to specify fixed facility requirements
+
+6. Add FAQ entry explaining why mobile services are not permitted
+
+================================================================================
+REGULATORY REFERENCES
+================================================================================
+
+• Dangerous Goods Act 1974 - Transportation requirements
+• Resource Management Act 1991 - Environmental protection
+• Hazardous Substances Act 1996 - Contaminated fuel management
+• Health and Safety at Work (Hazardous Substances) Regulations 2017
+• MfE Guidelines 2000 - Used oil and fuel disposal standards
+• EPA Hazardous Substances Regulations - Storage, handling, labeling
+
+================================================================================
+END OF ANALYSIS
+================================================================================
+
