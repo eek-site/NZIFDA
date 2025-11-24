@@ -1292,17 +1292,25 @@
             <div class="report-section">
                 <h2>Submit Compliance Concern</h2>
                 <p style="font-size: 1.2rem; margin-bottom: 2rem;">Report illegal or non-compliant operators. NZIFDA reports all illegal operators to WorkSafe New Zealand, the Environmental Protection Authority (EPA), and relevant local authorities for enforcement action.</p>
-                <form class="report-form">
+                <form class="report-form" id="indexReportForm">
                     <div class="form-group">
-                        <label for="company">Organization Name</label>
+                        <label for="report-name">Your Name *</label>
+                        <input type="text" id="report-name" name="report-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="report-email">Your Email *</label>
+                        <input type="email" id="report-email" name="report-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Organization Name (Being Reported) *</label>
                         <input type="text" id="company" name="company" required>
                     </div>
                     <div class="form-group">
-                        <label for="location">Location</label>
-                        <input type="text" id="location" name="location" required>
+                        <label for="location">Location *</label>
+                        <input type="text" id="location" name="location" required placeholder="City, region">
                     </div>
                     <div class="form-group">
-                        <label for="violation">Non-Compliance Category</label>
+                        <label for="violation">Non-Compliance Category *</label>
                         <select id="violation" name="violation" required>
                             <option value="">Select category...</option>
                             <option value="incomplete">Inadequate fuel extraction procedures</option>
@@ -1311,11 +1319,17 @@
                             <option value="disposal">Non-compliant waste disposal methods</option>
                             <option value="documentation">Insufficient documentation/warranty</option>
                             <option value="certification">Operating without proper certification</option>
+                            <option value="mobile">Operating mobile extraction services (non-compliant)</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="details">Detailed Description</label>
-                        <textarea id="details" name="details" required></textarea>
+                        <label for="details">Detailed Description *</label>
+                        <textarea id="details" name="details" required placeholder="Please provide as much detail as possible about the non-compliance issue"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="report-date">Date of Incident (if applicable)</label>
+                        <input type="date" id="report-date" name="report-date">
                     </div>
                     <button type="submit" class="btn-submit">Submit Compliance Report</button>
                 </form>
@@ -1490,17 +1504,139 @@
         <span>Issue</span>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        // Power Automate endpoint
+        const POWER_AUTOMATE_URL = 'https://default61ffc6bcd9ce458b8120d32187c377.0d.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/9a207992d26c4e73bd974dab2623c9c0/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=EL1ZRvFplGo3NgrPzLqb1eUoe29BNQF-pxmOla6U0Cw';
+        
+        // Function to format form data for email (two columns)
+        function formatFormDataForEmail(formData, formType) {
+            let html = '<table style="border-collapse: collapse; width: 100%; font-family: Arial, sans-serif;">';
+            html += '<tr style="background-color: #f0f0f0;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left; width: 30%;">Field</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Value</th></tr>';
+            
+            // Add form type as first row
+            html += '<tr><td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">Form Type</td><td style="border: 1px solid #ddd; padding: 8px;">' + formType + '</td></tr>';
+            
+            // Add all form fields
+            for (const [key, value] of Object.entries(formData)) {
+                if (value && value.toString().trim() !== '') {
+                    const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()).replace(/-/g, ' ').replace(/report /g, '');
+                    html += '<tr><td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">' + label + '</td><td style="border: 1px solid #ddd; padding: 8px;">' + (value.toString().replace(/\n/g, '<br>')) + '</td></tr>';
+                }
+            }
+            
+            html += '</table>';
+            return html;
+        }
+        
+        // Function to generate subject line
+        function generateSubject(formType, formData) {
+            let subject = 'NZIFDA Form Submission: ' + formType;
+            
+            if (formType === 'General Contact') {
+                const subjectType = formData.subject || 'General Inquiry';
+                subject += ' - ' + subjectType;
+                if (formData.name) subject += ' from ' + formData.name;
+            } else if (formType === 'Certification Application') {
+                const certType = formData['cert-type'] || 'Unknown Type';
+                subject += ' - ' + certType;
+                if (formData['cert-company']) subject += ' - ' + formData['cert-company'];
+            } else if (formType === 'Compliance Report') {
+                const violation = formData['comp-violation'] || formData.violation || 'Unknown Category';
+                subject += ' - ' + violation;
+                if (formData['comp-company'] || formData.company) {
+                    subject += ' - ' + (formData['comp-company'] || formData.company);
+                }
+            }
+            
+            return subject;
+        }
+        
+        // Function to submit form to Power Automate
+        async function submitToPowerAutomate(formType, formData) {
+            try {
+                const emailBody = formatFormDataForEmail(formData, formType);
+                const subject = generateSubject(formType, formData);
+                
+                const payload = {
+                    formType: formType,
+                    subject: subject,
+                    emailBody: emailBody,
+                    formData: formData
+                };
+                
+                const response = await fetch(POWER_AUTOMATE_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const result = await response.json();
+                return { success: true, result: result };
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                return { success: false, error: error.message };
+            }
+        }
+        
+        // Function to collect form data
+        function collectFormData(form) {
+            const formData = {};
+            const inputs = form.querySelectorAll('input, select, textarea');
+            
+            inputs.forEach(input => {
+                if (input.name && input.name !== '') {
+                    if (input.type === 'checkbox' || input.type === 'radio') {
+                        if (input.checked) {
+                            formData[input.name] = input.value;
+                        }
+                    } else {
+                        formData[input.name] = input.value || '';
+                    }
+                }
+            });
+            
+            return formData;
+        }
+        
         // Mobile menu toggle
         function toggleMobileMenu() {
             document.getElementById('mobileNav').classList.toggle('active');
         }
         
-        // Form submission handler
-        document.querySelector('.report-form').addEventListener('submit', function(e) {
+        // Form submission handler for index page report form
+        document.querySelector('#indexReportForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            alert('Compliance report submitted. This matter will be investigated according to NZIFDA protocols. Thank you for maintaining industry standards.');
-            this.reset();
+            const form = this;
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            // Disable button and show loading
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            
+            try {
+                const formData = collectFormData(form);
+                const result = await submitToPowerAutomate('Compliance Report', formData);
+                
+                if (result.success) {
+                    alert('Thank you for your compliance report. This matter will be investigated according to NZIFDA protocols. Thank you for maintaining industry standards.');
+                    form.reset();
+                } else {
+                    alert('There was an error submitting your report. Please try again or contact us directly.');
+                }
+            } catch (error) {
+                alert('There was an error submitting your report. Please try again or contact us directly.');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+            }
         });
 
         // Smooth scroll for navigation links
