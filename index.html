@@ -370,7 +370,8 @@
             border-bottom: 3px solid var(--accent);
             padding: 1rem 0;
             position: relative;
-            margin-top: 80px;
+            margin-top: 100px;
+            z-index: 999;
         }
         
         .alert-content {
@@ -798,6 +799,11 @@
                 padding: 1rem 1.5rem;
             }
             
+            .header {
+                height: auto;
+                min-height: 70px;
+            }
+            
             .nav-links {
                 display: none;
             }
@@ -806,9 +812,14 @@
                 display: block;
             }
             
+            .alert-banner {
+                margin-top: 70px;
+                padding: 0.875rem 0;
+            }
+            
             .hero {
                 padding: 3rem 1.5rem;
-                margin-top: 80px;
+                margin-top: 0;
             }
             
             .hero h2 {
@@ -897,7 +908,7 @@
             <p class="hero-subtitle">Setting and Enforcing Professional Standards for Misfuel Recovery & Vehicle Remediation</p>
             <div class="hero-actions">
                 <a href="#report" class="btn btn-primary">Report Non-Compliance</a>
-                <a href="certification.html" class="btn btn-secondary">Apply for Certification</a>
+                <a href="certification.html" class="btn btn-secondary">Get the NZIFDA Mark</a>
             </div>
         </div>
     </section>
@@ -942,29 +953,75 @@
             </div>
         </section>
 
-        <!-- Certification Status -->
+        <!-- NZIFDA Mark -->
         <section class="section" id="certification">
             <div class="section-header">
-                <h2>Compliance Status Registry</h2>
+                <h2>The NZIFDA Mark</h2>
             </div>
-            <div class="status-grid">
-                <div class="status-card status-certified">
-                    <span class="status-badge badge-certified">Fully Compliant</span>
-                    <h3>Certified Operators</h3>
-                    <div class="status-count" style="color: var(--success);">127</div>
-                    <p>Meeting all NZIFDA standards and authorized for fuel remediation services</p>
+            <div style="max-width: 1000px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8;">
+                <div style="background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 2rem;">
+                    <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--text-dark);">Certified Operators Carry the NZIFDA Mark</h3>
+                    <p style="margin-bottom: 1.5rem;">The NZIFDA Mark is the official certification symbol that identifies compliant operators and certified workshops authorized to provide fuel contamination remediation services in New Zealand. When you see the NZIFDA Mark, you can be confident that the operator meets our rigorous standards for quality, compliance, and professional service.</p>
+                    <div style="background: var(--surface); padding: 1.5rem; border-radius: 6px; border-left: 4px solid var(--success); margin: 1.5rem 0;">
+                        <h4 style="font-family: 'Oswald', sans-serif; color: var(--success); margin-bottom: 1rem; font-size: 1.3rem;">What the NZIFDA Mark Means:</h4>
+                        <ul style="margin-left: 2rem; margin-bottom: 0;">
+                            <li>Operator has completed comprehensive certification process</li>
+                            <li>Fixed facility meets all regulatory requirements</li>
+                            <li>Staff are properly trained and qualified</li>
+                            <li>Equipment meets NZIFDA standards</li>
+                            <li>Insurance and licensing are current</li>
+                            <li>Compliance with all New Zealand regulations</li>
+                            <li>Commitment to quality service and customer protection</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="status-card status-warning">
-                    <span class="status-badge badge-warning">Pending Review</span>
-                    <h3>Under Assessment</h3>
-                    <div class="status-count" style="color: var(--warning);">34</div>
-                    <p>Currently undergoing compliance assessment and verification procedures</p>
+                
+                <div style="background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 2rem;">
+                    <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--text-dark);">Two-Tier Certification Structure</h3>
+                    <p style="margin-bottom: 1.5rem;">NZIFDA operates a two-tier certification system designed to ensure quality service delivery and efficient job allocation:</p>
+                    
+                    <div style="background: var(--surface); padding: 2rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid var(--accent);">
+                        <h4 style="font-family: 'Oswald', sans-serif; color: var(--accent); margin-bottom: 1rem; font-size: 1.3rem;">Compliant Operators (Management Layer)</h4>
+                        <p style="margin-bottom: 1rem;"><strong>Investment:</strong> $15,000 + GST</p>
+                        <p style="margin-bottom: 1rem;">Compliant Operators serve as the management layer of the NZIFDA certification system. They are responsible for:</p>
+                        <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                            <li>Receiving and managing customer inquiries and job requests</li>
+                            <li>Allocating work to certified workshops under their license</li>
+                            <li>Ensuring quality control and compliance across their network</li>
+                            <li>Managing customer relationships and service delivery</li>
+                            <li>Overseeing documentation and warranty processes</li>
+                            <li>Coordinating with certified workshops for service execution</li>
+                        </ul>
+                        <p style="margin-bottom: 0; font-weight: 600;">Compliant Operators act as the interface between customers and certified workshops, ensuring efficient job allocation and maintaining service standards.</p>
+                    </div>
+                    
+                    <div style="background: var(--surface); padding: 2rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid var(--success);">
+                        <h4 style="font-family: 'Oswald', sans-serif; color: var(--success); margin-bottom: 1rem; font-size: 1.3rem;">Certified Workshops (Service Delivery)</h4>
+                        <p style="margin-bottom: 1rem;"><strong>Investment:</strong> $1,500 + GST (operating under a Compliant Operator license)</p>
+                        <p style="margin-bottom: 1rem;">Certified Workshops are the service delivery facilities that perform the actual fuel remediation work. They operate under the license and management of a Compliant Operator. Certified Workshops:</p>
+                        <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                            <li>Perform fuel extraction and system remediation at fixed facilities</li>
+                            <li>Operate under the oversight of their Compliant Operator</li>
+                            <li>Receive job allocations from their Compliant Operator</li>
+                            <li>Maintain fixed facility standards and equipment</li>
+                            <li>Follow NZIFDA protocols and procedures</li>
+                            <li>Provide quality service under the NZIFDA Mark</li>
+                        </ul>
+                        <p style="margin-bottom: 0; font-weight: 600;">Workshops must operate under a Compliant Operator license - they cannot operate independently. This structure ensures proper management, quality control, and regulatory compliance.</p>
+                    </div>
                 </div>
-                <div class="status-card status-blacklisted">
-                    <span class="status-badge badge-blacklist">Non-Compliant</span>
-                    <h3>Suspended Operators</h3>
-                    <div class="status-count" style="color: var(--danger);">89</div>
-                    <p>Failed to meet minimum compliance standards - NOT AUTHORIZED</p>
+                
+                <div style="background: rgba(59, 130, 246, 0.1); padding: 2rem; border-radius: 8px; border-left: 4px solid var(--accent);">
+                    <h4 style="font-family: 'Oswald', sans-serif; color: var(--accent); margin-bottom: 1rem; font-size: 1.3rem;">How the System Works</h4>
+                    <p style="margin-bottom: 1rem;">When a customer needs misfuel remediation services:</p>
+                    <ol style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Customer contacts a <strong>Compliant Operator</strong> (who carries the NZIFDA Mark)</li>
+                        <li>Compliant Operator assesses the job and allocates it to an appropriate <strong>Certified Workshop</strong> in their network</li>
+                        <li>Certified Workshop performs the remediation work at their fixed facility</li>
+                        <li>Compliant Operator manages the customer relationship, documentation, and warranty</li>
+                        <li>Both operate under the NZIFDA Mark, ensuring quality and compliance</li>
+                    </ol>
+                    <p style="margin-bottom: 0; font-weight: 600;">This structure provides customers with a single point of contact (Compliant Operator) while ensuring work is performed at certified facilities (Certified Workshops) with proper oversight and quality control.</p>
                 </div>
             </div>
         </section>
@@ -1163,6 +1220,7 @@
                 <h3>Quick Links</h3>
                 <ul>
                     <li><a href="certification.html">Certification Process</a></li>
+                    <li><a href="#certification">NZIFDA Mark</a></li>
                     <li><a href="#standards">Industry Standards</a></li>
                     <li><a href="#report">Report Violations</a></li>
                     <li><a href="#compliance">Compliance Check</a></li>

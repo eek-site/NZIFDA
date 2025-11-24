@@ -116,7 +116,7 @@
                 <div class="contact-card">
                     <h3>Emergency</h3>
                     <p><strong>For misfuel emergencies:</strong></p>
-                    <p>Contact a <a href="index.html#certification">certified operator</a> immediately</p>
+                    <p>Contact an operator displaying the <a href="index.html#certification">NZIFDA Mark</a> immediately</p>
                     <p><strong>DO NOT START YOUR ENGINE</strong></p>
                 </div>
             </div>
@@ -150,7 +150,21 @@
             </form>
 
             <h2 id="certification-form">Certification Application Form</h2>
+            <p style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--accent); border-radius: 4px;"><strong>Two-Tier System:</strong> Compliant Operators ($15,000 + GST) serve as the management layer. Certified Workshops ($1,500 + GST) must operate under a Compliant Operator license.</p>
             <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for your certification application. We will review your submission and contact you within 10-15 business days.'); this.reset();">
+                <div class="form-group">
+                    <label for="cert-type">Certification Type *</label>
+                    <select id="cert-type" name="cert-type" required onchange="toggleCertFields()">
+                        <option value="">Select certification type...</option>
+                        <option value="compliant-operator">Compliant Operator ($15,000 + GST)</option>
+                        <option value="certified-workshop">Certified Workshop ($1,500 + GST)</option>
+                    </select>
+                </div>
+                <div class="form-group" id="workshop-operator-group" style="display: none;">
+                    <label for="cert-operator">Compliant Operator License Holder *</label>
+                    <input type="text" id="cert-operator" name="cert-operator" placeholder="Name of Compliant Operator you will operate under">
+                    <small style="display: block; margin-top: 0.5rem; color: #64748b;">Required for Certified Workshop applications</small>
+                </div>
                 <div class="form-group">
                     <label for="cert-company">Company/Organization Name *</label>
                     <input type="text" id="cert-company" name="cert-company" required>
@@ -163,25 +177,34 @@
                     <label for="cert-email">Email Address *</label>
                     <input type="email" id="cert-email" name="cert-email" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="facility-group">
                     <label for="cert-facility">Fixed Facility Address *</label>
                     <textarea id="cert-facility" name="cert-facility" required placeholder="Full address of your fixed facility"></textarea>
+                    <small style="display: block; margin-top: 0.5rem; color: #64748b;">Required for Certified Workshop applications</small>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="license-group">
                     <label for="cert-license">Dangerous Goods License Number *</label>
-                    <input type="text" id="cert-license" name="cert-license" required>
+                    <input type="text" id="cert-license" name="cert-license" placeholder="Required for Certified Workshop applications">
+                    <small style="display: block; margin-top: 0.5rem; color: #64748b;">Required for Certified Workshop applications</small>
                 </div>
                 <div class="form-group">
                     <label for="cert-insurance">Insurance Provider & Policy Number *</label>
                     <input type="text" id="cert-insurance" name="cert-insurance" required placeholder="Provider name and policy number">
                 </div>
-                <div class="form-group">
-                    <label for="cert-equipment">Equipment Description *</label>
-                    <textarea id="cert-equipment" name="cert-equipment" required placeholder="Describe your vacuum extraction and remediation equipment"></textarea>
+                <div class="form-group" id="equipment-group">
+                    <label for="cert-equipment">Equipment Description</label>
+                    <textarea id="cert-equipment" name="cert-equipment" placeholder="Describe your vacuum extraction and remediation equipment (Required for Certified Workshop applications)"></textarea>
+                    <small style="display: block; margin-top: 0.5rem; color: #64748b;">Required for Certified Workshop applications</small>
+                </div>
+                <div class="form-group" id="staff-group">
+                    <label for="cert-staff">Number of Trained Staff</label>
+                    <input type="number" id="cert-staff" name="cert-staff" min="1" placeholder="Required for Certified Workshop applications">
+                    <small style="display: block; margin-top: 0.5rem; color: #64748b;">Required for Certified Workshop applications</small>
                 </div>
                 <div class="form-group">
-                    <label for="cert-staff">Number of Trained Staff *</label>
-                    <input type="number" id="cert-staff" name="cert-staff" required min="1">
+                    <label for="cert-management">Management Systems & Capabilities</label>
+                    <textarea id="cert-management" name="cert-management" placeholder="Describe your management systems, customer service capabilities, and network coordination processes (Important for Compliant Operator applications)"></textarea>
+                    <small style="display: block; margin-top: 0.5rem; color: #64748b;">Important for Compliant Operator applications</small>
                 </div>
                 <div class="form-group">
                     <label for="cert-additional">Additional Information</label>
@@ -189,6 +212,34 @@
                 </div>
                 <button type="submit" class="btn">Submit Certification Application</button>
             </form>
+            <script>
+                function toggleCertFields() {
+                    const certType = document.getElementById('cert-type').value;
+                    const workshopOperatorGroup = document.getElementById('workshop-operator-group');
+                    const facilityGroup = document.getElementById('facility-group');
+                    const licenseGroup = document.getElementById('license-group');
+                    const equipmentGroup = document.getElementById('equipment-group');
+                    const staffGroup = document.getElementById('staff-group');
+                    
+                    if (certType === 'certified-workshop') {
+                        workshopOperatorGroup.style.display = 'block';
+                        document.getElementById('cert-operator').required = true;
+                        facilityGroup.querySelector('textarea').required = true;
+                        licenseGroup.querySelector('input').required = true;
+                        equipmentGroup.querySelector('textarea').required = true;
+                        staffGroup.querySelector('input').required = true;
+                    } else if (certType === 'compliant-operator') {
+                        workshopOperatorGroup.style.display = 'none';
+                        document.getElementById('cert-operator').required = false;
+                        facilityGroup.querySelector('textarea').required = false;
+                        licenseGroup.querySelector('input').required = false;
+                        equipmentGroup.querySelector('textarea').required = false;
+                        staffGroup.querySelector('input').required = false;
+                    } else {
+                        workshopOperatorGroup.style.display = 'none';
+                    }
+                }
+            </script>
 
             <h2 id="compliance-form">Compliance Report Form</h2>
             <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for your compliance report. This matter will be investigated according to NZIFDA protocols.'); this.reset();">
