@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Fuel Stations - NZIFDA</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600&display=swap');
+        :root { --primary: #1a1a1a; --danger: #dc2626; --warning: #f59e0b; --success: #16a34a; --accent: #0369a1; --surface: #f8fafc; --border: #e2e8f0; --text: #334155; --text-dark: #0f172a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Barlow', sans-serif; background: var(--surface); color: var(--text); line-height: 1.8; }
+        .header { background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%); padding: 1rem 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative; }
+        .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: white; font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 700; }
+        .logo a { color: white; text-decoration: none; }
+        .back-link { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; display: none; }
+        .back-link:hover { color: var(--danger); }
+        .mobile-menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; }
+        .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--primary); padding: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 999; }
+        .mobile-nav.active { display: block; }
+        .mobile-nav a { display: block; color: white; text-decoration: none; padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .mobile-nav a:hover { background: rgba(255,255,255,0.1); color: var(--danger); }
+        @media (min-width: 768px) {
+            .header { padding: 1.5rem 2rem; }
+            .logo { font-size: 1.5rem; }
+            .back-link { display: inline-block; }
+            .mobile-menu-toggle { display: none; }
+        }
+        .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+        .content { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        @media (min-width: 768px) {
+            .container { margin: 3rem auto; padding: 0 2rem; }
+            .content { padding: 3rem; }
+        }
+        h1 { font-family: 'Oswald', sans-serif; font-size: 2.5rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 4px solid var(--danger); padding-bottom: 1rem; }
+        h2 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; color: var(--text-dark); margin-top: 2.5rem; margin-bottom: 1rem; }
+        h3 { font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: var(--text-dark); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        p { margin-bottom: 1rem; }
+        ul, ol { margin-left: 2rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.5rem; }
+        .warning-box { background: rgba(220, 38, 38, 0.15); padding: 2rem; border-radius: 8px; margin: 2rem 0; border: 3px solid var(--danger); }
+        .warning-box h2 { color: var(--danger); margin-top: 0; }
+        .info-card { background: var(--surface); padding: 2rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid var(--accent); }
+        .info-card h3 { margin-top: 0; }
+        .action-box { background: rgba(22, 163, 74, 0.1); padding: 2rem; border-radius: 8px; margin: 2rem 0; border-left: 4px solid var(--success); }
+        .btn { display: inline-block; padding: 1rem 2rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; font-weight: 600; margin: 0.5rem 0.5rem 0.5rem 0; transition: background 0.3s; }
+        .btn:hover { background: var(--danger); }
+        .btn-secondary { background: var(--success); }
+        .btn-secondary:hover { background: #13803d; }
+        .footer { background: var(--primary); color: white; padding: 2rem; text-align: center; margin-top: 4rem; }
+        .footer a { color: var(--danger); text-decoration: none; }
+        .quick-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .quick-link-card { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid var(--accent); }
+        .quick-link-card h3 { margin-top: 0; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><a href="index.html">NZIFDA</a></div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </div>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="for-consumers.html">For Consumers</a>
+            <a href="for-operators.html">For Operators</a>
+            <a href="for-fuel-stations.html">For Fuel Stations</a>
+            <a href="index.html#fuel-station-obligations">Your Obligations</a>
+            <a href="resources.html">Resources</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+    </script>
+    <div class="container">
+        <div class="content">
+            <h1>For Fuel Stations</h1>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Fuel stations have critical legal obligations under New Zealand law regarding misfuel incidents and operator access to their sites. Understanding and complying with these obligations protects your business from fines, legal liability, and environmental damage.</p>
+            
+            <div class="warning-box">
+                <h2>⚠️ CRITICAL LEGAL OBLIGATION</h2>
+                <p style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">Fuel stations must NOT allow mobile extraction operators onto their sites.</p>
+                <p style="font-size: 1.1rem; margin-bottom: 1rem;">All fuel remediation must occur at certified fixed facilities. Fuel stations that allow mobile operators on their premises may face significant fines and legal consequences under New Zealand law.</p>
+                <p style="margin-bottom: 0; font-weight: 600;">Protect your business: Only allow operators displaying the NZIFDA Mark who operate from certified fixed facilities.</p>
+            </div>
+
+            <h2>Your Legal Obligations</h2>
+
+            <div class="info-card">
+                <h3>1. Health and Safety at Work Act 2015</h3>
+                <p><strong>PCBU (Person Conducting a Business or Undertaking) Duties:</strong></p>
+                <p>Fuel stations are PCBUs with legal obligations under sections 36-37:</p>
+                <ul>
+                    <li><strong>Primary Duty of Care:</strong> Ensure the health and safety of workers and other persons (including customers and contractors) who may be affected by your work</li>
+                    <li><strong>Site Control:</strong> Control your workplace and ensure only authorized, compliant contractors operate on your premises</li>
+                    <li><strong>Risk Management:</strong> Allowing mobile extraction operators creates uncontrolled risks including spills, environmental contamination, and safety hazards</li>
+                    <li><strong>Due Diligence:</strong> Verify that any contractor operating on your site has proper licenses, insurance, and certification</li>
+                </ul>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--danger);">Penalties: Up to $3 million for corporate entities and up to $600,000 and/or 5 years imprisonment for individuals.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>2. Resource Management Act 1991</h3>
+                <p><strong>Environmental Protection Obligations:</strong></p>
+                <ul>
+                    <li><strong>Discharge Controls:</strong> Prevent any discharge of contaminants (including contaminated fuel) into the environment</li>
+                    <li><strong>Site Contamination:</strong> Allowing mobile extraction operations increases the risk of spills and environmental contamination</li>
+                    <li><strong>Waste Management:</strong> Mobile operators cannot properly manage hazardous waste at uncontrolled locations</li>
+                </ul>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--danger);">Penalties: Up to $600,000 for companies and up to $300,000 for individuals.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>3. Dangerous Goods Act 1974</h3>
+                <p><strong>Transportation and Handling Requirements:</strong></p>
+                <ul>
+                    <li><strong>Licensed Transport:</strong> Only operators with valid Dangerous Goods licenses can transport contaminated fuel</li>
+                    <li><strong>Proper Handling:</strong> Contaminated fuel must be handled at licensed facilities with proper containment</li>
+                    <li><strong>Site Safety:</strong> Ensure that any dangerous goods operations on your site comply with all safety requirements</li>
+                </ul>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--danger);">Penalties: Fines and potential imprisonment for breaches.</p>
+            </div>
+
+            <div class="info-card">
+                <h3>4. Hazardous Substances Regulations</h3>
+                <p><strong>EPA and Health and Safety Requirements:</strong></p>
+                <ul>
+                    <li><strong>Proper Storage:</strong> Contaminated fuel must be stored in approved containers at licensed facilities</li>
+                    <li><strong>Waste Tracking:</strong> Waste tracking documentation must begin at the point of generation</li>
+                    <li><strong>Emergency Response:</strong> Ensure that any hazardous substance operations have proper emergency response capabilities</li>
+                </ul>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--danger);">Penalties: Significant fines for non-compliance.</p>
+            </div>
+
+            <h2>Why Mobile Extraction is Non-Compliant</h2>
+            <div style="background: var(--surface); padding: 2rem; border-radius: 8px; margin: 2rem 0;">
+                <p style="margin-bottom: 1rem; font-weight: 600;">Mobile extraction services cannot meet New Zealand regulatory requirements because:</p>
+                <ul style="margin-left: 2rem; margin-bottom: 0;">
+                    <li><strong>No Fixed Facilities:</strong> All remediation must occur at certified fixed facilities with proper containment</li>
+                    <li><strong>Transportation Issues:</strong> Mobile operators would need to transport contaminated fuel, triggering full Dangerous Goods transportation requirements</li>
+                    <li><strong>Waste Tracking:</strong> Waste tracking must begin at the point of generation, creating compliance challenges at uncontrolled locations</li>
+                    <li><strong>Environmental Risks:</strong> Mobile extraction increases the risk of spills and environmental contamination</li>
+                    <li><strong>Safety Concerns:</strong> Uncontrolled work environments create safety hazards</li>
+                    <li><strong>No Certification:</strong> NZIFDA cannot and will not certify mobile extraction services</li>
+                </ul>
+            </div>
+
+            <div class="action-box">
+                <h3 style="font-family: 'Oswald', sans-serif; color: var(--success); margin-bottom: 1rem; font-size: 1.4rem;">✅ What Fuel Stations Must Do</h3>
+                <ol style="margin-left: 2rem; margin-bottom: 1rem;">
+                    <li><strong>Refuse Mobile Operators:</strong> Do not allow mobile extraction operators onto your site, regardless of customer requests</li>
+                    <li><strong>Verify Certification:</strong> Only allow operators who can display the NZIFDA Mark and operate from certified fixed facilities</li>
+                    <li><strong>Direct to Certified Operators:</strong> Direct customers to contact NZIFDA-certified operators who will arrange towing to their fixed facilities</li>
+                    <li><strong>Report Non-Compliance:</strong> If mobile operators attempt to operate on your site, report them using our compliance reporting form</li>
+                    <li><strong>Protect Your Business:</strong> By refusing mobile operators, you protect your business from legal liability, fines, and environmental contamination risks</li>
+                </ol>
+                <p style="margin-bottom: 0; font-weight: 600;">✅ <strong>The Compliant Process:</strong> When a misfuel occurs at your station, the vehicle must be towed to a certified fixed facility for proper remediation. This ensures compliance with all New Zealand regulations and protects your fuel station from legal liability.</p>
+            </div>
+
+            <div style="background: rgba(220, 38, 38, 0.1); padding: 2rem; border-radius: 8px; margin: 2rem 0; border-left: 4px solid var(--danger);">
+                <h3 style="font-family: 'Oswald', sans-serif; color: var(--danger); margin-bottom: 1rem; font-size: 1.3rem;">⚠️ Legal Protection</h3>
+                <p style="margin-bottom: 0; font-weight: 600; color: var(--text-dark);">Fuel stations that allow mobile operators on their premises may be held jointly liable for any environmental contamination, safety incidents, or regulatory breaches that occur. Protect your business by only allowing NZIFDA-certified operators with fixed facilities.</p>
+            </div>
+
+            <h2>How to Verify Certified Operators</h2>
+            <div style="background: var(--surface); padding: 2rem; border-radius: 8px; margin: 2rem 0;">
+                <p style="margin-bottom: 1rem; font-weight: 600;">Look for operators displaying the NZIFDA Mark:</p>
+                <div style="text-align: center; margin: 2rem 0; padding: 2rem; background: white; border-radius: 8px; border: 2px solid var(--accent);">
+                    <div style="display: inline-block; padding: 1.5rem; background: white; border: 4px solid var(--accent); border-radius: 12px;">
+                        <div style="font-family: 'Oswald', sans-serif; font-size: 2.5rem; font-weight: 700; line-height: 1; margin-bottom: 0.5rem;">
+                            <span style="color: var(--text-dark);">NZ</span><span style="color: var(--danger);">IF</span><span style="color: var(--accent);">DA</span>
+                        </div>
+                        <div style="width: 100px; height: 4px; background: linear-gradient(90deg, var(--danger) 0%, var(--accent) 100%); margin: 0.5rem auto; border-radius: 2px;"></div>
+                        <div style="font-size: 0.8rem; color: var(--text); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.5rem;">Certified</div>
+                    </div>
+                </div>
+                <p style="margin-bottom: 1rem;">Operators carrying the NZIFDA Mark have:</p>
+                <ul style="margin-left: 2rem; margin-bottom: 0;">
+                    <li>Valid Dangerous Goods licenses</li>
+                    <li>Proper insurance coverage ($2M+ professional indemnity)</li>
+                    <li>Certified fixed facilities (mobile services are illegal)</li>
+                    <li>Compliance with all New Zealand regulations</li>
+                    <li>Proper waste tracking and disposal procedures</li>
+                </ul>
+            </div>
+
+            <h2>Quick Links</h2>
+            <div class="quick-links">
+                <div class="quick-link-card">
+                    <h3>Your Legal Obligations</h3>
+                    <p>Detailed information about fuel station obligations and legal requirements.</p>
+                    <a href="index.html#fuel-station-obligations" class="btn">View Obligations</a>
+                </div>
+                <div class="quick-link-card">
+                    <h3>Report Non-Compliance</h3>
+                    <p>Report mobile operators attempting to operate on your site.</p>
+                    <a href="index.html#report" class="btn">Report Now</a>
+                </div>
+                <div class="quick-link-card">
+                    <h3>Resources & Legislation</h3>
+                    <p>Access all relevant legislation and regulatory resources.</p>
+                    <a href="resources.html" class="btn">View Resources</a>
+                </div>
+                <div class="quick-link-card">
+                    <h3>Contact NZIFDA</h3>
+                    <p>Get in touch with questions about your obligations.</p>
+                    <a href="contact.html" class="btn">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 NZIFDA - New Zealand Insoluble Fuel Disposal Agency</p>
+        <p><a href="index.html">Home</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookies-policy.html">Cookies Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+    </footer>
+</body>
+</html>
+

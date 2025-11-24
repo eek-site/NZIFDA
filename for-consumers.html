@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Consumers - I've Misfueled - NZIFDA</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600&display=swap');
+        :root { --primary: #1a1a1a; --danger: #dc2626; --warning: #f59e0b; --success: #16a34a; --accent: #0369a1; --surface: #f8fafc; --border: #e2e8f0; --text: #334155; --text-dark: #0f172a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Barlow', sans-serif; background: var(--surface); color: var(--text); line-height: 1.8; }
+        .header { background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%); padding: 1rem 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative; }
+        .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: white; font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 700; }
+        .logo a { color: white; text-decoration: none; }
+        .back-link { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; display: none; }
+        .back-link:hover { color: var(--danger); }
+        .mobile-menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; }
+        .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--primary); padding: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 999; }
+        .mobile-nav.active { display: block; }
+        .mobile-nav a { display: block; color: white; text-decoration: none; padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .mobile-nav a:hover { background: rgba(255,255,255,0.1); color: var(--danger); }
+        @media (min-width: 768px) {
+            .header { padding: 1.5rem 2rem; }
+            .logo { font-size: 1.5rem; }
+            .back-link { display: inline-block; }
+            .mobile-menu-toggle { display: none; }
+        }
+        .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+        .content { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        @media (min-width: 768px) {
+            .container { margin: 3rem auto; padding: 0 2rem; }
+            .content { padding: 3rem; }
+        }
+        h1 { font-family: 'Oswald', sans-serif; font-size: 2.5rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 4px solid var(--danger); padding-bottom: 1rem; }
+        h2 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; color: var(--text-dark); margin-top: 2.5rem; margin-bottom: 1rem; }
+        h3 { font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: var(--text-dark); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        p { margin-bottom: 1rem; }
+        ul, ol { margin-left: 2rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.5rem; }
+        .emergency-box { background: rgba(220, 38, 38, 0.15); padding: 2rem; border-radius: 8px; margin: 2rem 0; border: 3px solid var(--danger); }
+        .emergency-box h2 { color: var(--danger); margin-top: 0; }
+        .action-card { background: var(--surface); padding: 2rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid var(--accent); }
+        .action-card h3 { margin-top: 0; }
+        .btn { display: inline-block; padding: 1rem 2rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; font-weight: 600; margin: 0.5rem 0.5rem 0.5rem 0; transition: background 0.3s; }
+        .btn:hover { background: var(--danger); }
+        .btn-secondary { background: var(--success); }
+        .btn-secondary:hover { background: #13803d; }
+        .footer { background: var(--primary); color: white; padding: 2rem; text-align: center; margin-top: 4rem; }
+        .footer a { color: var(--danger); text-decoration: none; }
+        .quick-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .quick-link-card { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid var(--accent); }
+        .quick-link-card h3 { margin-top: 0; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><a href="index.html">NZIFDA</a></div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </div>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="for-consumers.html">For Consumers</a>
+            <a href="for-operators.html">For Operators</a>
+            <a href="for-fuel-stations.html">For Fuel Stations</a>
+            <a href="emergency-response.html">Emergency Response</a>
+            <a href="misfuel-prevention.html">Prevention Guide</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+    </script>
+    <div class="container">
+        <div class="content">
+            <h1>I've Misfueled - What Do I Do?</h1>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">If you've accidentally put the wrong fuel in your vehicle, don't panic. Follow these steps to protect your vehicle and ensure proper remediation.</p>
+            
+            <div class="emergency-box">
+                <h2>🚨 IMMEDIATE ACTION REQUIRED</h2>
+                <p style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">IF YOU HAVE MISFUELED YOUR VEHICLE:</p>
+                <ol style="font-size: 1.1rem;">
+                    <li><strong>DO NOT START THE ENGINE</strong> - This is critical!</li>
+                    <li><strong>DO NOT TURN THE IGNITION KEY</strong></li>
+                    <li><strong>DO NOT ATTEMPT TO DRIVE</strong></li>
+                    <li><strong>DO NOT attempt to drain fuel yourself</strong></li>
+                    <li><strong>Contact ONLY operators displaying the NZIFDA Mark</strong></li>
+                </ol>
+                <p style="margin-top: 1rem; font-weight: 600;">Starting the engine will circulate contaminated fuel throughout your vehicle's system, causing extensive damage and significantly higher repair costs.</p>
+            </div>
+
+            <div style="background: rgba(59, 130, 246, 0.1); padding: 2rem; border-radius: 8px; margin: 2rem 0; border-left: 4px solid var(--accent);">
+                <h3 style="font-family: 'Oswald', sans-serif; color: var(--accent); margin-bottom: 1rem; font-size: 1.4rem;">✅ How to Find a Certified Operator</h3>
+                <p style="margin-bottom: 1rem; font-weight: 600;">Look for operators displaying the NZIFDA Mark. This mark guarantees:</p>
+                <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                    <li>Valid Dangerous Goods licenses</li>
+                    <li>Proper insurance coverage ($2M+ professional indemnity)</li>
+                    <li>Certified fixed facilities (mobile services are illegal)</li>
+                    <li>Compliance with all New Zealand regulations</li>
+                    <li>Proper waste tracking and disposal procedures</li>
+                    <li>Comprehensive warranties</li>
+                </ul>
+                <p style="margin-bottom: 0; font-weight: 600; color: var(--danger);">⚠️ If an operator cannot show you the NZIFDA Mark, do not use their services. They are not certified and may cause further damage or legal issues.</p>
+            </div>
+
+            <h2>Step-by-Step Guide</h2>
+            
+            <div class="action-card">
+                <h3>Step 1: Stop Immediately</h3>
+                <p>If you realize you've misfueled before starting the engine, you're in the best possible situation. Do not start the engine under any circumstances. If you've already started the engine, turn it off immediately and do not restart it.</p>
+            </div>
+
+            <div class="action-card">
+                <h3>Step 2: Secure Your Vehicle</h3>
+                <p>If you're at a fuel station, move your vehicle to a safe location away from fuel pumps if possible (without starting the engine - you may need to push it or have it towed). If you're on the road, pull over safely and turn on your hazard lights.</p>
+            </div>
+
+            <div class="action-card">
+                <h3>Step 3: Contact a Certified Operator</h3>
+                <p>Contact a NZIFDA-certified operator immediately. Only operators displaying the NZIFDA Mark are authorized to provide misfuel remediation services. They will:</p>
+                <ul>
+                    <li>Arrange safe transport of your vehicle to their certified fixed facility</li>
+                    <li>Perform proper fuel extraction and system remediation</li>
+                    <li>Provide complete documentation and warranties</li>
+                    <li>Ensure compliant waste disposal</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Remember:</strong> Mobile extraction services are illegal in New Zealand. All remediation must occur at certified fixed facilities.</p>
+            </div>
+
+            <div class="action-card">
+                <h3>Step 4: Understand the Process</h3>
+                <p>Certified operators will:</p>
+                <ol>
+                    <li>Transport your vehicle to their certified fixed facility (if needed)</li>
+                    <li>Extract all contaminated fuel using certified equipment</li>
+                    <li>Flush and clean the entire fuel system</li>
+                    <li>Replace affected components per manufacturer specifications</li>
+                    <li>Test the system to ensure proper operation</li>
+                    <li>Provide documentation and warranties</li>
+                </ol>
+            </div>
+
+            <div class="action-card">
+                <h3>Step 5: Verify Certification</h3>
+                <p>Before engaging any operator, verify they display the NZIFDA Mark. Ask to see their certification. If they cannot provide proof of NZIFDA certification, do not use their services.</p>
+                <p style="margin-top: 1rem;"><a href="index.html#certification" class="btn">View the NZIFDA Mark</a> <a href="contact.html" class="btn btn-secondary">Report Non-Compliance</a></p>
+            </div>
+
+            <h2>Important Information</h2>
+
+            <div style="background: rgba(220, 38, 38, 0.1); padding: 2rem; border-radius: 8px; margin: 2rem 0; border-left: 4px solid var(--danger);">
+                <h3 style="font-family: 'Oswald', sans-serif; color: var(--danger); margin-bottom: 1rem;">Your Legal Responsibility</h3>
+                <p style="margin-bottom: 1rem; font-weight: 600;">Under New Zealand law, you are responsible as the generator of contaminated fuel for ensuring it is handled by properly licensed operators.</p>
+                <p style="margin-bottom: 1rem;"><strong>Using illegal or unlicensed operators can result in:</strong></p>
+                <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                    <li>Fines and penalties for using unlicensed waste disposal services</li>
+                    <li>Liability for environmental violations if waste is improperly disposed</li>
+                    <li>Responsibility for cleanup costs if environmental damage occurs</li>
+                    <li>Voided insurance coverage if work is performed by unlicensed operators</li>
+                    <li>No legal recourse if work is performed incorrectly</li>
+                </ul>
+                <p style="margin-bottom: 0; font-weight: 600; color: var(--success);">✅ Protect yourself: Only use operators displaying the NZIFDA Mark.</p>
+            </div>
+
+            <h2>Quick Links</h2>
+            <div class="quick-links">
+                <div class="quick-link-card">
+                    <h3>Emergency Response</h3>
+                    <p>Detailed emergency response procedures for misfuel incidents.</p>
+                    <a href="emergency-response.html" class="btn">View Guide</a>
+                </div>
+                <div class="quick-link-card">
+                    <h3>Prevention Guide</h3>
+                    <p>Learn how to prevent misfuelling in the future.</p>
+                    <a href="misfuel-prevention.html" class="btn">Prevention Tips</a>
+                </div>
+                <div class="quick-link-card">
+                    <h3>Frequently Asked Questions</h3>
+                    <p>Common questions about misfuels and remediation.</p>
+                    <a href="faq.html" class="btn">View FAQ</a>
+                </div>
+                <div class="quick-link-card">
+                    <h3>Report Non-Compliance</h3>
+                    <p>Report illegal or non-compliant operators.</p>
+                    <a href="index.html#report" class="btn">Report Now</a>
+                </div>
+            </div>
+
+            <h2>What to Expect from Certified Operators</h2>
+            <div style="background: var(--surface); padding: 2rem; border-radius: 8px; margin: 2rem 0;">
+                <ul style="margin-left: 2rem; margin-bottom: 0;">
+                    <li><strong>Transparent Pricing:</strong> Clear, upfront pricing with no hidden fees</li>
+                    <li><strong>Professional Service:</strong> Trained technicians using certified equipment</li>
+                    <li><strong>Complete Documentation:</strong> Full records of work performed and warranties</li>
+                    <li><strong>Compliant Disposal:</strong> Proper handling and disposal of contaminated fuel</li>
+                    <li><strong>Comprehensive Warranties:</strong> Protection for your vehicle and peace of mind</li>
+                    <li><strong>Fixed Facility Operations:</strong> All work performed at certified, controlled facilities</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 NZIFDA - New Zealand Insoluble Fuel Disposal Agency</p>
+        <p><a href="index.html">Home</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookies-policy.html">Cookies Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+    </footer>
+</body>
+</html>
+

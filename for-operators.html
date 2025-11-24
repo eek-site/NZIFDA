@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Operators - NZIFDA</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600&display=swap');
+        :root { --primary: #1a1a1a; --danger: #dc2626; --warning: #f59e0b; --success: #16a34a; --accent: #0369a1; --surface: #f8fafc; --border: #e2e8f0; --text: #334155; --text-dark: #0f172a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Barlow', sans-serif; background: var(--surface); color: var(--text); line-height: 1.8; }
+        .header { background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%); padding: 1rem 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative; }
+        .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: white; font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 700; }
+        .logo a { color: white; text-decoration: none; }
+        .back-link { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; display: none; }
+        .back-link:hover { color: var(--danger); }
+        .mobile-menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; }
+        .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--primary); padding: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 999; }
+        .mobile-nav.active { display: block; }
+        .mobile-nav a { display: block; color: white; text-decoration: none; padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .mobile-nav a:hover { background: rgba(255,255,255,0.1); color: var(--danger); }
+        @media (min-width: 768px) {
+            .header { padding: 1.5rem 2rem; }
+            .logo { font-size: 1.5rem; }
+            .back-link { display: inline-block; }
+            .mobile-menu-toggle { display: none; }
+        }
+        .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+        .content { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        @media (min-width: 768px) {
+            .container { margin: 3rem auto; padding: 0 2rem; }
+            .content { padding: 3rem; }
+        }
+        h1 { font-family: 'Oswald', sans-serif; font-size: 2.5rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 4px solid var(--accent); padding-bottom: 1rem; }
+        h2 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; color: var(--text-dark); margin-top: 2.5rem; margin-bottom: 1rem; }
+        h3 { font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: var(--text-dark); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        p { margin-bottom: 1rem; }
+        ul, ol { margin-left: 2rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.5rem; }
+        .info-card { background: var(--surface); padding: 2rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid var(--accent); }
+        .info-card h3 { margin-top: 0; }
+        .btn { display: inline-block; padding: 1rem 2rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; font-weight: 600; margin: 0.5rem 0.5rem 0.5rem 0; transition: background 0.3s; }
+        .btn:hover { background: var(--danger); }
+        .btn-secondary { background: var(--success); }
+        .btn-secondary:hover { background: #13803d; }
+        .footer { background: var(--primary); color: white; padding: 2rem; text-align: center; margin-top: 4rem; }
+        .footer a { color: var(--danger); text-decoration: none; }
+        .quick-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .quick-link-card { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid var(--accent); }
+        .quick-link-card h3 { margin-top: 0; font-size: 1.2rem; }
+        .two-tier-box { background: rgba(59, 130, 246, 0.1); padding: 2rem; border-radius: 8px; margin: 2rem 0; border-left: 4px solid var(--accent); }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><a href="index.html">NZIFDA</a></div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </div>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="for-consumers.html">For Consumers</a>
+            <a href="for-operators.html">For Operators</a>
+            <a href="for-fuel-stations.html">For Fuel Stations</a>
+            <a href="certification.html">Certification Process</a>
+            <a href="services.html">Services</a>
+            <a href="training.html">Training</a>
+            <a href="resources.html">Resources</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+    </script>
+    <div class="container">
+        <div class="content">
+            <h1>For Operators & Workshops</h1>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">NZIFDA certification demonstrates that your operation meets the highest standards for fuel contamination remediation. Certified operators and workshops carry the NZIFDA Mark and are authorized to provide misfuel remediation services.</p>
+            
+            <div style="text-align: center; margin: 2rem 0; padding: 2rem; background: var(--surface); border-radius: 8px;">
+                <div style="display: inline-block; padding: 2rem; background: white; border: 4px solid var(--accent); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <div style="font-family: 'Oswald', sans-serif; font-size: 3rem; font-weight: 700; line-height: 1; margin-bottom: 0.5rem;">
+                        <span style="color: var(--text-dark);">NZ</span><span style="color: var(--danger);">IF</span><span style="color: var(--accent);">DA</span>
+                    </div>
+                    <div style="width: 120px; height: 4px; background: linear-gradient(90deg, var(--danger) 0%, var(--accent) 100%); margin: 0.5rem auto; border-radius: 2px;"></div>
+                    <div style="font-size: 0.9rem; color: var(--text); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.5rem;">Certified</div>
+                </div>
+                <p style="margin-top: 1.5rem; font-size: 1.1rem; color: var(--text-dark); font-weight: 600;">The Official NZIFDA Mark</p>
+            </div>
+
+            <div class="two-tier-box">
+                <h3 style="font-family: 'Oswald', sans-serif; color: var(--accent); margin-bottom: 1rem; font-size: 1.4rem;">Two-Tier Certification System</h3>
+                <p style="margin-bottom: 1rem; font-weight: 600;">NZIFDA operates a two-tier certification system designed to ensure quality service delivery and efficient job allocation:</p>
+                <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                    <li><strong>Compliant Operators ($15,000 + GST):</strong> Management layer that receives customer inquiries and allocates jobs to certified workshops. Requires business management systems and network coordination capability.</li>
+                    <li><strong>Certified Workshops ($1,500 + GST):</strong> Service delivery facilities that perform remediation work. Must operate under a Compliant Operator license and have certified fixed facilities, proper licensing, insurance, equipment, and trained staff.</li>
+                </ul>
+                <p style="margin-bottom: 0; font-weight: 600;">⚠️ <strong>Important:</strong> Mobile operators cannot be certified - only fixed facilities are eligible. Workshops must operate under a Compliant Operator license.</p>
+            </div>
+
+            <h2>Certification Requirements</h2>
+
+            <div class="info-card">
+                <h3>Fixed Facility Requirement</h3>
+                <p>All remediation must occur at certified fixed facilities. Mobile extraction services are non-compliant and cannot be certified. Your facility must have:</p>
+                <ul>
+                    <li>Proper containment systems for fuel extraction</li>
+                    <li>Approved storage for contaminated fuel</li>
+                    <li>Emergency response equipment</li>
+                    <li>Proper ventilation and safety systems</li>
+                    <li>Compliance with all local council requirements</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Licensing & Insurance</h3>
+                <p>Operators must have:</p>
+                <ul>
+                    <li><strong>Dangerous Goods License:</strong> Valid license for transporting and handling contaminated fuel</li>
+                    <li><strong>Professional Indemnity Insurance:</strong> Minimum $2M coverage</li>
+                    <li><strong>Public Liability Insurance:</strong> Comprehensive coverage for operations</li>
+                    <li><strong>All relevant permits:</strong> Council permits, resource consents, and EPA approvals as required</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Equipment & Standards</h3>
+                <p>Certified equipment and procedures must meet NZIFDA standards:</p>
+                <ul>
+                    <li>Certified vacuum extraction systems</li>
+                    <li>Proper fuel system flushing equipment</li>
+                    <li>Component replacement capabilities</li>
+                    <li>Waste tracking and documentation systems</li>
+                    <li>Quality assurance protocols</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Training & Competency</h3>
+                <p>All staff must be properly trained:</p>
+                <ul>
+                    <li>Hazardous substances handling certification</li>
+                    <li>Dangerous goods transportation training</li>
+                    <li>NZIFDA protocol training</li>
+                    <li>Emergency response procedures</li>
+                    <li>Waste tracking documentation</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Regulatory Compliance</h3>
+                <p>Full compliance with all New Zealand regulations:</p>
+                <ul>
+                    <li>Dangerous Goods Act 1974</li>
+                    <li>Resource Management Act 1991</li>
+                    <li>Health and Safety at Work (Hazardous Substances) Regulations 2017</li>
+                    <li>EPA Hazardous Substances Regulations</li>
+                    <li>MfE waste disposal guidelines</li>
+                    <li>Fuel Industry Act 2020</li>
+                </ul>
+            </div>
+
+            <h2>Certification Process</h2>
+            <div style="background: var(--surface); padding: 2rem; border-radius: 8px; margin: 2rem 0;">
+                <ol style="margin-left: 2rem; margin-bottom: 0;">
+                    <li><strong>Application Submission:</strong> Complete and submit the certification application form</li>
+                    <li><strong>Documentation Review:</strong> NZIFDA reviews your business documentation, licenses, and insurance</li>
+                    <li><strong>Site Inspection:</strong> On-site inspection of your facilities and equipment</li>
+                    <li><strong>Compliance Verification:</strong> Verification of all regulatory compliance requirements</li>
+                    <li><strong>Certification Approval:</strong> Upon meeting all requirements, you receive the NZIFDA Mark</li>
+                    <li><strong>Ongoing Monitoring:</strong> Regular compliance monitoring and renewal requirements</li>
+                </ol>
+            </div>
+
+            <h2>Benefits of Certification</h2>
+            <div style="background: var(--surface); padding: 2rem; border-radius: 8px; margin: 2rem 0;">
+                <ul style="margin-left: 2rem; margin-bottom: 0;">
+                    <li><strong>Industry Recognition:</strong> Display the NZIFDA Mark to demonstrate compliance and quality</li>
+                    <li><strong>Customer Trust:</strong> Customers know you meet the highest industry standards</li>
+                    <li><strong>Legal Protection:</strong> Compliance with all regulatory requirements protects your business</li>
+                    <li><strong>Competitive Advantage:</strong> Stand out from non-compliant operators</li>
+                    <li><strong>Network Access:</strong> Compliant Operators can build networks of Certified Workshops</li>
+                    <li><strong>Ongoing Support:</strong> Access to training, resources, and industry updates</li>
+                </ul>
+            </div>
+
+            <h2>Quick Links</h2>
+            <div class="quick-links">
+                <div class="quick-link-card">
+                    <h3>Certification Process</h3>
+                    <p>Detailed information about the certification process and requirements.</p>
+                    <a href="certification.html" class="btn">View Process</a>
+                </div>
+                <div class="quick-link-card">
+                    <h3>Apply for Certification</h3>
+                    <p>Submit your certification application online.</p>
+                    <a href="contact.html#certification-form" class="btn">Apply Now</a>
+                </div>
+                <div class="quick-link-card">
+                    <h3>Industry Standards</h3>
+                    <p>View the complete NZIFDA industry standards and protocols.</p>
+                    <a href="index.html#standards" class="btn">View Standards</a>
+                </div>
+                <div class="quick-link-card">
+                    <h3>Training Programs</h3>
+                    <p>Access training resources and programs for operators.</p>
+                    <a href="training.html" class="btn">View Training</a>
+                </div>
+                <div class="quick-link-card">
+                    <h3>Resources & Legislation</h3>
+                    <p>Access all relevant legislation and regulatory resources.</p>
+                    <a href="resources.html" class="btn">View Resources</a>
+                </div>
+                <div class="quick-link-card">
+                    <h3>Contact NZIFDA</h3>
+                    <p>Get in touch with questions about certification.</p>
+                    <a href="contact.html" class="btn">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 NZIFDA - New Zealand Insoluble Fuel Disposal Agency</p>
+        <p><a href="index.html">Home</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookies-policy.html">Cookies Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+    </footer>
+</body>
+</html>
+
