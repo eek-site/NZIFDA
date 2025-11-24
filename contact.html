@@ -9,36 +9,71 @@
         :root { --primary: #1a1a1a; --danger: #dc2626; --warning: #f59e0b; --success: #16a34a; --accent: #0369a1; --surface: #f8fafc; --border: #e2e8f0; --text: #334155; --text-dark: #0f172a; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Barlow', sans-serif; background: var(--surface); color: var(--text); line-height: 1.8; }
-        .header { background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%); padding: 1.5rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .header { background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%); padding: 1rem 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative; }
         .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { color: white; font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700; }
+        .logo { color: white; font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 700; }
         .logo a { color: white; text-decoration: none; }
-        .back-link { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
-        .back-link:hover { color: var(--danger); }
-        .container { max-width: 1000px; margin: 3rem auto; padding: 0 2rem; }
-        .content { background: white; padding: 3rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-        h1 { font-family: 'Oswald', sans-serif; font-size: 2.5rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 4px solid var(--danger); padding-bottom: 1rem; }
-        h2 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; color: var(--text-dark); margin-top: 2.5rem; margin-bottom: 1rem; }
-        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0; }
-        .contact-card { background: var(--surface); padding: 2rem; border-radius: 8px; border-left: 4px solid var(--danger); }
-        .contact-card h3 { font-family: 'Oswald', sans-serif; color: var(--danger); margin-bottom: 1rem; }
+        .back-link { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; display: none; }
+        .mobile-menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; }
+        .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--primary); padding: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .mobile-nav.active { display: block; }
+        .mobile-nav a { display: block; color: white; text-decoration: none; padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .mobile-nav a:hover { background: rgba(255,255,255,0.1); color: var(--danger); }
+        .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+        .content { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h1 { font-family: 'Oswald', sans-serif; font-size: 2rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 4px solid var(--danger); padding-bottom: 1rem; }
+        h2 { font-family: 'Oswald', sans-serif; font-size: 1.5rem; color: var(--text-dark); margin-top: 2.5rem; margin-bottom: 1rem; }
+        .contact-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 2rem 0; }
+        .contact-card { background: var(--surface); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--danger); }
+        .contact-card h3 { font-family: 'Oswald', sans-serif; color: var(--danger); margin-bottom: 1rem; font-size: 1.2rem; }
+        .contact-form { margin: 2rem 0; padding: 1.5rem; background: var(--surface); border-radius: 8px; }
         .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.95rem; }
         .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 6px; font-family: inherit; font-size: 1rem; }
-        .form-group textarea { min-height: 150px; resize: vertical; }
-        .btn { padding: 0.75rem 2rem; background: var(--danger); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .btn { padding: 0.75rem 2rem; background: var(--danger); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: background 0.3s; }
         .btn:hover { background: #b91c1c; }
-        .footer { background: var(--primary); color: white; padding: 2rem; text-align: center; margin-top: 4rem; }
+        .footer { background: var(--primary); color: white; padding: 2rem 1rem; text-align: center; margin-top: 4rem; }
         .footer a { color: var(--danger); text-decoration: none; }
+        @media (min-width: 768px) {
+            .header { padding: 1.5rem 2rem; }
+            .logo { font-size: 1.5rem; }
+            .back-link { display: inline-block; }
+            .mobile-menu-toggle { display: none; }
+            .container { padding: 0 2rem; margin: 3rem auto; }
+            .content { padding: 3rem; }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.8rem; }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+            .contact-card { padding: 2rem; }
+        }
+        @media (min-width: 1024px) {
+            .contact-grid { grid-template-columns: repeat(3, 1fr); }
+        }
     </style>
 </head>
 <body>
     <header class="header">
         <div class="header-content">
             <div class="logo"><a href="index.html">NZIFDA</a></div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
             <a href="index.html" class="back-link">← Back to Home</a>
         </div>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="certification.html">Certification</a>
+            <a href="resources.html">Resources</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+        </nav>
     </header>
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+    </script>
     <div class="container">
         <div class="content">
             <h1>Contact NZIFDA</h1>
@@ -48,22 +83,22 @@
                 <div class="contact-card">
                     <h3>General Inquiries</h3>
                     <p><strong>Email:</strong> info@nzifda.govt.nz</p>
-                    <p><strong>Phone:</strong> 0800-COWBOYS</p>
                     <p><strong>Hours:</strong> Monday - Friday, 9:00 AM - 5:00 PM NZST</p>
+                    <p>Use the form below to contact us</p>
                 </div>
                 
                 <div class="contact-card">
                     <h3>Certification</h3>
                     <p><strong>Email:</strong> certification@nzifda.govt.nz</p>
-                    <p><strong>Phone:</strong> 0800-COWBOYS (ext. 2)</p>
                     <p>For certification applications and inquiries</p>
+                    <p><a href="#certification-form" class="btn" style="margin-top: 1rem; display: inline-block; padding: 0.5rem 1rem; font-size: 0.9rem;">Apply for Certification</a></p>
                 </div>
                 
                 <div class="contact-card">
                     <h3>Compliance Reports</h3>
                     <p><strong>Email:</strong> compliance@nzifda.govt.nz</p>
-                    <p><strong>Phone:</strong> 0800-COWBOYS (ext. 3)</p>
                     <p>To report non-compliant operators</p>
+                    <p><a href="#compliance-form" class="btn" style="margin-top: 1rem; display: inline-block; padding: 0.5rem 1rem; font-size: 0.9rem;">Report Non-Compliance</a></p>
                 </div>
                 
                 <div class="contact-card">
@@ -86,8 +121,8 @@
                 </div>
             </div>
             
-            <h2>Send Us a Message</h2>
-            <form onsubmit="event.preventDefault(); alert('Thank you for your message. We will respond within 2 business days.'); this.reset();">
+            <h2 id="general-form">General Contact Form</h2>
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for your message. We will respond within 2 business days.'); this.reset();">
                 <div class="form-group">
                     <label for="name">Name *</label>
                     <input type="text" id="name" name="name" required>
@@ -101,10 +136,9 @@
                     <select id="subject" name="subject" required>
                         <option value="">Select a subject...</option>
                         <option value="general">General Inquiry</option>
-                        <option value="certification">Certification</option>
-                        <option value="compliance">Compliance Report</option>
                         <option value="privacy">Privacy Inquiry</option>
                         <option value="accessibility">Accessibility</option>
+                        <option value="training">Training Inquiry</option>
                         <option value="other">Other</option>
                     </select>
                 </div>
@@ -113,6 +147,90 @@
                     <textarea id="message" name="message" required></textarea>
                 </div>
                 <button type="submit" class="btn">Send Message</button>
+            </form>
+
+            <h2 id="certification-form">Certification Application Form</h2>
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for your certification application. We will review your submission and contact you within 10-15 business days.'); this.reset();">
+                <div class="form-group">
+                    <label for="cert-company">Company/Organization Name *</label>
+                    <input type="text" id="cert-company" name="cert-company" required>
+                </div>
+                <div class="form-group">
+                    <label for="cert-contact">Contact Person Name *</label>
+                    <input type="text" id="cert-contact" name="cert-contact" required>
+                </div>
+                <div class="form-group">
+                    <label for="cert-email">Email Address *</label>
+                    <input type="email" id="cert-email" name="cert-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="cert-facility">Fixed Facility Address *</label>
+                    <textarea id="cert-facility" name="cert-facility" required placeholder="Full address of your fixed facility"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="cert-license">Dangerous Goods License Number *</label>
+                    <input type="text" id="cert-license" name="cert-license" required>
+                </div>
+                <div class="form-group">
+                    <label for="cert-insurance">Insurance Provider & Policy Number *</label>
+                    <input type="text" id="cert-insurance" name="cert-insurance" required placeholder="Provider name and policy number">
+                </div>
+                <div class="form-group">
+                    <label for="cert-equipment">Equipment Description *</label>
+                    <textarea id="cert-equipment" name="cert-equipment" required placeholder="Describe your vacuum extraction and remediation equipment"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="cert-staff">Number of Trained Staff *</label>
+                    <input type="number" id="cert-staff" name="cert-staff" required min="1">
+                </div>
+                <div class="form-group">
+                    <label for="cert-additional">Additional Information</label>
+                    <textarea id="cert-additional" name="cert-additional" placeholder="Any additional information about your operation"></textarea>
+                </div>
+                <button type="submit" class="btn">Submit Certification Application</button>
+            </form>
+
+            <h2 id="compliance-form">Compliance Report Form</h2>
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for your compliance report. This matter will be investigated according to NZIFDA protocols.'); this.reset();">
+                <div class="form-group">
+                    <label for="comp-reporter">Your Name *</label>
+                    <input type="text" id="comp-reporter" name="comp-reporter" required>
+                </div>
+                <div class="form-group">
+                    <label for="comp-email">Your Email *</label>
+                    <input type="email" id="comp-email" name="comp-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="comp-company">Organization/Company Name (Being Reported) *</label>
+                    <input type="text" id="comp-company" name="comp-company" required>
+                </div>
+                <div class="form-group">
+                    <label for="comp-location">Location *</label>
+                    <input type="text" id="comp-location" name="comp-location" required placeholder="City, region">
+                </div>
+                <div class="form-group">
+                    <label for="comp-violation">Non-Compliance Category *</label>
+                    <select id="comp-violation" name="comp-violation" required>
+                        <option value="">Select category...</option>
+                        <option value="incomplete">Inadequate fuel extraction procedures</option>
+                        <option value="pricing">Pricing transparency violations</option>
+                        <option value="damage">Improper remediation resulting in damage</option>
+                        <option value="disposal">Non-compliant waste disposal methods</option>
+                        <option value="documentation">Insufficient documentation/warranty</option>
+                        <option value="certification">Operating without proper certification</option>
+                        <option value="mobile">Operating mobile extraction services (non-compliant)</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="comp-details">Detailed Description *</label>
+                    <textarea id="comp-details" name="comp-details" required placeholder="Please provide as much detail as possible about the non-compliance issue"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="comp-date">Date of Incident (if applicable)</label>
+                    <input type="date" id="comp-date" name="comp-date">
+                </div>
+                <button type="submit" class="btn">Submit Compliance Report</button>
             </form>
         </div>
     </div>

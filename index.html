@@ -177,6 +177,48 @@
             list-style: none;
         }
         
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--primary);
+            padding: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 999;
+        }
+        
+        .mobile-nav.active {
+            display: block;
+        }
+        
+        .mobile-nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-transform: uppercase;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .mobile-nav a:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--danger);
+        }
+        
         .nav-links a {
             color: white;
             text-decoration: none;
@@ -324,54 +366,57 @@
         
         /* Alert Section */
         .alert-banner {
-            background: var(--warning);
-            padding: 1.5rem;
-            text-align: center;
+            background: #f0f4f8;
+            border-bottom: 3px solid var(--accent);
+            padding: 1rem 0;
             position: relative;
+            margin-top: 80px;
         }
-        
-        .alert-banner::before,
-        .alert-banner::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 20px;
-            background: repeating-linear-gradient(
-                45deg,
-                var(--warning),
-                var(--warning) 10px,
-                #333 10px,
-                #333 20px
-            );
-        }
-        
-        .alert-banner::before { left: 0; }
-        .alert-banner::after { right: 0; }
         
         .alert-content {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.75rem;
         }
         
         .alert-icon {
-            font-size: 1.5rem;
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            font-size: 1.25rem;
+            color: var(--accent);
+            flex-shrink: 0;
         }
         
         .alert-text {
-            font-weight: 600;
+            font-weight: 500;
             color: var(--text-dark);
-            font-size: 1.1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .alert-text strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .alert-banner {
+                margin-top: 70px;
+                padding: 0.875rem 0;
+            }
+            
+            .alert-content {
+                padding: 0 1rem;
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+            
+            .alert-text {
+                font-size: 0.9rem;
+            }
         }
         
         /* Main Content */
@@ -749,25 +794,48 @@
         
         /* Responsive */
         @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+            
             .nav-links {
                 display: none;
             }
             
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .hero {
+                padding: 3rem 1.5rem;
+                margin-top: 80px;
+            }
+            
             .hero h2 {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
             
             .hero-subtitle {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
             
             .hero-actions {
                 flex-direction: column;
+                gap: 1rem;
             }
             
             .status-grid,
             .standards-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 2rem 1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
         }
     </style>
@@ -791,6 +859,7 @@
                 </div>
             </div>
             <nav>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
                 <ul class="nav-links">
                     <li><a href="about.html">About</a></li>
                     <li><a href="services.html">Services</a></li>
@@ -801,15 +870,23 @@
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
+            <nav class="mobile-nav" id="mobileNav">
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="#standards" onclick="document.getElementById('standards').scrollIntoView({behavior:'smooth'}); toggleMobileMenu();">Standards</a>
+                <a href="certification.html">Certification</a>
+                <a href="#report" onclick="document.getElementById('report').scrollIntoView({behavior:'smooth'}); toggleMobileMenu();">Report</a>
+                <a href="resources.html">Resources</a>
+                <a href="contact.html">Contact</a>
+            </nav>
         </div>
     </header>
 
     <!-- Alert Banner -->
     <div class="alert-banner">
         <div class="alert-content">
-            <span class="alert-icon">⚠️</span>
-            <span class="alert-text">NOTICE: Mobile extraction services are NON-COMPLIANT. All remediation must occur at certified fixed facilities. Mobile operators CANNOT be certified by NZIFDA.</span>
-            <span class="alert-icon">⚠️</span>
+            <span class="alert-icon">ℹ️</span>
+            <span class="alert-text"><strong>Important Notice:</strong> All fuel remediation must occur at certified fixed facilities. Mobile extraction services do not meet New Zealand regulatory requirements and cannot be certified by NZIFDA. <a href="faq.html#mobile-services" style="color: var(--accent); text-decoration: underline;">Learn more about certification requirements</a>.</span>
         </div>
     </div>
 
@@ -844,17 +921,17 @@
                     <p style="margin-bottom: 1rem;"><strong>Immediate Actions Required:</strong> If misfuelling is detected, the vehicle must NOT be started. Starting the engine circulates contaminated fuel throughout the system, exponentially increasing damage and remediation costs.</p>
                 </div>
                 
-                <div style="background: rgba(220, 38, 38, 0.1); padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 2rem; border-left: 4px solid var(--danger);">
-                    <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--danger);">⚠️ Mobile Extraction Services Are NON-COMPLIANT</h3>
-                    <p style="margin-bottom: 1rem; font-weight: 600;">All fuel remediation must occur at certified fixed facilities. Mobile extraction services are NON-COMPLIANT with New Zealand regulations and cannot be certified by NZIFDA.</p>
+                <div style="background: #f0f4f8; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 2rem; border-left: 4px solid var(--accent);">
+                    <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.5rem; margin-bottom: 1rem; color: var(--text-dark);">Certification Requirements</h3>
+                    <p style="margin-bottom: 1rem;">All fuel remediation must occur at certified fixed facilities. Mobile extraction services do not meet New Zealand regulatory requirements and cannot be certified by NZIFDA.</p>
                     <p style="margin-bottom: 1rem;">Mobile operators cannot meet the regulatory requirements for:</p>
-                    <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                    <ul style="margin-left: 2rem; margin-bottom: 1.5rem; color: var(--text);">
                         <li>Proper waste tracking documentation at point of generation</li>
                         <li>Dangerous Goods transportation compliance from uncontrolled locations</li>
                         <li>Environmental protection and spill containment at variable sites</li>
                         <li>Fixed facility inspections and compliance monitoring</li>
                     </ul>
-                    <p style="margin-bottom: 0; font-weight: 600;">The compliant process is: <strong>Vehicle towed → Fixed facility → Extraction → Proper disposal</strong></p>
+                    <p style="margin-bottom: 0; color: var(--text-dark);">The compliant process is: <strong>Vehicle towed → Fixed facility → Extraction → Proper disposal</strong></p>
                 </div>
                 
                 <div style="background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
@@ -1115,9 +1192,9 @@
             <div class="footer-section">
                 <h3>Contact</h3>
                 <ul>
-                    <li style="color: #cbd5e1;">Report Line: 0800-COWBOYS</li>
-                    <li style="color: #cbd5e1;">Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b1d2dedcc1ddd8d0dfd2d4f1dfcbd8d7d5d09fdec3d6">[email&#160;protected]</a></li>
-                    <li style="color: #cbd5e1;">Certification: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0360667177436d796a6567622d6c7164">[email&#160;protected]</a></li>
+                    <li style="color: #cbd5e1;">General: <a href="contact.html#general-form" style="color: var(--danger);">Contact Form</a></li>
+                    <li style="color: #cbd5e1;">Certification: <a href="contact.html#certification-form" style="color: var(--danger);">Application Form</a></li>
+                    <li style="color: #cbd5e1;">Compliance: <a href="contact.html#compliance-form" style="color: var(--danger);">Report Form</a></li>
                 </ul>
             </div>
         </div>
@@ -1139,6 +1216,11 @@
     </div>
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+        
         // Form submission handler
         document.querySelector('.report-form').addEventListener('submit', function(e) {
             e.preventDefault();
