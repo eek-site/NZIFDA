@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - NZIFDA</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600&display=swap');
+        :root { --primary: #1a1a1a; --danger: #dc2626; --warning: #f59e0b; --success: #16a34a; --accent: #0369a1; --surface: #f8fafc; --border: #e2e8f0; --text: #334155; --text-dark: #0f172a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Barlow', sans-serif; background: var(--surface); color: var(--text); line-height: 1.8; }
+        .header { background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%); padding: 1.5rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: white; font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700; }
+        .logo a { color: white; text-decoration: none; }
+        .back-link { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .back-link:hover { color: var(--danger); }
+        .container { max-width: 1000px; margin: 3rem auto; padding: 0 2rem; }
+        .content { background: white; padding: 3rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h1 { font-family: 'Oswald', sans-serif; font-size: 2.5rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 4px solid var(--danger); padding-bottom: 1rem; }
+        h2 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; color: var(--text-dark); margin-top: 2.5rem; margin-bottom: 1rem; }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0; }
+        .contact-card { background: var(--surface); padding: 2rem; border-radius: 8px; border-left: 4px solid var(--danger); }
+        .contact-card h3 { font-family: 'Oswald', sans-serif; color: var(--danger); margin-bottom: 1rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 6px; font-family: inherit; font-size: 1rem; }
+        .form-group textarea { min-height: 150px; resize: vertical; }
+        .btn { padding: 0.75rem 2rem; background: var(--danger); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; }
+        .btn:hover { background: #b91c1c; }
+        .footer { background: var(--primary); color: white; padding: 2rem; text-align: center; margin-top: 4rem; }
+        .footer a { color: var(--danger); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><a href="index.html">NZIFDA</a></div>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </div>
+    </header>
+    <div class="container">
+        <div class="content">
+            <h1>Contact NZIFDA</h1>
+            <p>Get in touch with us for inquiries, certification applications, compliance reports, or general questions.</p>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>General Inquiries</h3>
+                    <p><strong>Email:</strong> info@nzifda.govt.nz</p>
+                    <p><strong>Phone:</strong> 0800-COWBOYS</p>
+                    <p><strong>Hours:</strong> Monday - Friday, 9:00 AM - 5:00 PM NZST</p>
+                </div>
+                
+                <div class="contact-card">
+                    <h3>Certification</h3>
+                    <p><strong>Email:</strong> certification@nzifda.govt.nz</p>
+                    <p><strong>Phone:</strong> 0800-COWBOYS (ext. 2)</p>
+                    <p>For certification applications and inquiries</p>
+                </div>
+                
+                <div class="contact-card">
+                    <h3>Compliance Reports</h3>
+                    <p><strong>Email:</strong> compliance@nzifda.govt.nz</p>
+                    <p><strong>Phone:</strong> 0800-COWBOYS (ext. 3)</p>
+                    <p>To report non-compliant operators</p>
+                </div>
+                
+                <div class="contact-card">
+                    <h3>Privacy & Data</h3>
+                    <p><strong>Email:</strong> privacy@nzifda.govt.nz</p>
+                    <p>For privacy inquiries and data requests</p>
+                </div>
+                
+                <div class="contact-card">
+                    <h3>Accessibility</h3>
+                    <p><strong>Email:</strong> accessibility@nzifda.govt.nz</p>
+                    <p>For accessibility concerns and alternative formats</p>
+                </div>
+                
+                <div class="contact-card">
+                    <h3>Emergency</h3>
+                    <p><strong>For misfuel emergencies:</strong></p>
+                    <p>Contact a <a href="index.html#certification">certified operator</a> immediately</p>
+                    <p><strong>DO NOT START YOUR ENGINE</strong></p>
+                </div>
+            </div>
+            
+            <h2>Send Us a Message</h2>
+            <form onsubmit="event.preventDefault(); alert('Thank you for your message. We will respond within 2 business days.'); this.reset();">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject *</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Select a subject...</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="certification">Certification</option>
+                        <option value="compliance">Compliance Report</option>
+                        <option value="privacy">Privacy Inquiry</option>
+                        <option value="accessibility">Accessibility</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 NZIFDA - New Zealand Insoluble Fuel Disposal Agency</p>
+        <p><a href="index.html">Home</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookies-policy.html">Cookies Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+    </footer>
+</body>
+</html>
+

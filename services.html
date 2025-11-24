@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - NZIFDA</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600&display=swap');
+        :root { --primary: #1a1a1a; --danger: #dc2626; --warning: #f59e0b; --success: #16a34a; --accent: #0369a1; --surface: #f8fafc; --border: #e2e8f0; --text: #334155; --text-dark: #0f172a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Barlow', sans-serif; background: var(--surface); color: var(--text); line-height: 1.8; }
+        .header { background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%); padding: 1.5rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: white; font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700; }
+        .logo a { color: white; text-decoration: none; }
+        .back-link { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .back-link:hover { color: var(--danger); }
+        .container { max-width: 1000px; margin: 3rem auto; padding: 0 2rem; }
+        .content { background: white; padding: 3rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h1 { font-family: 'Oswald', sans-serif; font-size: 2.5rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 4px solid var(--danger); padding-bottom: 1rem; }
+        h2 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; color: var(--text-dark); margin-top: 2.5rem; margin-bottom: 1rem; }
+        h3 { font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: var(--text-dark); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        p { margin-bottom: 1rem; }
+        ul { margin-left: 2rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.5rem; }
+        .service-card { background: var(--surface); padding: 2rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid var(--danger); }
+        .service-card h3 { margin-top: 0; }
+        .footer { background: var(--primary); color: white; padding: 2rem; text-align: center; margin-top: 4rem; }
+        .footer a { color: var(--danger); text-decoration: none; }
+        .btn { display: inline-block; padding: 0.75rem 1.5rem; background: var(--danger); color: white; text-decoration: none; border-radius: 6px; font-weight: 600; margin-top: 1rem; }
+        .btn:hover { background: #b91c1c; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><a href="index.html">NZIFDA</a></div>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </div>
+    </header>
+    <div class="container">
+        <div class="content">
+            <h1>NZIFDA Services</h1>
+            <p>NZIFDA provides comprehensive regulatory services to ensure industry excellence in fuel contamination remediation.</p>
+            
+            <div class="service-card">
+                <h3>Operator Certification</h3>
+                <p>We assess and certify fuel remediation operators who meet our rigorous standards. Certification includes:</p>
+                <ul>
+                    <li>Comprehensive compliance audits</li>
+                    <li>Equipment and facility inspections</li>
+                    <li>Staff training verification</li>
+                    <li>Insurance and licensing verification</li>
+                    <li>Ongoing monitoring and renewal</li>
+                </ul>
+                <a href="certification.html" class="btn">Learn More About Certification</a>
+            </div>
+            
+            <div class="service-card">
+                <h3>Compliance Monitoring</h3>
+                <p>We actively monitor the industry to ensure all operators maintain compliance with NZIFDA standards and New Zealand regulations.</p>
+                <ul>
+                    <li>Regular compliance audits</li>
+                    <li>Investigation of reported violations</li>
+                    <li>Public registry of certified operators</li>
+                    <li>Enforcement actions against non-compliant operators</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <h3>Industry Standards Development</h3>
+                <p>We establish and maintain comprehensive standards for fuel contamination remediation, including:</p>
+                <ul>
+                    <li>Fuel extraction protocols</li>
+                    <li>System remediation procedures</li>
+                    <li>Waste management requirements</li>
+                    <li>Documentation and warranty standards</li>
+                    <li>Pricing transparency guidelines</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <h3>Training and Education</h3>
+                <p>We provide training programs and educational resources to help operators meet and maintain certification standards.</p>
+                <ul>
+                    <li>Operator training courses</li>
+                    <li>Compliance workshops</li>
+                    <li>Best practice guides</li>
+                    <li>Regulatory updates and newsletters</li>
+                </ul>
+                <a href="training.html" class="btn">View Training Programs</a>
+            </div>
+            
+            <div class="service-card">
+                <h3>Consumer Protection</h3>
+                <p>We protect consumers by ensuring certified operators provide:</p>
+                <ul>
+                    <li>Fair and transparent pricing</li>
+                    <li>Comprehensive warranties</li>
+                    <li>Proper documentation</li>
+                    <li>Quality service standards</li>
+                    <li>Dispute resolution support</li>
+                </ul>
+            </div>
+            
+            <div class="service-card">
+                <h3>Regulatory Compliance Support</h3>
+                <p>We help operators understand and comply with New Zealand regulations including:</p>
+                <ul>
+                    <li>EPA Hazardous Substances Regulations</li>
+                    <li>Dangerous Goods Act requirements</li>
+                    <li>MfE waste disposal guidelines</li>
+                    <li>Health and Safety at Work Regulations</li>
+                    <li>Fuel Industry Act compliance</li>
+                </ul>
+            </div>
+            
+            <h2>How to Access Our Services</h2>
+            <p>For operators seeking certification, visit our <a href="certification.html">Certification page</a>.</p>
+            <p>For consumers, use our <a href="index.html#certification">Certified Operators Registry</a> to find compliant service providers.</p>
+            <p>To report non-compliance, use our <a href="index.html#report">Report Violation</a> form.</p>
+            <p>For questions or support, <a href="contact.html">contact us</a>.</p>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 NZIFDA - New Zealand Insoluble Fuel Disposal Agency</p>
+        <p><a href="index.html">Home</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookies-policy.html">Cookies Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+    </footer>
+</body>
+</html>
+

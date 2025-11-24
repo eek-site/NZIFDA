@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - NZIFDA</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600&display=swap');
+        :root { --primary: #1a1a1a; --danger: #dc2626; --warning: #f59e0b; --success: #16a34a; --accent: #0369a1; --surface: #f8fafc; --border: #e2e8f0; --text: #334155; --text-dark: #0f172a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Barlow', sans-serif; background: var(--surface); color: var(--text); line-height: 1.8; }
+        .header { background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%); padding: 1.5rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: white; font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700; }
+        .logo a { color: white; text-decoration: none; }
+        .back-link { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .back-link:hover { color: var(--danger); }
+        .container { max-width: 1000px; margin: 3rem auto; padding: 0 2rem; }
+        .content { background: white; padding: 3rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h1 { font-family: 'Oswald', sans-serif; font-size: 2.5rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 4px solid var(--danger); padding-bottom: 1rem; }
+        h2 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; color: var(--text-dark); margin-top: 2.5rem; margin-bottom: 1rem; }
+        h3 { font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: var(--text-dark); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        p { margin-bottom: 1rem; }
+        ul { margin-left: 2rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.5rem; }
+        .info-box { background: var(--surface); padding: 1.5rem; border-radius: 6px; margin: 1.5rem 0; border-left: 4px solid var(--accent); }
+        .footer { background: var(--primary); color: white; padding: 2rem; text-align: center; margin-top: 4rem; }
+        .footer a { color: var(--danger); text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .value-card { background: var(--surface); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--danger); }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><a href="index.html">NZIFDA</a></div>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </div>
+    </header>
+    <div class="container">
+        <div class="content">
+            <h1>About NZIFDA</h1>
+            <h2>Our Mission</h2>
+            <p>The New Zealand Insoluble Fuel Disposal Agency (NZIFDA) is an independent regulatory authority dedicated to establishing and maintaining professional standards in the fuel contamination remediation sector. We ensure compliance with environmental regulations, safety protocols, and industry best practices to protect all stakeholders across New Zealand's fuel management industry.</p>
+            
+            <h2>Our History</h2>
+            <p>Established in 2024, NZIFDA was created in response to growing concerns about inconsistent standards and non-compliant practices in the misfuel remediation industry. We recognized the need for a centralized authority to establish clear guidelines, enforce compliance, and protect both consumers and the environment.</p>
+            
+            <h2>What We Do</h2>
+            <ul>
+                <li><strong>Set Industry Standards:</strong> Develop comprehensive protocols for fuel contamination remediation</li>
+                <li><strong>Certify Operators:</strong> Assess and certify operators who meet our rigorous standards</li>
+                <li><strong>Enforce Compliance:</strong> Monitor the industry and take action against non-compliant operators</li>
+                <li><strong>Protect Consumers:</strong> Ensure fair pricing, proper documentation, and quality service</li>
+                <li><strong>Environmental Protection:</strong> Ensure proper disposal of contaminated fuel per EPA and MfE guidelines</li>
+                <li><strong>Industry Education:</strong> Provide resources and training to improve industry practices</li>
+            </ul>
+            
+            <h2>Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <h3>Integrity</h3>
+                    <p>We operate with transparency and honesty in all our regulatory activities.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Excellence</h3>
+                    <p>We set and maintain the highest standards for fuel remediation services.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Protection</h3>
+                    <p>We protect consumers, operators, and the environment through rigorous oversight.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Compliance</h3>
+                    <p>We ensure all operations meet New Zealand's regulatory requirements.</p>
+                </div>
+            </div>
+            
+            <h2>Regulatory Authority</h2>
+            <p>NZIFDA operates under the authority of New Zealand legislation including:</p>
+            <ul>
+                <li>Dangerous Goods Act 1974</li>
+                <li>Resource Management Act 1991</li>
+                <li>Hazardous Substances Act 1996</li>
+                <li>Health and Safety at Work (Hazardous Substances) Regulations 2017</li>
+                <li>Fuel Industry Act 2020</li>
+                <li>EPA Hazardous Substances Regulations</li>
+            </ul>
+            
+            <div class="info-box">
+                <p><strong>Contact Us:</strong> For more information about NZIFDA, please visit our <a href="contact.html">Contact page</a> or email us at info@nzifda.govt.nz</p>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 NZIFDA - New Zealand Insoluble Fuel Disposal Agency</p>
+        <p><a href="index.html">Home</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookies-policy.html">Cookies Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+    </footer>
+    <div id="cookieConsent" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--primary); color: white; padding: 1.5rem; z-index: 10000; box-shadow: 0 -4px 20px rgba(0,0,0,0.3);">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+            <div style="flex: 1; min-width: 300px;"><p style="margin: 0; line-height: 1.6;"><strong>Cookie Notice:</strong> We use cookies. <a href="cookies-policy.html" style="color: var(--danger); text-decoration: underline;">Learn more</a></p></div>
+            <div style="display: flex; gap: 1rem;"><button onclick="acceptCookies()" style="padding: 0.75rem 1.5rem; background: var(--danger); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">Accept</button><button onclick="rejectCookies()" style="padding: 0.75rem 1.5rem; background: transparent; color: white; border: 2px solid white; border-radius: 6px; cursor: pointer; font-weight: 600;">Reject</button></div>
+        </div>
+    </div>
+    <script>function getCookie(n){const v=`; ${document.cookie}`;const p=v.split(`; ${n}=`);if(p.length===2)return p.pop().split(';').shift();}function setCookie(n,v,d){const d2=new Date();d2.setTime(d2.getTime()+(d*24*60*60*1000));document.cookie=`${n}=${v};expires=${d2.toUTCString()};path=/`;}function acceptCookies(){setCookie('cookieConsent','accepted',365);document.getElementById('cookieConsent').style.display='none';}function rejectCookies(){setCookie('cookieConsent','rejected',365);document.getElementById('cookieConsent').style.display='none';}if(!getCookie('cookieConsent')){document.getElementById('cookieConsent').style.display='block';}</script>
+</body>
+</html>
+

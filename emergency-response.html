@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Response - NZIFDA</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600&display=swap');
+        :root { --primary: #1a1a1a; --danger: #dc2626; --warning: #f59e0b; --success: #16a34a; --accent: #0369a1; --surface: #f8fafc; --border: #e2e8f0; --text: #334155; --text-dark: #0f172a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Barlow', sans-serif; background: var(--surface); color: var(--text); line-height: 1.8; }
+        .header { background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%); padding: 1.5rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+        .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: white; font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700; }
+        .logo a { color: white; text-decoration: none; }
+        .back-link { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .back-link:hover { color: var(--danger); }
+        .container { max-width: 1000px; margin: 3rem auto; padding: 0 2rem; }
+        .content { background: white; padding: 3rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h1 { font-family: 'Oswald', sans-serif; font-size: 2.5rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 4px solid var(--danger); padding-bottom: 1rem; }
+        h2 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; color: var(--text-dark); margin-top: 2.5rem; margin-bottom: 1rem; }
+        h3 { font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: var(--text-dark); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        p { margin-bottom: 1rem; }
+        ul, ol { margin-left: 2rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.5rem; }
+        .emergency-box { background: rgba(220, 38, 38, 0.15); padding: 2rem; border-radius: 8px; margin: 2rem 0; border: 3px solid var(--danger); }
+        .emergency-box h2 { color: var(--danger); margin-top: 0; }
+        .step-card { background: var(--surface); padding: 2rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid var(--accent); }
+        .footer { background: var(--primary); color: white; padding: 2rem; text-align: center; margin-top: 4rem; }
+        .footer a { color: var(--danger); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><a href="index.html">NZIFDA</a></div>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </div>
+    </header>
+    <div class="container">
+        <div class="content">
+            <h1>Emergency Response: Misfuel Incidents</h1>
+            
+            <div class="emergency-box">
+                <h2>🚨 IMMEDIATE ACTION REQUIRED</h2>
+                <p style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem;">IF YOU HAVE MISFUELED YOUR VEHICLE:</p>
+                <ol style="font-size: 1.1rem;">
+                    <li><strong>DO NOT START THE ENGINE</strong></li>
+                    <li><strong>DO NOT TURN THE IGNITION KEY</strong></li>
+                    <li><strong>DO NOT ATTEMPT TO DRIVE</strong></li>
+                    <li>Contact a NZIFDA-certified operator immediately</li>
+                </ol>
+            </div>
+            
+            <h2>Scenario 1: Misfuel Detected Before Starting Engine</h2>
+            <div class="step-card">
+                <h3>Step 1: Stop Immediately</h3>
+                <p>If you realize you've put the wrong fuel in your vehicle before starting the engine, you're in the best possible situation. Do not start the engine under any circumstances.</p>
+            </div>
+            
+            <div class="step-card">
+                <h3>Step 2: Contact a Certified Operator</h3>
+                <p>Immediately contact a <a href="index.html#certification">NZIFDA-certified operator</a>. They have the expertise and equipment to properly remediate the misfuel without starting the engine.</p>
+            </div>
+            
+            <div class="step-card">
+                <h3>Step 3: Arrange Safe Transport</h3>
+                <p>If the vehicle is at a fuel station, arrange for towing to the operator's facility. Do not attempt to start the engine to move the vehicle.</p>
+            </div>
+            
+            <div class="step-card">
+                <h3>Step 4: Professional Remediation</h3>
+                <p>The certified operator will:</p>
+                <ul>
+                    <li>Extract all contaminated fuel using certified vacuum systems</li>
+                    <li>Flush the fuel system completely</li>
+                    <li>Replace affected components if necessary</li>
+                    <li>Provide proper documentation and warranty</li>
+                </ul>
+            </div>
+            
+            <h2>Scenario 2: Engine Has Been Started</h2>
+            <div class="step-card">
+                <h3>Immediate Actions</h3>
+                <p>If you've already started the engine with the wrong fuel:</p>
+                <ol>
+                    <li><strong>Turn off the engine immediately</strong> - Do not continue driving</li>
+                    <li>Turn off the ignition</li>
+                    <li>Move the vehicle to a safe location if possible (only if it's safe to do so)</li>
+                    <li>Contact a certified operator immediately</li>
+                </ol>
+                <p><strong>Warning:</strong> Starting the engine circulates contaminated fuel throughout the entire fuel system, causing extensive damage. Repair costs will be significantly higher.</p>
+            </div>
+            
+            <div class="step-card">
+                <h3>What to Expect</h3>
+                <p>If the engine has been started, the remediation process will be more extensive:</p>
+                <ul>
+                    <li>Complete fuel system extraction and flushing</li>
+                    <li>Replacement of fuel pump, injectors, and filters</li>
+                    <li>System cleaning and component replacement</li>
+                    <li>Testing and verification</li>
+                    <li>Higher costs due to increased damage</li>
+                </ul>
+            </div>
+            
+            <h2>What NOT to Do</h2>
+            <div class="step-card">
+                <h3>Avoid These Mistakes</h3>
+                <ul>
+                    <li><strong>Do NOT start the engine</strong> - This is the most critical rule</li>
+                    <li><strong>Do NOT attempt to drain fuel yourself</strong> - This requires professional equipment</li>
+                    <li><strong>Do NOT add more of the correct fuel</strong> - This won't help and may cause more damage</li>
+                    <li><strong>Do NOT use unqualified operators</strong> - Only use NZIFDA-certified operators</li>
+                    <li><strong>Do NOT delay</strong> - Contact a certified operator immediately</li>
+                </ul>
+            </div>
+            
+            <h2>Finding a Certified Operator</h2>
+            <p>Use our <a href="index.html#certification">Certified Operators Registry</a> to find a qualified operator in your area. Certified operators:</p>
+            <ul>
+                <li>Meet all NZIFDA standards</li>
+                <li>Have proper licensing and insurance</li>
+                <li>Use certified equipment</li>
+                <li>Provide warranties and documentation</li>
+                <li>Follow proper waste disposal procedures</li>
+            </ul>
+            
+            <h2>Cost Considerations</h2>
+            <div class="step-card">
+                <h3>Before Engine Start</h3>
+                <p>If the engine has NOT been started, remediation costs are typically lower as damage is limited to the fuel tank and lines.</p>
+            </div>
+            
+            <div class="step-card">
+                <h3>After Engine Start</h3>
+                <p>If the engine HAS been started, costs are significantly higher due to damage to:</p>
+                <ul>
+                    <li>Fuel pump</li>
+                    <li>Fuel injectors</li>
+                    <li>Fuel filters</li>
+                    <li>Fuel lines</li>
+                    <li>Potentially the engine itself</li>
+                </ul>
+            </div>
+            
+            <h2>Prevention</h2>
+            <p>The best emergency response is prevention. See our <a href="misfuel-prevention.html">Misfuel Prevention Guide</a> for tips on avoiding misfuelling incidents.</p>
+            
+            <h2>Additional Resources</h2>
+            <ul>
+                <li><a href="index.html#certification">Certified Operators Registry</a></li>
+                <li><a href="faq.html">Frequently Asked Questions</a></li>
+                <li><a href="contact.html">Contact NZIFDA</a></li>
+            </ul>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 NZIFDA - New Zealand Insoluble Fuel Disposal Agency</p>
+        <p><a href="index.html">Home</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookies-policy.html">Cookies Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+    </footer>
+</body>
+</html>
+
