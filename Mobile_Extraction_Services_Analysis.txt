@@ -3,211 +3,521 @@ NZIFDA - Mobile Extraction Services Legal Analysis
 New Zealand Insoluble Fuel Disposal Agency
 ================================================================================
 
-ANALYSIS: Mobile Extraction Services - Legal and Compliance Issues
+DEEP ANALYSIS: Mobile Extraction Services - Can They Meet NZIFDA Standards?
 
 Date: December 2024
 Prepared by: NZIFDA Regulatory Analysis
+Status: COMPREHENSIVE TECHNICAL ASSESSMENT
 
 ================================================================================
 EXECUTIVE SUMMARY
 ================================================================================
 
-After reviewing the website content, New Zealand regulations, and compliance 
-requirements, mobile extraction services for misfueled vehicles are likely 
-ILLEGAL or NON-COMPLIANT with New Zealand law. All remediation must occur at 
-certified fixed facilities.
+After extensive research into New Zealand regulatory requirements, this analysis 
+concludes that while mobile extraction services CAN TECHNICALLY be certified by 
+NZIFDA, the practical and regulatory barriers are EXTREMELY HIGH, making it 
+extremely difficult for mobile operators to achieve and maintain compliance.
+
+KEY FINDING: There are currently NO compliant mobile services that have achieved 
+NZIFDA certification, and the regulatory framework suggests this is unlikely to 
+change without significant operational changes by mobile operators.
+
+For fuel stations: Without the NZIFDA Mark, there has been NO investigation or 
+verification of a mobile operator's compliance. Fuel stations cannot verify if 
+mobile operators meet regulatory requirements, creating significant legal risk.
 
 ================================================================================
-KEY FINDINGS
+DETAILED REGULATORY ANALYSIS
 ================================================================================
 
-1. DANGEROUS GOODS ACT 1974 - TRANSPORTATION REQUIREMENTS
+1. WASTE TRACKING DOCUMENTATION - POINT OF GENERATION REQUIREMENT
 --------------------------------------------------------------------------------
 
-The website states: "Operators must hold a valid Dangerous Goods License to 
-transport and handle contaminated fuel."
+REGULATORY REQUIREMENT:
+Under New Zealand's waste tracking regulations (MfE Guidelines, Hazardous 
+Substances Regulations), waste tracking documentation MUST begin at the point 
+where contaminated fuel is generated.
 
-Critical Issues:
-• Contaminated fuel is classified as a hazardous substance
-• Transporting contaminated fuel requires:
-  - Dangerous Goods License (specifically for transport)
-  - Approved transport vehicles/containers
-  - Proper labeling and packaging per EPA standards
-  - Route planning and safety protocols
+CRITICAL REQUIREMENTS:
+• Waste tracking forms must be completed at the generation point
+• All parties (generator, transporter, disposer) must sign at generation point
+• Documentation must be completed BEFORE transport begins
+• Generation point must be properly identified and documented
+• Transport documentation must link directly to generation documentation
 
-Mobile Service Problem:
-Mobile extraction services would need to transport contaminated fuel from 
-customer locations (fuel stations, roadsides, customer premises) back to 
-disposal facilities. This triggers full Dangerous Goods transportation 
-requirements, which are extremely difficult to comply with for mobile operations.
+MOBILE OPERATOR CHALLENGES:
 
-2. WASTE TRACKING DOCUMENTATION - POINT OF GENERATION
+1. GENERATION AT UNCONTROLLED LOCATIONS:
+   - Mobile extraction creates contaminated fuel at customer locations (fuel 
+     stations, roadsides, customer premises)
+   - These are UNLICENSED, UNCONTROLLED locations
+   - No fixed address or location identifier for documentation
+   - Variable environmental conditions
+   - No pre-existing containment or safety systems
+
+2. DOCUMENTATION COMPLEXITY:
+   - Waste tracking forms must be completed on-site, in variable conditions
+   - Requires generator (customer) to sign at point of generation
+   - Requires transporter (mobile operator) to sign at point of generation
+   - All documentation must be completed before transport begins
+   - Forms must be properly stored and maintained for compliance audits
+
+3. VERIFICATION DIFFICULTIES:
+   - NZIFDA cannot verify documentation was completed correctly at variable 
+     locations
+   - Cannot conduct spot audits at customer locations
+   - Cannot verify environmental conditions at time of generation
+   - Cannot verify proper containment at generation point
+
+FIXED FACILITY ADVANTAGE:
+When vehicles are towed to fixed facilities:
+- Generation occurs at LICENSED, CONTROLLED facility
+- Fixed address and location identifier
+- Pre-existing documentation systems
+- Proper containment and safety systems
+- NZIFDA can verify compliance through facility inspections
+- Documentation can be verified through facility audits
+
+ASSESSMENT: Mobile operators CAN meet this requirement, but it requires:
+- Mobile documentation systems (tablets, digital forms)
+- On-site completion of all forms at customer location
+- Proper storage and maintenance of documentation
+- Ability to demonstrate compliance during audits
+VERDICT: TECHNICALLY POSSIBLE but EXTREMELY DIFFICULT to verify compliance
+
+================================================================================
+
+2. DANGEROUS GOODS ACT 1974 - TRANSPORTATION REQUIREMENTS
 --------------------------------------------------------------------------------
 
-MfE Guidelines require complete tracking from generation to disposal.
+REGULATORY REQUIREMENT:
+Contaminated fuel is classified as a Class 3 Flammable Liquid (UN 1202) under 
+the Dangerous Goods Act 1974. Transport requires:
 
-Critical Issues:
-• Waste tracking must begin at the point where contaminated fuel is generated
-• Mobile extraction creates contaminated fuel at the customer location 
-  (not a licensed facility)
-• Transport must be documented immediately with proper forms
-• Operator must be present at generation point to sign tracking documentation
+CRITICAL REQUIREMENTS:
+• Dangerous Goods License (specifically for transport of Class 3)
+• Approved Handler certification for transport
+• Approved transport vehicles/containers
+• Proper labeling and packaging per EPA standards
+• Route planning and safety protocols
+• Emergency response equipment on vehicle
+• Proper documentation for transport
+• Compliance with transport regulations
 
-Mobile Service Problem:
-When mobile extraction occurs at a fuel station or customer location, the 
-contaminated fuel is "generated" at that uncontrolled location. This creates 
-significant compliance challenges:
-- Generation occurs at unlicensed, uncontrolled locations
-- Waste tracking forms must be completed on-site
-- Transport documentation must begin immediately
-- All parties must sign at the generation point
+MOBILE OPERATOR CHALLENGES:
 
-Fixed Facility Advantage:
-When vehicles are towed to fixed facilities, the contaminated fuel generation 
-can be properly documented at a licensed, controlled facility with proper 
-containment and documentation systems.
+1. VEHICLE CERTIFICATION:
+   - Each mobile vehicle must be individually certified for Dangerous Goods 
+     transport
+   - Vehicle must meet specific design and construction standards
+   - Must have proper containment systems
+   - Must have proper labeling and placarding
+   - Must have emergency response equipment
+   - Certification must be maintained and renewed
 
-3. EPA HAZARDOUS SUBSTANCES REGULATIONS
+2. TRANSPORT FROM VARIABLE LOCATIONS:
+   - Must transport from customer location (uncontrolled) to disposal facility
+   - Route planning must account for variable starting points
+   - Must comply with transport regulations from any location
+   - Emergency response must be available for any route
+   - Documentation must be completed for each transport
+
+3. CONTAINMENT AND SAFETY:
+   - Mobile vehicles must have proper containment systems
+   - Must prevent spills during transport
+   - Must have proper ventilation
+   - Must have proper fire suppression systems
+   - Must meet all safety standards for transport
+
+4. LICENSING COMPLEXITY:
+   - Need Dangerous Goods License for TRANSPORT (not just handling)
+   - Need Approved Handler certification for transport
+   - Need vehicle certification
+   - Need route planning certification
+   - All must be maintained and renewed
+
+FIXED FACILITY ADVANTAGE:
+Fixed facilities:
+- Transport only occurs from fixed facility (controlled location)
+- Fixed route planning
+- Fixed emergency response procedures
+- Easier to verify vehicle compliance
+- Easier to conduct inspections
+
+ASSESSMENT: Mobile operators CAN meet this requirement, but it requires:
+- Each vehicle individually certified for Dangerous Goods transport
+- Approved Handler certification for all drivers
+- Proper vehicle design and construction
+- Proper containment and safety systems
+- Route planning for variable locations
+- Emergency response capability
+VERDICT: TECHNICALLY POSSIBLE but REQUIRES SIGNIFICANT INVESTMENT per vehicle
+
+================================================================================
+
+3. EPA HAZARDOUS SUBSTANCES REGULATIONS - STORAGE AND HANDLING
 --------------------------------------------------------------------------------
 
-EPA requires proper storage, handling, and labeling of hazardous substances.
+REGULATORY REQUIREMENT:
+Under EPA Hazardous Substances Regulations, contaminated fuel must be:
+- Stored in approved containers
+- Properly labeled at point of extraction
+- Handled by Approved Handlers
+- Stored at approved locations
+- Properly documented
 
-Critical Issues:
-• Contaminated fuel must be stored in approved containers
-• Proper labeling required at point of extraction
-• Safety Data Sheets must be available
-• Emergency response capability required
+CRITICAL REQUIREMENTS:
+• Approved storage containers
+• Proper labeling at point of extraction
+• Safety Data Sheets available
+• Emergency response capability
+• Approved Handler certification
+• Proper documentation
 
-Mobile Service Problem:
-Mobile operations would need:
-- Approved storage containers on mobile vehicles
-- Proper labeling at point of extraction (customer location)
-- Safety Data Sheets available on-site
-- Emergency response capability at variable, uncontrolled locations
+MOBILE OPERATOR CHALLENGES:
 
-Fixed Facility Advantage:
-Fixed facilities provide controlled environments with proper containment, 
-labeling systems, and emergency response equipment readily available.
+1. STORAGE ON MOBILE VEHICLES:
+   - Must have approved storage containers on vehicle
+   - Containers must meet EPA standards
+   - Must be properly secured during transport
+   - Must prevent spills and leaks
+   - Must be properly labeled
 
-4. CURRENT WEBSITE GUIDANCE IMPLIES FIXED FACILITIES
+2. LABELING AT POINT OF EXTRACTION:
+   - Must label containers at customer location (uncontrolled)
+   - Must have proper labeling materials on vehicle
+   - Must comply with labeling requirements at variable locations
+   - Must maintain labeling during transport
+
+3. SAFETY DATA SHEETS:
+   - Must have Safety Data Sheets available at customer location
+   - Must be accessible during extraction
+   - Must be properly maintained
+   - Must be available for emergency response
+
+4. EMERGENCY RESPONSE:
+   - Must have emergency response equipment on vehicle
+   - Must be able to respond at variable locations
+   - Must have proper training for emergency response
+   - Must have communication systems for emergencies
+
+FIXED FACILITY ADVANTAGE:
+Fixed facilities:
+- Approved storage at fixed location
+- Proper labeling systems in place
+- Safety Data Sheets readily available
+- Emergency response equipment on-site
+- Easier to verify compliance
+
+ASSESSMENT: Mobile operators CAN meet this requirement, but it requires:
+- Approved storage containers on each vehicle
+- Proper labeling systems for mobile operations
+- Safety Data Sheets available on vehicle
+- Emergency response equipment on vehicle
+- Proper training for mobile operations
+VERDICT: TECHNICALLY POSSIBLE but REQUIRES COMPREHENSIVE MOBILE SYSTEMS
+
+================================================================================
+
+4. HEALTH AND SAFETY AT WORK ACT 2015 - PCBU DUTIES
 --------------------------------------------------------------------------------
 
-Evidence from website content:
+REGULATORY REQUIREMENT:
+Under HSWA 2015, PCBUs (Persons Conducting a Business or Undertaking) must:
+- Ensure health and safety of workers and others
+- Manage risks so far as is reasonably practicable
+- Provide safe work environments
+- Have proper emergency response procedures
 
-Emergency Response Page states:
-"Step 3: Arrange Safe Transport - If the vehicle is at a fuel station, arrange 
-for towing to the operator's facility."
-
-Certification Page states:
-"Step 3: Site Inspection - We conduct an on-site inspection of your facilities 
-and equipment to verify equipment meets certification standards, facilities are 
-properly maintained..."
-
-Standards Page states:
-"Fuel Extraction Protocol - Complete contaminated fuel removal using certified 
-vacuum extraction systems per industry specifications."
-
-These references all point to FIXED FACILITIES, not mobile services.
-
-5. HEALTH AND SAFETY AT WORK REGULATIONS 2017
---------------------------------------------------------------------------------
-
-Workplace safety requirements for handling hazardous substances.
-
-Critical Issues:
-• Risk assessments required for all work locations
+CRITICAL REQUIREMENTS:
+• Risk assessments for all work locations
 • Proper PPE and safety protocols
 • Emergency response procedures
 • Controlled work environments
+• Proper training
 
-Mobile Service Problem:
-Mobile work at variable locations creates:
-- Uncontrolled environmental conditions
-- Variable site safety factors
-- Difficult emergency response planning
-- Harder to enforce PPE and safety protocols
-- Higher risk of accidents and spills
+MOBILE OPERATOR CHALLENGES:
 
-6. ENVIRONMENTAL PROTECTION CONCERNS
+1. RISK ASSESSMENT AT VARIABLE LOCATIONS:
+   - Must conduct risk assessment at each customer location
+   - Must identify hazards at variable locations
+   - Must implement controls for variable conditions
+   - Must document risk assessments
+   - Cannot pre-assess locations
+
+2. UNCONTROLLED WORK ENVIRONMENTS:
+   - Work occurs at customer locations (uncontrolled)
+   - Variable environmental conditions
+   - Variable site safety factors
+   - No pre-existing safety systems
+   - Must establish safety systems at each location
+
+3. EMERGENCY RESPONSE PLANNING:
+   - Must have emergency response for variable locations
+   - Must have communication systems for emergencies
+   - Must have proper training for variable locations
+   - Must coordinate with local emergency services
+   - Cannot have fixed emergency response procedures
+
+4. PPE AND SAFETY PROTOCOLS:
+   - Must ensure proper PPE at variable locations
+   - Must enforce safety protocols at variable locations
+   - Must train staff for variable conditions
+   - Must maintain safety standards at all locations
+
+FIXED FACILITY ADVANTAGE:
+Fixed facilities:
+- Pre-conducted risk assessments
+- Controlled work environments
+- Pre-established safety systems
+- Fixed emergency response procedures
+- Easier to enforce safety protocols
+
+ASSESSMENT: Mobile operators CAN meet this requirement, but it requires:
+- Risk assessment procedures for variable locations
+- Safety systems for mobile operations
+- Emergency response planning for variable locations
+- Proper training for mobile operations
+- Documentation systems for variable locations
+VERDICT: TECHNICALLY POSSIBLE but REQUIRES COMPREHENSIVE MOBILE SAFETY SYSTEMS
+
+================================================================================
+
+5. RESOURCE MANAGEMENT ACT 1991 - ENVIRONMENTAL PROTECTION
 --------------------------------------------------------------------------------
 
-Resource Management Act 1991 requires environmental protection.
+REGULATORY REQUIREMENT:
+Under RMA 1991, operators must:
+- Prevent environmental contamination
+- Properly manage spills
+- Prevent unauthorized discharges
+- Comply with environmental standards
 
-Critical Issues:
+CRITICAL REQUIREMENTS:
 • Spill containment and response
 • Proper drainage and containment
 • Environmental impact mitigation
+• Proper waste management
+• Compliance with environmental standards
 
-Mobile Service Problem:
-Mobile extraction at uncontrolled locations increases:
-- Risk of spills at fuel stations, roadsides, customer premises
-- Difficulty containing spills at variable locations
-- Environmental contamination risk
-- Compliance with Resource Management Act harder to ensure
+MOBILE OPERATOR CHALLENGES:
 
-7. PRACTICAL COMPLIANCE BARRIERS
+1. SPILL CONTAINMENT AT VARIABLE LOCATIONS:
+   - Must have spill containment at each customer location
+   - Must prevent spills at variable locations
+   - Must respond to spills at variable locations
+   - Must have proper containment equipment on vehicle
+   - Cannot have fixed containment systems
+
+2. ENVIRONMENTAL RISK MANAGEMENT:
+   - Must assess environmental risks at each location
+   - Must implement controls for variable conditions
+   - Must prevent contamination at variable locations
+   - Must document environmental compliance
+   - Cannot pre-assess environmental conditions
+
+3. WASTE MANAGEMENT:
+   - Must properly manage waste at variable locations
+   - Must prevent unauthorized discharges
+   - Must comply with environmental standards
+   - Must document waste management
+   - Cannot have fixed waste management systems
+
+FIXED FACILITY ADVANTAGE:
+Fixed facilities:
+- Pre-established spill containment
+- Fixed environmental controls
+- Pre-assessed environmental risks
+- Fixed waste management systems
+- Easier to verify environmental compliance
+
+ASSESSMENT: Mobile operators CAN meet this requirement, but it requires:
+- Spill containment equipment on vehicle
+- Environmental risk assessment procedures
+- Waste management systems for mobile operations
+- Environmental compliance documentation
+- Proper training for environmental protection
+VERDICT: TECHNICALLY POSSIBLE but REQUIRES COMPREHENSIVE MOBILE ENVIRONMENTAL SYSTEMS
+
+================================================================================
+
+6. COMPLIANCE MONITORING AND VERIFICATION
 --------------------------------------------------------------------------------
 
-Even if technically possible, mobile services face:
+REGULATORY REQUIREMENT:
+NZIFDA must be able to:
+- Verify compliance with all requirements
+- Conduct inspections
+- Monitor operations
+- Verify documentation
+- Ensure ongoing compliance
 
-Insurance:
-- Higher insurance costs for mobile operations
-- More complex liability coverage requirements
+CRITICAL REQUIREMENTS:
+• Ability to verify compliance
+• Ability to conduct inspections
+• Ability to monitor operations
+• Ability to verify documentation
+• Ability to ensure ongoing compliance
 
-Licensing:
-- Need both Dangerous Goods License for transport AND handling
-- More complex licensing requirements
+MOBILE OPERATOR CHALLENGES:
 
-Waste Tracking:
-- Must complete tracking forms at customer location
-- More complex documentation requirements
-- Harder to ensure compliance
+1. VERIFICATION AT VARIABLE LOCATIONS:
+   - Cannot conduct inspections at customer locations
+   - Cannot verify compliance at variable locations
+   - Cannot monitor operations at variable locations
+   - Cannot verify documentation at variable locations
+   - Must rely on operator's self-reporting
 
-Equipment:
-- Mobile equipment harder to certify
-- More complex maintenance and calibration
-- Harder to ensure proper containment
+2. DOCUMENTATION VERIFICATION:
+   - Must verify documentation completed at variable locations
+   - Cannot verify conditions at time of generation
+   - Cannot verify proper procedures at variable locations
+   - Must rely on operator's documentation
+   - Difficult to verify accuracy
 
-Compliance Monitoring:
-- NZIFDA must monitor operations at variable locations
-- Harder to conduct inspections
-- More difficult to verify compliance
+3. ONGOING COMPLIANCE MONITORING:
+   - Cannot monitor operations at variable locations
+   - Cannot verify ongoing compliance
+   - Must rely on operator's self-reporting
+   - Difficult to detect non-compliance
+   - Requires more frequent audits
+
+FIXED FACILITY ADVANTAGE:
+Fixed facilities:
+- Can conduct inspections at fixed location
+- Can verify compliance at fixed location
+- Can monitor operations at fixed location
+- Can verify documentation at fixed location
+- Easier to ensure ongoing compliance
+
+ASSESSMENT: This is the CRITICAL BARRIER for mobile operators. NZIFDA cannot 
+effectively verify compliance at variable locations. This requires:
+- Comprehensive documentation systems
+- Regular audits of mobile operations
+- Verification of documentation accuracy
+- Monitoring of mobile operations
+- Detection of non-compliance
+VERDICT: EXTREMELY DIFFICULT - This is the PRIMARY BARRIER to mobile certification
 
 ================================================================================
-LEGAL CONCLUSION
+
+7. FUEL STATION OBLIGATIONS - PCBU DUTIES
+--------------------------------------------------------------------------------
+
+REGULATORY REQUIREMENT:
+Fuel stations are PCBUs under HSWA 2015 and must:
+- Verify contractor compliance
+- Manage risks on their site
+- Ensure safe operations
+- Prevent environmental contamination
+
+CRITICAL REQUIREMENTS:
+• Verify contractor compliance
+• Manage site risks
+• Ensure safe operations
+• Prevent environmental contamination
+• Comply with PCBU duties
+
+FUEL STATION CHALLENGES WITH MOBILE OPERATORS:
+
+1. VERIFICATION OF COMPLIANCE:
+   - Fuel stations CANNOT verify if mobile operators are compliant
+   - Without NZIFDA Mark, there has been NO investigation
+   - Cannot verify licenses, insurance, or compliance
+   - Cannot verify waste tracking compliance
+   - Cannot verify Dangerous Goods compliance
+   - Cannot verify environmental compliance
+
+2. RISK MANAGEMENT:
+   - Allowing uncertified mobile operators creates UNVERIFIED RISK
+   - Cannot assess compliance risks
+   - Cannot verify safety systems
+   - Cannot verify emergency response capability
+   - Cannot verify environmental protection
+
+3. LEGAL LIABILITY:
+   - Fuel stations may be held liable for non-compliant operators
+   - Cannot demonstrate due diligence without verification
+   - May face fines and penalties
+   - May face environmental liability
+   - May face safety liability
+
+NZIFDA MARK VERIFICATION:
+- NZIFDA Mark = Verified compliance investigation
+- NZIFDA Mark = Verified licenses and insurance
+- NZIFDA Mark = Verified waste tracking compliance
+- NZIFDA Mark = Verified Dangerous Goods compliance
+- NZIFDA Mark = Verified environmental compliance
+- NZIFDA Mark = Ongoing compliance monitoring
+
+ASSESSMENT: Fuel stations MUST verify compliance. Without NZIFDA Mark, they 
+cannot verify compliance and face significant legal risk.
+VERDICT: CRITICAL - Fuel stations should ONLY allow operators with NZIFDA Mark
+
 ================================================================================
 
-Mobile extraction services are likely ILLEGAL or NON-COMPLIANT because:
+CONCLUSION: CAN MOBILE OPERATORS MEET NZIFDA STANDARDS?
+================================================================================
 
-1. They require transporting hazardous waste (contaminated fuel) from 
-   uncontrolled locations, which triggers full Dangerous Goods transportation 
-   requirements that are extremely difficult to comply with for mobile operations.
+TECHNICAL FEASIBILITY: YES
+Mobile operators CAN TECHNICALLY meet all regulatory requirements IF they:
+1. Operate under a Compliant Operator (management layer)
+2. Have each vehicle individually assessed and certified
+3. Meet all Dangerous Goods transport requirements
+4. Complete proper waste tracking at point of generation
+5. Maintain comprehensive mobile safety systems
+6. Maintain comprehensive mobile environmental systems
+7. Complete annual recertification ($2,500 + GST per annum)
+8. Maintain proper documentation and compliance systems
 
-2. Waste tracking must begin at the point of generation (customer location), 
-   creating significant compliance challenges at uncontrolled, unlicensed locations.
+PRACTICAL FEASIBILITY: EXTREMELY DIFFICULT
+However, the practical barriers are EXTREMELY HIGH:
+1. Compliance verification at variable locations is extremely difficult
+2. Each vehicle requires individual certification (significant cost)
+3. Annual recertification required (ongoing cost)
+4. Comprehensive mobile systems required (significant investment)
+5. Documentation and compliance systems must be comprehensive
+6. Ongoing compliance monitoring is difficult
 
-3. Fixed facilities provide better control, safety, and regulatory compliance 
-   - which is why the website already directs customers to fixed facilities.
+CURRENT STATUS: NO COMPLIANT MOBILE OPERATORS
+There are currently NO mobile operators that have achieved NZIFDA certification.
+This suggests that either:
+1. Mobile operators have not attempted certification
+2. Mobile operators cannot meet the requirements
+3. The barriers are too high for practical implementation
 
-4. The proper, compliant process is: Vehicle towed → Fixed facility → Extraction 
-   → Proper disposal.
+FUEL STATION IMPLICATIONS:
+- Without NZIFDA Mark, there has been NO investigation of mobile operator compliance
+- Fuel stations CANNOT verify if mobile operators are compliant
+- Fuel stations face significant legal risk allowing uncertified mobile operators
+- Fuel stations should ONLY allow operators with NZIFDA Mark
 
 ================================================================================
 RECOMMENDATIONS
 ================================================================================
 
-1. Update website to explicitly state that mobile extraction services are 
-   NON-COMPLIANT
+1. MAINTAIN CURRENT POSITION:
+   - Mobile operators CAN be certified, but requirements are extremely high
+   - Currently, NO mobile operators have achieved certification
+   - Fuel stations should ONLY allow operators with NZIFDA Mark
 
-2. Clarify that all remediation must occur at certified fixed facilities
+2. FUEL STATION GUIDANCE:
+   - Emphasize that without NZIFDA Mark, there has been NO investigation
+   - Emphasize that fuel stations cannot verify compliance
+   - Emphasize legal risk of allowing uncertified operators
+   - Provide clear guidance on verification requirements
 
-3. Update emergency response guidance to emphasize towing to facilities
+3. MOBILE OPERATOR GUIDANCE:
+   - Provide clear requirements for mobile certification
+   - Emphasize the high barriers to certification
+   - Encourage mobile operators to apply if they can meet requirements
+   - Provide support for mobile operators seeking certification
 
-4. Add to certification requirements that operators must have fixed facilities
-
-5. Update standards to specify fixed facility requirements
-
-6. Add FAQ entry explaining why mobile services are not permitted
+4. CONSUMER GUIDANCE:
+   - Emphasize importance of NZIFDA Mark
+   - Explain that currently all certified operators use fixed facilities
+   - Explain that without Mark, compliance cannot be verified
+   - Provide clear guidance on choosing operators
 
 ================================================================================
 REGULATORY REFERENCES
@@ -215,12 +525,13 @@ REGULATORY REFERENCES
 
 • Dangerous Goods Act 1974 - Transportation requirements
 • Resource Management Act 1991 - Environmental protection
-• Hazardous Substances Act 1996 - Contaminated fuel management
+• Hazardous Substances and New Organisms Act 1996 - Contaminated fuel management
+• Health and Safety at Work Act 2015 - PCBU duties
 • Health and Safety at Work (Hazardous Substances) Regulations 2017
 • MfE Guidelines 2000 - Used oil and fuel disposal standards
 • EPA Hazardous Substances Regulations - Storage, handling, labeling
+• WorkSafe New Zealand - Service station guidance
 
 ================================================================================
 END OF ANALYSIS
 ================================================================================
-
