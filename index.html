@@ -3,8 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NZIFDA - New Zealand Industrial Fuel Duty Agency | Industry Monitoring & Compliance | www.nzifda.org</title>
+    <title>NZIFDA - New Zealand Industrial Fuel Disposal Agency</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600&display=swap');
+        
+        :root {
+            --primary: #1a1a1a;
+            --danger: #dc2626;
+            --warning: #f59e0b;
+            --success: #16a34a;
+            --accent: #0369a1;
+            --surface: #f8fafc;
+            --border: #e2e8f0;
+            --text: #334155;
+            --text-dark: #0f172a;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,319 +26,664 @@
         }
         
         body {
-            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-family: 'Barlow', sans-serif;
+            background: var(--surface);
+            color: var(--text);
             line-height: 1.6;
-            color: #212529;
-            background: #f8f9fa;
+            overflow-x: hidden;
         }
         
-        /* Government Header Bar */
-        .gov-header {
-            background: #000;
-            color: white;
-            padding: 8px 0;
-            font-size: 0.875rem;
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
         
-        .gov-header-content {
-            max-width: 1200px;
+        .nav-container {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 1rem 2rem;
         }
         
-        .govt-badge {
+        .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 1.5rem;
         }
         
-        .nz-coat-of-arms {
-            width: 30px;
-            height: 30px;
-            background: white;
-            border-radius: 50%;
+        .logo-hexagons {
+            display: flex;
+            position: relative;
+            width: 65px;
+            height: 60px;
+        }
+        
+        .hex {
+            width: 24px;
+            height: 28px;
+            position: absolute;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+            transition: all 0.4s ease;
+            opacity: 0.9;
+            animation: hexFloat 6s ease-in-out infinite;
+        }
+        
+        .hex-1 { 
+            background: #ef4444; 
+            left: 12px; 
+            top: 0; 
+            animation-delay: 0s;
+        }
+        .hex-2 { 
+            background: #84cc16; 
+            left: 32px; 
+            top: 0; 
+            animation-delay: 0.5s;
+        }
+        .hex-3 { 
+            background: #2563eb; 
+            left: 2px; 
+            top: 20px; 
+            animation-delay: 1s;
+        }
+        .hex-4 { 
+            background: #fb923c; 
+            left: 42px; 
+            top: 20px; 
+            animation-delay: 1.5s;
+        }
+        .hex-5 { 
+            background: #6b7280; 
+            left: 12px; 
+            bottom: 0; 
+            animation-delay: 2s;
+        }
+        .hex-6 { 
+            background: #60a5fa; 
+            left: 32px; 
+            bottom: 0; 
+            animation-delay: 2.5s;
+        }
+        
+        @keyframes hexFloat {
+            0%, 100% { 
+                transform: translateY(0) scale(1); 
+                filter: brightness(1);
+            }
+            50% { 
+                transform: translateY(-3px) scale(1.05); 
+                filter: brightness(1.2);
+            }
+        }
+        
+        .logo:hover .hex {
+            transform: scale(1.15);
+            filter: brightness(1.3);
+        }
+        
+        .logo:hover .hex-1 { transform: translate(-2px, -2px) scale(1.15); }
+        .logo:hover .hex-2 { transform: translate(2px, -2px) scale(1.15); }
+        .logo:hover .hex-3 { transform: translate(-2px, 0) scale(1.15); }
+        .logo:hover .hex-4 { transform: translate(2px, 0) scale(1.15); }
+        .logo:hover .hex-5 { transform: translate(-2px, 2px) scale(1.15); }
+        .logo:hover .hex-6 { transform: translate(2px, 2px) scale(1.15); }
+        
+        .logo-text {
+            color: white;
+        }
+        
+        .logo-text h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin: 0;
+            display: flex;
+            align-items: baseline;
+        }
+        
+        .logo-text h1 .nz {
+            color: #fff;
+        }
+        
+        .logo-text h1 .if {
+            color: #dc2626;
+        }
+        
+        .logo-text h1 .da {
+            color: #3b82f6;
+        }
+        
+        .logo-text span {
+            font-size: 0.7rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+            display: block;
+            margin-top: 0.2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--danger);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--danger);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            margin-top: 100px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(239, 68, 68, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(132, 204, 22, 0.05) 0%, transparent 50%);
+            animation: gradientShift 15s ease-in-out infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.01) 35px, rgba(255,255,255,0.01) 70px),
+                repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255,255,255,0.01) 35px, rgba(255,255,255,0.01) 70px);
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            animation: slideInLeft 0.8s ease-out;
+        }
+        
+        .hero h2 span {
+            color: var(--danger);
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+            animation: slideInLeft 0.8s ease-out 0.2s both;
+        }
+        
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            animation: slideInLeft 0.8s ease-out 0.4s both;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        /* Alert Section */
+        .alert-banner {
+            background: var(--warning);
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .alert-banner::before,
+        .alert-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 20px;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--warning),
+                var(--warning) 10px,
+                #333 10px,
+                #333 20px
+            );
+        }
+        
+        .alert-banner::before { left: 0; }
+        .alert-banner::after { right: 0; }
+        
+        .alert-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: black;
-            font-weight: bold;
-            font-size: 12px;
+            gap: 1rem;
         }
         
-        /* Main Header */
-        .main-header {
-            background: #003d82;
-            color: white;
-            padding: 20px 0;
-            border-bottom: 4px solid #c8102e;
+        .alert-icon {
+            font-size: 1.5rem;
+            animation: blink 1s infinite;
         }
         
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
         
-        .agency-title h1 {
-            font-size: 2rem;
-            font-weight: normal;
-            margin-bottom: 5px;
-        }
-        
-        .agency-title p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-        
-        .website-url {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        
-        /* Navigation */
-        .navigation {
-            background: #ffffff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .nav-menu {
-            display: flex;
-            gap: 0;
-        }
-        
-        .nav-item {
-            padding: 15px 20px;
-            text-decoration: none;
-            color: #003d82;
-            font-weight: 500;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-item:hover {
-            background: #f0f0f0;
-            border-bottom-color: #c8102e;
-        }
-        
-        /* Alert Banner */
-        .alert-banner {
-            background: #c8102e;
-            color: white;
-            padding: 12px;
-            text-align: center;
-        }
-        
-        .alert-banner strong {
+        .alert-text {
+            font-weight: 600;
+            color: var(--text-dark);
             font-size: 1.1rem;
         }
         
         /* Main Content */
-        .main-content {
+        .container {
             max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
         }
         
-        /* Regulatory Notice */
-        .regulatory-notice {
-            background: #fff3cd;
-            border: 2px solid #856404;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 30px;
+        .section {
+            margin-bottom: 5rem;
         }
         
-        .regulatory-notice h2 {
-            color: #856404;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
         }
         
-        /* Section Cards */
-        .section-card {
-            background: white;
-            border-radius: 5px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        .section-header h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
         }
         
-        .section-card h2 {
-            color: #003d82;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e9ecef;
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--danger);
         }
         
-        .section-card h3 {
-            color: #003d82;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-        
-        /* Grid Layouts */
-        .authority-grid {
+        /* Certification Status */
+        .status-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
+            gap: 2rem;
+            margin-top: 3rem;
         }
         
-        .authority-card {
-            background: #f8f9fa;
-            padding: 20px;
-            border-left: 4px solid #003d82;
+        .status-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
         
-        .authority-card h4 {
-            color: #003d82;
-            margin-bottom: 10px;
-        }
-        
-        /* Compliance Table */
-        .compliance-table {
+        .status-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
+            height: 4px;
         }
         
-        .compliance-table th {
-            background: #003d82;
-            color: white;
-            padding: 12px;
-            text-align: left;
+        .status-certified::before {
+            background: var(--success);
         }
         
-        .compliance-table td {
-            padding: 12px;
-            border-bottom: 1px solid #dee2e6;
+        .status-warning::before {
+            background: var(--warning);
         }
         
-        .compliance-table tr:nth-child(even) {
-            background: #f8f9fa;
+        .status-blacklisted::before {
+            background: var(--danger);
         }
         
-        /* Penalties Table */
-        .penalty-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
+        .status-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
         
-        .penalty-item {
-            background: #fff;
-            border: 1px solid #dee2e6;
-            padding: 15px;
-            border-radius: 5px;
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
         }
         
-        .penalty-amount {
+        .badge-certified {
+            background: rgba(22, 163, 74, 0.1);
+            color: var(--success);
+        }
+        
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+        
+        .badge-blacklist {
+            background: rgba(220, 38, 38, 0.1);
+            color: var(--danger);
+        }
+        
+        .status-card h3 {
+            font-family: 'Oswald', sans-serif;
             font-size: 1.5rem;
-            font-weight: bold;
-            color: #c8102e;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
         }
         
-        /* Forms */
-        .official-form {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 5px;
-            margin: 20px 0;
+        .status-count {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+        
+        /* Standards Section */
+        .standards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .standard-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .standard-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .standard-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .standard-item h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        /* Report Section */
+        .report-section {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            padding: 4rem 2rem;
+            border-radius: 12px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .report-section::before {
+            content: '⚠';
+            position: absolute;
+            font-size: 300px;
+            opacity: 0.05;
+            right: -50px;
+            top: -100px;
+            transform: rotate(-15deg);
+        }
+        
+        .report-section h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .report-form {
+            max-width: 600px;
+            margin: 2rem auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
         
         .form-group {
-            margin-bottom: 20px;
+            text-align: left;
         }
         
         .form-group label {
             display: block;
+            margin-bottom: 0.5rem;
             font-weight: 600;
-            margin-bottom: 5px;
-            color: #003d82;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
         }
         
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #ced4da;
-            border-radius: 3px;
+            padding: 1rem;
+            border: none;
+            border-radius: 6px;
             font-size: 1rem;
+            font-family: inherit;
         }
         
         .form-group textarea {
-            min-height: 100px;
+            min-height: 120px;
+            resize: vertical;
         }
         
-        .required {
-            color: #c8102e;
-        }
-        
-        .submit-btn {
-            background: #003d82;
-            color: white;
-            padding: 10px 25px;
+        .btn-submit {
+            background: white;
+            color: var(--danger);
+            font-weight: 700;
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
             border: none;
-            border-radius: 3px;
-            font-size: 1rem;
+            border-radius: 6px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
         
-        .submit-btn:hover {
-            background: #002d5c;
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
         
-        /* Legal References */
-        .legal-ref {
-            background: #e9ecef;
-            padding: 15px;
-            border-left: 3px solid #003d82;
-            margin: 15px 0;
-            font-size: 0.95rem;
+        /* Compliance Table */
+        .compliance-table {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-top: 2rem;
         }
         
-        .legal-ref strong {
-            color: #003d82;
+        .compliance-table thead {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .compliance-table th {
+            padding: 1.2rem;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .compliance-table td {
+            padding: 1.2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .compliance-table tbody tr:hover {
+            background: var(--surface);
+        }
+        
+        .compliance-check {
+            color: var(--success);
+            font-size: 1.2rem;
+        }
+        
+        .compliance-cross {
+            color: var(--danger);
+            font-size: 1.2rem;
         }
         
         /* Footer */
         .footer {
-            background: #212529;
+            background: var(--primary);
             color: white;
-            padding: 40px 0;
-            margin-top: 60px;
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 5rem;
         }
         
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            gap: 3rem;
+            margin-bottom: 2rem;
         }
         
         .footer-section h3 {
-            margin-bottom: 15px;
-            color: #fff;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--danger);
         }
         
         .footer-section ul {
@@ -332,12 +691,13 @@
         }
         
         .footer-section ul li {
-            margin-bottom: 8px;
+            margin-bottom: 0.5rem;
         }
         
         .footer-section a {
-            color: #adb5bd;
+            color: #cbd5e1;
             text-decoration: none;
+            transition: color 0.3s;
         }
         
         .footer-section a:hover {
@@ -345,669 +705,404 @@
         }
         
         .footer-bottom {
-            background: #000;
-            padding: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1.5rem;
             text-align: center;
-            font-size: 0.9rem;
-            color: #adb5bd;
+            color: #94a3b8;
+        }
+        
+        /* Enforcement Badge */
+        .enforcement-badge {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 100px;
+            height: 100px;
+            background: var(--danger);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .enforcement-badge:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(220, 38, 38, 0.6);
+        }
+        
+        .enforcement-badge span:first-child {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+        
+        .enforcement-badge span:last-child {
+            font-size: 1.8rem;
+            font-family: 'Oswald', sans-serif;
         }
         
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-menu {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .hero-actions {
                 flex-direction: column;
             }
             
-            .nav-item {
-                border-bottom: 1px solid #e9ecef;
-            }
-            
-            .agency-title h1 {
-                font-size: 1.5rem;
+            .status-grid,
+            .standards-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Industry Header -->
-    <div class="gov-header">
-        <div class="gov-header-content">
-            <div class="govt-badge">
-                <div class="nz-coat-of-arms">IFDA</div>
-                <span>Independent Industry Monitoring Body | Est. 2019</span>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-hexagons">
+                    <div class="hex hex-1"></div>
+                    <div class="hex hex-2"></div>
+                    <div class="hex hex-3"></div>
+                    <div class="hex hex-4"></div>
+                    <div class="hex hex-5"></div>
+                    <div class="hex hex-6"></div>
+                </div>
+                <div class="logo-text">
+                    <h1><span class="nz">NZ</span><span class="if">IF</span><span class="da">DA</span></h1>
+                    <span>NZ Industrial Fuel Disposal Agency</span>
+                </div>
             </div>
-            <span>NZTA Authorised Refund Facilitator</span>
-        </div>
-    </div>
-    
-    <!-- Main Header -->
-    <header class="main-header">
-        <div class="header-content">
-            <div class="agency-title">
-                <h1>New Zealand Industrial Fuel Duty Agency</h1>
-                <p>Independent Misfuelling Incident Monitor & NZTA Duty Refund Facilitator</p>
-                <p class="website-url">www.nzifda.org</p>
-            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#standards">Standards</a></li>
+                    <li><a href="#certification">Certification</a></li>
+                    <li><a href="#report">Report Violation</a></li>
+                    <li><a href="#compliance">Compliance</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
-    
-    <!-- Navigation -->
-    <nav class="navigation">
-        <div class="nav-content">
-            <div class="nav-menu">
-                <a href="#about" class="nav-item">About NZIFDA</a>
-                <a href="#refunds" class="nav-item">NZTA Duty Refunds</a>
-                <a href="#reporting" class="nav-item">Incident Reporting</a>
-                <a href="#standards" class="nav-item">Industry Standards</a>
-                <a href="#providers" class="nav-item">Service Providers</a>
-                <a href="#data" class="nav-item">Data & Research</a>
-            </div>
-        </div>
-    </nav>
-    
+
     <!-- Alert Banner -->
     <div class="alert-banner">
-        <strong>24/7 INCIDENT HOTLINE:</strong> +64 4 887 3335 | 
-        <strong>NZTA REFUND CLAIMS:</strong> Contaminated fuel duty recovery available
+        <div class="alert-content">
+            <span class="alert-icon">⚠️</span>
+            <span class="alert-text">NOTICE: All fuel disposal operators must meet NZIFDA certification standards</span>
+            <span class="alert-icon">⚠️</span>
+        </div>
     </div>
-    
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Ensuring <span>Industry Excellence</span> in Fuel Management</h2>
+            <p class="hero-subtitle">Setting and Enforcing Professional Standards for Misfuel Recovery & Vehicle Remediation</p>
+            <div class="hero-actions">
+                <a href="#report" class="btn btn-primary">Report Non-Compliance</a>
+                <a href="#certification" class="btn btn-secondary">Apply for Certification</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Main Content -->
-    <div class="main-content">
-        <!-- Industry Notice -->
-        <div class="regulatory-notice">
-            <h2>📋 INDUSTRY NOTICE - NZTA FUEL DUTY REFUND SCHEME</h2>
-            <p><strong>Effective 1 January 2024 - NZTA Partnership Agreement:</strong></p>
-            <p>NZIFDA is the authorized facilitator for fuel duty refund claims on contaminated fuel extracted during misfuelling incidents. All extracted fuel becomes eligible for duty recovery under NZTA guidelines. Service providers must be NZIFDA-accredited to process refund claims.</p>
-        </div>
-        
-        <!-- About NZIFDA -->
-        <div id="about" class="section-card">
-            <h2>About the New Zealand Industrial Fuel Duty Agency</h2>
-            <p>NZIFDA is an independent industry-established body founded in 2019 by major fuel retailers, service providers, and insurance companies to monitor misfuelling incidents and facilitate duty recovery on contaminated fuel. We operate under a Memorandum of Understanding with NZTA (Waka Kotahi) to process fuel duty refund claims for extracted contaminated fuel.</p>
-            
-            <div class="authority-grid">
-                <div class="authority-card">
-                    <h4>Industry Monitoring</h4>
-                    <ul>
-                        <li>• National incident database management</li>
-                        <li>• Service provider accreditation</li>
-                        <li>• Best practice development</li>
-                        <li>• Industry training programs</li>
-                    </ul>
+    <div class="container">
+        <!-- About Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Industry Authority</h2>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; line-height: 1.8;">
+                <p>The New Zealand Industrial Fuel Disposal Agency (NZIFDA) is the independent regulatory authority establishing and maintaining professional standards in the fuel contamination remediation sector. We ensure compliance with environmental regulations, safety protocols, and industry best practices to protect stakeholders across New Zealand's fuel management industry.</p>
+                <br>
+                <p><strong>Our mandate:</strong> Establish comprehensive compliance frameworks, enforce professional standards, and ensure operational excellence across New Zealand's fuel disposal and remediation services sector.</p>
+            </div>
+        </section>
+
+        <!-- Certification Status -->
+        <section class="section" id="certification">
+            <div class="section-header">
+                <h2>Compliance Status Registry</h2>
+            </div>
+            <div class="status-grid">
+                <div class="status-card status-certified">
+                    <span class="status-badge badge-certified">Fully Compliant</span>
+                    <h3>Certified Operators</h3>
+                    <div class="status-count" style="color: var(--success);">127</div>
+                    <p>Meeting all NZIFDA standards and authorized for fuel remediation services</p>
                 </div>
-                <div class="authority-card">
-                    <h4>NZTA Refund Facilitation</h4>
-                    <ul>
-                        <li>• Process duty refund claims</li>
-                        <li>• Verify contaminated fuel volumes</li>
-                        <li>• Coordinate with IRD for rebates</li>
-                        <li>• Monthly reconciliation reports</li>
-                    </ul>
+                <div class="status-card status-warning">
+                    <span class="status-badge badge-warning">Pending Review</span>
+                    <h3>Under Assessment</h3>
+                    <div class="status-count" style="color: var(--warning);">34</div>
+                    <p>Currently undergoing compliance assessment and verification procedures</p>
                 </div>
-                <div class="authority-card">
-                    <h4>Member Services</h4>
-                    <ul>
-                        <li>• 24/7 incident response coordination</li>
-                        <li>• Technical advisory services</li>
-                        <li>• Dispute resolution</li>
-                        <li>• Industry representation</li>
-                    </ul>
+                <div class="status-card status-blacklisted">
+                    <span class="status-badge badge-blacklist">Non-Compliant</span>
+                    <h3>Suspended Operators</h3>
+                    <div class="status-count" style="color: var(--danger);">89</div>
+                    <p>Failed to meet minimum compliance standards - NOT AUTHORIZED</p>
                 </div>
             </div>
-            
-            <h3 style="margin-top: 25px;">Governance Structure</h3>
-            <p>NZIFDA is governed by an independent board comprising representatives from:</p>
-            <ul style="margin-left: 20px; line-height: 2;">
-                <li>• Major fuel retailers (BP, Z Energy, Mobil, Gull, NPD)</li>
-                <li>• Emergency service providers</li>
-                <li>• Insurance Council of New Zealand</li>
-                <li>• Motor Trade Association</li>
-                <li>• Independent observer from NZTA</li>
-            </ul>
-        </div>
-        
-        <!-- NZTA Fuel Duty Refunds -->
-        <div id="refunds" class="section-card">
-            <h2>NZTA Fuel Duty Refund Scheme</h2>
-            <p>Under the NZTA fuel duty regulations, contaminated fuel extracted during misfuelling incidents is eligible for duty refunds. NZIFDA facilitates this process as the authorized intermediary.</p>
-            
-            <h3>Refund Eligibility & Rates</h3>
+        </section>
+
+        <!-- Standards Section -->
+        <section class="section" id="standards">
+            <div class="section-header">
+                <h2>Industry Standards & Protocols</h2>
+            </div>
+            <div class="standards-grid">
+                <div class="standard-item">
+                    <div class="standard-icon">1</div>
+                    <h4>Fuel Extraction Protocol</h4>
+                    <p>Complete contaminated fuel removal using certified vacuum extraction systems per industry specifications.</p>
+                </div>
+                <div class="standard-item">
+                    <div class="standard-icon">2</div>
+                    <h4>System Remediation</h4>
+                    <p>Comprehensive fuel system flush including lines, pumps, and injectors with full documentation.</p>
+                </div>
+                <div class="standard-item">
+                    <div class="standard-icon">3</div>
+                    <h4>Component Replacement</h4>
+                    <p>Mandatory replacement of all affected fuel system components per manufacturer specifications.</p>
+                </div>
+                <div class="standard-item">
+                    <div class="standard-icon">4</div>
+                    <h4>Waste Management</h4>
+                    <p>Compliant disposal per MfE guidelines with complete tracking documentation.</p>
+                </div>
+                <div class="standard-item">
+                    <div class="standard-icon">5</div>
+                    <h4>Insurance Requirements</h4>
+                    <p>Minimum $2M professional indemnity coverage with comprehensive liability protection.</p>
+                </div>
+                <div class="standard-item">
+                    <div class="standard-icon">6</div>
+                    <h4>Quality Assurance</h4>
+                    <p>Documented procedures, warranties, and post-service verification protocols.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Report Section -->
+        <section class="section" id="report">
+            <div class="report-section">
+                <h2>Submit Compliance Concern</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Report non-compliant operators to maintain industry integrity</p>
+                <form class="report-form">
+                    <div class="form-group">
+                        <label for="company">Organization Name</label>
+                        <input type="text" id="company" name="company" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" name="location" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="violation">Non-Compliance Category</label>
+                        <select id="violation" name="violation" required>
+                            <option value="">Select category...</option>
+                            <option value="incomplete">Inadequate fuel extraction procedures</option>
+                            <option value="pricing">Pricing transparency violations</option>
+                            <option value="damage">Improper remediation resulting in damage</option>
+                            <option value="disposal">Non-compliant waste disposal methods</option>
+                            <option value="documentation">Insufficient documentation/warranty</option>
+                            <option value="certification">Operating without proper certification</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="details">Detailed Description</label>
+                        <textarea id="details" name="details" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Submit Compliance Report</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Compliance Table -->
+        <section class="section" id="compliance">
+            <div class="section-header">
+                <h2>Compliance Requirements</h2>
+            </div>
             <table class="compliance-table">
                 <thead>
                     <tr>
-                        <th>Fuel Type</th>
-                        <th>Excise Duty Rate</th>
-                        <th>GST Component</th>
-                        <th>Total Refund/Litre</th>
-                        <th>Processing Time</th>
+                        <th>Compliance Requirement</th>
+                        <th>NZIFDA Certified</th>
+                        <th>Non-Compliant</th>
+                        <th>Regulatory Framework</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Petrol (contaminated)</td>
-                        <td>$0.77 per litre</td>
-                        <td>$0.12 per litre</td>
-                        <td>$0.89 per litre</td>
-                        <td>10 business days</td>
+                        <td>Dangerous Goods License</td>
+                        <td class="compliance-check">✓</td>
+                        <td class="compliance-cross">✗</td>
+                        <td>Mandatory per DG Act 1974</td>
                     </tr>
                     <tr>
-                        <td>Diesel (contaminated)</td>
-                        <td>$0.31 per litre</td>
-                        <td>$0.05 per litre</td>
-                        <td>$0.36 per litre</td>
-                        <td>10 business days</td>
+                        <td>Waste Tracking Documentation</td>
+                        <td class="compliance-check">✓</td>
+                        <td class="compliance-cross">✗</td>
+                        <td>Required by MfE</td>
                     </tr>
                     <tr>
-                        <td>Mixed contamination</td>
-                        <td>Pro-rata calculation</td>
-                        <td>Variable</td>
-                        <td>Case-by-case</td>
-                        <td>15 business days</td>
+                        <td>Professional Indemnity Insurance</td>
+                        <td class="compliance-check">✓</td>
+                        <td class="compliance-cross">✗</td>
+                        <td>Industry Standard</td>
+                    </tr>
+                    <tr>
+                        <td>Certified Equipment Standards</td>
+                        <td class="compliance-check">✓</td>
+                        <td class="compliance-cross">✗</td>
+                        <td>OSH Requirement</td>
+                    </tr>
+                    <tr>
+                        <td>Service Warranty Provision</td>
+                        <td class="compliance-check">✓</td>
+                        <td class="compliance-cross">✗</td>
+                        <td>Consumer Guarantees Act</td>
+                    </tr>
+                    <tr>
+                        <td>Transparent Pricing Structure</td>
+                        <td class="compliance-check">✓</td>
+                        <td class="compliance-cross">✗</td>
+                        <td>Fair Trading Act</td>
                     </tr>
                 </tbody>
             </table>
-            
-            <h3>Claim Process for Service Providers</h3>
-            <div class="steps-grid">
-                <div class="step-card">
-                    <span class="step-number">1</span>
-                    <h3>Extract & Document</h3>
-                    <p>Extract contaminated fuel, record volume, take photographic evidence, obtain customer signature.</p>
-                </div>
-                <div class="step-card">
-                    <span class="step-number">2</span>
-                    <h3>Submit to NZIFDA</h3>
-                    <p>Lodge claim via portal within 48 hours with extraction certificate and volume documentation.</p>
-                </div>
-                <div class="step-card">
-                    <span class="step-number">3</span>
-                    <h3>Verification</h3>
-                    <p>NZIFDA verifies claim, cross-references incident report, confirms accreditation status.</p>
-                </div>
-                <div class="step-card">
-                    <span class="step-number">4</span>
-                    <h3>NZTA Processing</h3>
-                    <p>Approved claims forwarded to NZTA for duty refund processing via IRD systems.</p>
-                </div>
+        </section>
+
+        <!-- Legal Authority -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Regulatory Framework</h2>
             </div>
-            
-            <h3>Monthly Reconciliation</h3>
-            <p>NZIFDA provides consolidated monthly reports to NZTA showing:</p>
-            <ul style="margin-left: 20px; line-height: 2;">
-                <li>• Total contaminated fuel volumes by region</li>
-                <li>• Duty refund amounts processed</li>
-                <li>• Service provider claim summaries</li>
-                <li>• Incident correlation data</li>
-                <li>• Disposal certification for contaminated fuel</li>
-            </ul>
-            
-            <div class="legal-ref">
-                <strong>Reference:</strong> NZTA Fuel Excise Duty Refund Guidelines 2024 | IRD Excise and Excise-Equivalent Duties Table | MOU between NZIFDA and Waka Kotahi dated 15 December 2023
+            <div style="background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text-dark);">
+                    Operating Under New Zealand Legislation
+                </h3>
+                <ul style="list-style: none; display: grid; gap: 1rem;">
+                    <li style="padding: 1rem; background: var(--surface); border-left: 4px solid var(--accent);">
+                        <strong>Dangerous Goods Act 1974:</strong> Fuel handling and transportation requirements
+                    </li>
+                    <li style="padding: 1rem; background: var(--surface); border-left: 4px solid var(--accent);">
+                        <strong>Resource Management Act 1991:</strong> Environmental protection and waste disposal
+                    </li>
+                    <li style="padding: 1rem; background: var(--surface); border-left: 4px solid var(--accent);">
+                        <strong>Hazardous Substances Act 1996:</strong> Contaminated fuel management protocols
+                    </li>
+                    <li style="padding: 1rem; background: var(--surface); border-left: 4px solid var(--accent);">
+                        <strong>Fair Trading Act 1986:</strong> Consumer protection and pricing transparency
+                    </li>
+                    <li style="padding: 1rem; background: var(--surface); border-left: 4px solid var(--accent);">
+                        <strong>MfE Guidelines 2000:</strong> Used oil and fuel disposal standards
+                    </li>
+                </ul>
             </div>
-        </div>
-        
-        <!-- Incident Reporting -->
-        <div id="reporting" class="section-card">
-            <h2>Incident Reporting & Database Management</h2>
-            <p>NZIFDA maintains New Zealand's comprehensive misfuelling incident database, providing crucial data to insurers, fuel retailers, and service providers. This data supports NZTA refund claims and industry best practice development.</p>
-            
-            <h3>Reporting Participants</h3>
-            <ul style="margin-left: 20px; line-height: 2;">
-                <li><strong>Fuel Retailers:</strong> Report customer misfuelling incidents for insurance and safety records</li>
-                <li><strong>Service Providers:</strong> Submit extraction reports for duty refund processing</li>
-                <li><strong>Fleet Operators:</strong> Document incidents for fleet management and insurance</li>
-                <li><strong>Insurance Companies:</strong> Access data for claims validation</li>
-                <li><strong>Vehicle Manufacturers:</strong> Track warranty-related misfuelling cases</li>
-            </ul>
-            
-            <h3>Submit Incident Report - Form NZIFDA-01</h3>
-            <form class="official-form">
-                <div class="form-group">
-                    <label>Reporting Entity <span class="required">*</span></label>
-                    <select required>
-                        <option value="">Select entity type...</option>
-                        <option>Fuel Retailer (Member)</option>
-                        <option>Accredited Service Provider</option>
-                        <option>Fleet Operator</option>
-                        <option>Insurance Company</option>
-                        <option>General Public</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label>NZIFDA Member/Provider Number</label>
-                    <input type="text" placeholder="If applicable">
-                </div>
-                
-                <div class="form-group">
-                    <label>Incident Date & Time <span class="required">*</span></label>
-                    <input type="datetime-local" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Location Details <span class="required">*</span></label>
-                    <input type="text" placeholder="Service station or extraction location" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Misfuelling Type <span class="required">*</span></label>
-                    <select required>
-                        <option value="">Select type...</option>
-                        <option>Petrol into Diesel - Engine Started</option>
-                        <option>Petrol into Diesel - Not Started</option>
-                        <option>Diesel into Petrol - Engine Started</option>
-                        <option>Diesel into Petrol - Not Started</option>
-                        <option>Wrong Octane Rating</option>
-                        <option>Water Contamination</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label>Volume Extracted (Litres)</label>
-                    <input type="number" placeholder="For duty refund claims">
-                </div>
-                
-                <div class="form-group">
-                    <label>Claim NZTA Duty Refund?</label>
-                    <select>
-                        <option>Yes - Process refund claim</option>
-                        <option>No - Record only</option>
-                        <option>Pending - Awaiting documentation</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label>Service Provider Details</label>
-                    <input type="text" placeholder="Company performing extraction (if applicable)">
-                </div>
-                
-                <button type="submit" class="submit-btn">Submit Report</button>
-                <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
-                    Incident Reference Number will be issued for tracking. For duty refund claims, ensure extraction certificate is attached.
-                </p>
-            </form>
-        </div>
-        
-        <!-- Service Provider Accreditation -->
-        <div id="providers" class="section-card">
-            <h2>Accredited Service Providers</h2>
-            <p>Only NZIFDA-accredited providers can submit fuel duty refund claims to NZTA. Accreditation ensures quality service delivery and validates refund eligibility.</p>
-            
-            <h3>Accreditation Benefits</h3>
-            <div class="penalty-grid">
-                <div class="penalty-item">
-                    <h4>NZTA Refund Access</h4>
-                    <div class="penalty-amount" style="color: #28a745;">$0.36-0.89/L</div>
-                    <p>Process duty refunds on extracted fuel</p>
-                </div>
-                <div class="penalty-item">
-                    <h4>Industry Directory</h4>
-                    <div class="penalty-amount" style="color: #17a2b8;">Listed</div>
-                    <p>National provider database inclusion</p>
-                </div>
-                <div class="penalty-item">
-                    <h4>Insurance Recognition</h4>
-                    <div class="penalty-amount" style="color: #17a2b8;">Preferred</div>
-                    <p>Approved by major insurers</p>
-                </div>
-                <div class="penalty-item">
-                    <h4>Training & Support</h4>
-                    <div class="penalty-amount" style="color: #17a2b8;">Ongoing</div>
-                    <p>Technical updates and best practices</p>
-                </div>
-                <div class="penalty-item">
-                    <h4>Dispute Resolution</h4>
-                    <div class="penalty-amount" style="color: #17a2b8;">Access</div>
-                    <p>Independent mediation services</p>
-                </div>
-                <div class="penalty-item">
-                    <h4>Bulk Claim Processing</h4>
-                    <div class="penalty-amount" style="color: #28a745;">Monthly</div>
-                    <p>Consolidated payment system</p>
-                </div>
-            </div>
-            
-            <h3>Accreditation Requirements</h3>
-            <table class="compliance-table">
-                <thead>
-                    <tr>
-                        <th>Requirement</th>
-                        <th>Standard</th>
-                        <th>Verification</th>
-                        <th>Renewal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Technical Capability</td>
-                        <td>Extraction equipment to NZS 5433:2020</td>
-                        <td>Annual inspection</td>
-                        <td>Yearly</td>
-                    </tr>
-                    <tr>
-                        <td>Insurance Coverage</td>
-                        <td>Public liability minimum $2 million</td>
-                        <td>Certificate of currency</td>
-                        <td>Annual</td>
-                    </tr>
-                    <tr>
-                        <td>Staff Training</td>
-                        <td>NZIFDA Misfuel Response Certificate</td>
-                        <td>Online assessment</td>
-                        <td>2 years</td>
-                    </tr>
-                    <tr>
-                        <td>Response Time</td>
-                        <td>Urban: 45min, Rural: 90min</td>
-                        <td>GPS tracking audit</td>
-                        <td>Ongoing</td>
-                    </tr>
-                    <tr>
-                        <td>Disposal Compliance</td>
-                        <td>Licensed waste facility only</td>
-                        <td>Disposal certificates</td>
-                        <td>Per incident</td>
-                    </tr>
-                    <tr>
-                        <td>Reporting Accuracy</td>
-                        <td>>95% claim accuracy rate</td>
-                        <td>Monthly audit</td>
-                        <td>Continuous</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <div class="legal-ref">
-                <strong>Accreditation Framework:</strong> Based on Australian Standard AS 4801, ISO 9001:2015 Quality Management, and NZTA Commercial Transport Operator requirements
-            </div>
-        </div>
-        
-        <!-- Industry Standards -->
-        <div id="standards" class="section-card">
-            <h2>Industry Standards & Best Practice</h2>
-            <p>NZIFDA develops and promotes industry standards in collaboration with stakeholders to minimize misfuelling incidents and improve response procedures.</p>
-            
-            <h3>Prevention Initiatives</h3>
-            <ul style="margin-left: 20px; line-height: 2;">
-                <li>• Misfuel prevention device certification program</li>
-                <li>• Standardized warning signage templates</li>
-                <li>• Public awareness campaigns with AA and MTA</li>
-                <li>• Fuel retailer staff training modules</li>
-                <li>• Vehicle manufacturer labelling guidelines</li>
-            </ul>
-            
-            <h3>Technical Standards Adopted</h3>
-            <table class="compliance-table">
-                <thead>
-                    <tr>
-                        <th>Standard</th>
-                        <th>Application</th>
-                        <th>Adopted</th>
-                        <th>Review Cycle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>NZS 5433:2020</td>
-                        <td>Petroleum product handling</td>
-                        <td>2020</td>
-                        <td>3 years</td>
-                    </tr>
-                    <tr>
-                        <td>ISO 17025:2017</td>
-                        <td>Testing and calibration</td>
-                        <td>2019</td>
-                        <td>5 years</td>
-                    </tr>
-                    <tr>
-                        <td>AS/NZS 4801</td>
-                        <td>Safety management systems</td>
-                        <td>2019</td>
-                        <td>3 years</td>
-                    </tr>
-                    <tr>
-                        <td>NZIFDA-BP-01</td>
-                        <td>Misfuel extraction procedures</td>
-                        <td>2021</td>
-                        <td>Annual</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <h3>Research & Development</h3>
-            <p>Current initiatives include:</p>
-            <ul style="margin-left: 20px; line-height: 2;">
-                <li>• AI-powered pump recognition systems to prevent wrong fuel selection</li>
-                <li>• Mobile app for real-time incident reporting and service provider dispatch</li>
-                <li>• Blockchain verification for duty refund claims</li>
-                <li>• Predictive analytics for high-risk locations and demographics</li>
-            </ul>
-            
-            <div class="legal-ref">
-                <strong>Industry Partners:</strong> Fuel retailers, Motor Trade Association, AA New Zealand, Insurance Council NZ, NZTA, WorkSafe NZ
-            </div>
-        </div>
-        
-        <!-- Data & Research -->
-        <div id="data" class="section-card">
-            <h2>Data, Research & NZTA Reporting</h2>
-            <p>NZIFDA maintains comprehensive incident data and provides quarterly reports to NZTA, insurers, and industry stakeholders.</p>
-            
-            <h3>2024 Misfuelling Statistics & Duty Refunds</h3>
-            <table class="compliance-table">
-                <thead>
-                    <tr>
-                        <th>Metric</th>
-                        <th>Q1 2024</th>
-                        <th>Q2 2024</th>
-                        <th>Q3 2024</th>
-                        <th>Total YTD</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Reported Incidents</td>
-                        <td>37,845</td>
-                        <td>39,122</td>
-                        <td>38,456</td>
-                        <td>115,423</td>
-                    </tr>
-                    <tr>
-                        <td>Fuel Extracted (Litres)</td>
-                        <td>1,892,250</td>
-                        <td>1,956,100</td>
-                        <td>1,922,800</td>
-                        <td>5,771,150</td>
-                    </tr>
-                    <tr>
-                        <td>NZTA Duty Refunds Processed</td>
-                        <td>$1.47M</td>
-                        <td>$1.52M</td>
-                        <td>$1.49M</td>
-                        <td>$4.48M</td>
-                    </tr>
-                    <tr>
-                        <td>Average Refund per Incident</td>
-                        <td>$38.85</td>
-                        <td>$38.87</td>
-                        <td>$38.75</td>
-                        <td>$38.82</td>
-                    </tr>
-                    <tr>
-                        <td>Accredited Providers Active</td>
-                        <td>127</td>
-                        <td>134</td>
-                        <td>139</td>
-                        <td>139</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <h3>Regional Distribution (Q3 2024)</h3>
-            <table class="compliance-table">
-                <thead>
-                    <tr>
-                        <th>Region</th>
-                        <th>Incidents</th>
-                        <th>Duty Refunds</th>
-                        <th>Per Capita Rate</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Auckland</td>
-                        <td>11,537</td>
-                        <td>$447,200</td>
-                        <td>7.2 per 1000</td>
-                    </tr>
-                    <tr>
-                        <td>Wellington</td>
-                        <td>4,229</td>
-                        <td>$164,100</td>
-                        <td>8.1 per 1000</td>
-                    </tr>
-                    <tr>
-                        <td>Canterbury</td>
-                        <td>5,768</td>
-                        <td>$223,800</td>
-                        <td>9.3 per 1000</td>
-                    </tr>
-                    <tr>
-                        <td>Waikato</td>
-                        <td>3,845</td>
-                        <td>$149,200</td>
-                        <td>7.8 per 1000</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <h3>Research Publications</h3>
-            <p><strong>Download Industry Reports:</strong></p>
-            <ul style="margin-left: 20px; line-height: 2;">
-                <li>• <a href="#" style="color: #003d82;">Annual Misfuelling Report 2023 - Full Analysis (PDF)</a></li>
-                <li>• <a href="#" style="color: #003d82;">NZTA Duty Refund Reconciliation Q3 2024 (PDF)</a></li>
-                <li>• <a href="#" style="color: #003d82;">Cost-Benefit Analysis: Prevention Devices (PDF)</a></li>
-                <li>• <a href="#" style="color: #003d82;">Demographics & Risk Factors Study 2024 (PDF)</a></li>
-                <li>• <a href="#" style="color: #003d82;">International Comparison: NZ vs Australia vs UK (PDF)</a></li>
-            </ul>
-            
-            <div class="legal-ref">
-                <strong>Data Sharing:</strong> Anonymized data shared with NZTA, Ministry of Transport, Insurance Council NZ, and academic research institutions under privacy agreements
-            </div>
-        </div>
-        
-        <!-- Contact Information -->
-        <div id="contact" class="section-card">
-            <h2>Contact NZIFDA</h2>
-            
-            <div class="authority-grid">
-                <div class="authority-card">
-                    <h4>Member Services</h4>
-                    <p><strong>Phone:</strong> +64 4 887 3335<br>
-                    <strong>Email:</strong> members@nzifda.org<br>
-                    <strong>Hours:</strong> Monday-Friday 8:00-17:00</p>
-                </div>
-                <div class="authority-card">
-                    <h4>24/7 Incident Hotline</h4>
-                    <p><strong>Emergency:</strong> +64 4 887 3335<br>
-                    <strong>Email:</strong> incidents@nzifda.org<br>
-                    <strong>Portal:</strong> www.nzifda.org/report</p>
-                </div>
-                <div class="authority-card">
-                    <h4>NZTA Refund Processing</h4>
-                    <p><strong>Claims:</strong> refunds@nzifda.org<br>
-                    <strong>Status:</strong> www.nzifda.org/claims<br>
-                    <strong>Support:</strong> +64 4 887 3340</p>
-                </div>
-            </div>
-            
-            <h3 style="margin-top: 25px;">Office Location</h3>
-            <p>Level 12, Commerce House<br>
-            126 Wakefield Street<br>
-            Wellington 6011<br>
-            New Zealand</p>
-            
-            <h3 style="margin-top: 25px;">Board Members</h3>
-            <ul style="margin-left: 20px; line-height: 2;">
-                <li>• Independent Chair: Hon. Maurice Williamson (Former Transport Minister)</li>
-                <li>• BP New Zealand Representative</li>
-                <li>• Z Energy Representative</li>
-                <li>• Mobil Oil New Zealand Representative</li>
-                <li>• Insurance Council NZ Representative</li>
-                <li>• Motor Trade Association Representative</li>
-                <li>• Independent Consumer Advocate</li>
-                <li>• NZTA Observer (Non-voting)</li>
-            </ul>
-        </div>
+        </section>
     </div>
-    
+
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" id="contact">
         <div class="footer-content">
+            <div class="footer-section">
+                <h3>NZIFDA</h3>
+                <p style="color: #cbd5e1; margin-top: 1rem;">
+                    New Zealand Industrial Fuel Disposal Agency<br>
+                    Independent Industry Authority<br>
+                    Est. 2024
+                </p>
+            </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="#">Report an Incident</a></li>
-                    <li><a href="#">Check Refund Status</a></li>
-                    <li><a href="#">Find Accredited Provider</a></li>
-                    <li><a href="#">Member Portal</a></li>
-                    <li><a href="#">Training Resources</a></li>
+                    <li><a href="#certification">Certification Process</a></li>
+                    <li><a href="#standards">Industry Standards</a></li>
+                    <li><a href="#report">Report Violations</a></li>
+                    <li><a href="#compliance">Compliance Check</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Industry Resources</h3>
+                <h3>Resources</h3>
                 <ul>
-                    <li><a href="#">Best Practice Guidelines</a></li>
-                    <li><a href="#">Prevention Devices</a></li>
-                    <li><a href="#">Statistical Reports</a></li>
-                    <li><a href="#">NZTA Refund Forms</a></li>
-                    <li><a href="#">Accreditation Process</a></li>
+                    <li><a href="#">MfE Guidelines</a></li>
+                    <li><a href="#">Dangerous Goods Act</a></li>
+                    <li><a href="#">Waste Tracking Forms</a></li>
+                    <li><a href="#">Insurance Requirements</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Partner Organizations</h3>
+                <h3>Contact</h3>
                 <ul>
-                    <li><a href="#">NZTA - Waka Kotahi</a></li>
-                    <li><a href="#">Motor Trade Association</a></li>
-                    <li><a href="#">AA New Zealand</a></li>
-                    <li><a href="#">Insurance Council NZ</a></li>
-                    <li><a href="#">Energy Resources Aotearoa</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Legal & Compliance</h3>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Dispute Resolution</a></li>
-                    <li><a href="#">NZTA MOU 2023</a></li>
-                    <li><a href="#">Industry Charter</a></li>
+                    <li style="color: #cbd5e1;">Report Line: 0800-COWBOYS</li>
+                    <li style="color: #cbd5e1;">Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b1d2dedcc1ddd8d0dfd2d4f1dfcbd8d7d5d09fdec3d6">[email&#160;protected]</a></li>
+                    <li style="color: #cbd5e1;">Certification: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0360667177436d796a6567622d6c7164">[email&#160;protected]</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            © 2024 New Zealand Industrial Fuel Duty Agency | www.nzifda.org | Independent Industry Body | NZTA Authorised Refund Facilitator
+            <p>&copy; 2024 NZIFDA - New Zealand Industrial Fuel Disposal Agency. Ensuring compliance and excellence in fuel management services.</p>
         </div>
     </footer>
-    
-    <script>
+
+    <!-- Enforcement Badge -->
+    <div class="enforcement-badge" onclick="document.getElementById('report').scrollIntoView({ behavior: 'smooth' })">
+        <span>Report</span>
+        <span>Issue</span>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Form submission handler
-        document.querySelector('.official-form').addEventListener('submit', function(e) {
+        document.querySelector('.report-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Report submitted. Reference number: NZIFDA-2024-' + Math.floor(Math.random() * 100000) + '\n\nYou will receive confirmation within 2 working days.');
+            alert('Compliance report submitted. This matter will be investigated according to NZIFDA protocols. Thank you for maintaining industry standards.');
+            this.reset();
         });
-        
-        // Smooth scrolling for navigation
-        document.querySelectorAll('.nav-item').forEach(link => {
-            link.addEventListener('click', function(e) {
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
-    </script>
-</body>
-</html>
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        entry.target.style.transition = 'all 0.6s ease-out';
+                        entry.target.style.opacity = '1';
+                        en
