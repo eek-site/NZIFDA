@@ -402,13 +402,13 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="certType">Certification Type <span class="required">*</span></label>
-                    <select id="certType" name="certType" required>
-                        <option value="">Select certification type...</option>
-                        <option value="compliant_operator" selected>Compliant Operator - Management & Customer Service</option>
+                    <label for="certType">Certification Type</label>
+                    <select id="certType" name="certType">
+                        <option value="compliant_operator" selected>Compliant Operator - Management & Customer Service (Default)</option>
                         <option value="certified_workshop">Certified Workshop - Service Delivery Facility</option>
                         <option value="mobile_certified">Mobile Certified - Mobile Service Unit</option>
                     </select>
+                    <small style="display: block; margin-top: 0.5rem; color: var(--text); font-size: 0.9rem;">If not specified, defaults to Compliant Operator for existing records.</small>
                 </div>
                 
                 <div class="form-row">
