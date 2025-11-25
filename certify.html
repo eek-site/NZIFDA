@@ -391,24 +391,16 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="status">Status <span class="required">*</span></label>
+                    <label for="status">Status / Certification Type <span class="required">*</span></label>
                     <select id="status" name="status" required>
                         <option value="">Select status...</option>
-                        <option value="certified">Certified</option>
+                        <option value="compliant_operator">Compliant Operator - Certified</option>
+                        <option value="certified_workshop">Certified Workshop - Certified</option>
+                        <option value="mobile_certified">Mobile Certified - Certified</option>
                         <option value="pending">Pending</option>
                         <option value="suspended">Suspended</option>
                         <option value="expired">Expired</option>
                     </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="certType">Certification Type</label>
-                    <select id="certType" name="certType">
-                        <option value="compliant_operator" selected>Compliant Operator - Management & Customer Service (Default)</option>
-                        <option value="certified_workshop">Certified Workshop - Service Delivery Facility</option>
-                        <option value="mobile_certified">Mobile Certified - Mobile Service Unit</option>
-                    </select>
-                    <small style="display: block; margin-top: 0.5rem; color: var(--text); font-size: 0.9rem;">If not specified, defaults to Compliant Operator for existing records.</small>
                 </div>
                 
                 <div class="form-row">
@@ -494,11 +486,10 @@
             alert.classList.remove('show', 'success', 'error');
             
             // Get form data - match Power Automate JSON schema exactly
-            // All fields are strings, companyName, status, and certType are required
+            // Status field now contains certification type (compliant_operator, certified_workshop, mobile_certified) or status (pending, suspended, expired)
             const formData = {
                 companyName: document.getElementById('companyName').value,
                 status: document.getElementById('status').value,
-                certType: document.getElementById('certType').value || 'compliant_operator',
                 certificationDate: document.getElementById('certificationDate').value || '',
                 expiryDate: document.getElementById('expiryDate').value || '',
                 contactEmail: document.getElementById('contactEmail').value || '',

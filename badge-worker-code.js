@@ -17,9 +17,19 @@ export default {
       let certType = 'compliant_operator'; // default
       
       if (data) {
-        status = data.status || 'notfound';
+        const statusValue = data.status || 'notfound';
         companyName = data.company || '';
-        certType = data.cert_type || 'compliant_operator';
+        
+        // Derive cert_type from status field
+        // Status can be: compliant_operator, certified_workshop, mobile_certified, pending, suspended, expired, notfound
+        if (statusValue === 'compliant_operator' || statusValue === 'certified_workshop' || statusValue === 'mobile_certified') {
+          certType = statusValue;
+          status = 'certified'; // These are all certified types
+        } else {
+          // For pending, suspended, expired, notfound - use status as-is and default cert_type
+          status = statusValue;
+          certType = data.cert_type || 'compliant_operator'; // Fallback to cert_type if exists, otherwise default
+        }
       }
       
       const badge = generateBadge(status, companyName, hashId, certType);
