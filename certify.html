@@ -494,76 +494,18 @@
                 notes: document.getElementById('notes').value || null
             };
             
-            console.log('Submitting certification data:', formData);
-            
             try {
-                // Power Automate HTTP triggers sometimes expect data wrapped in a specific format
-                // Try sending it directly first, but also prepare alternative formats
-                const requestBody = JSON.stringify(formData);
-                console.log('Request body:', requestBody);
-                
                 const response = await fetch(POWER_AUTOMATE_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept': 'application/json'
                     },
-                    body: requestBody
+                    body: JSON.stringify(formData)
                 });
                 
-                console.log('Response status:', response.status, response.statusText);
-                console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+                const result = await response.json();
                 
-                // Get response text first to see what Power Automate is saying
-                const responseText = await response.text();
-                console.log('Response body:', responseText);
-                
-                // Check if response is ok
-                if (!response.ok) {
-                    let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
-                    
-                    // Try to parse error response
-                    try {
-                        const errorData = JSON.parse(responseText);
-                        console.log('Error data:', errorData);
-                        errorMessage = errorData.message || errorData.error?.message || errorData.error || errorData.value || errorMessage;
-                        
-                        // Power Automate sometimes returns detailed error info
-                        if (errorData.error && typeof errorData.error === 'object') {
-                            const errorDetails = Object.entries(errorData.error)
-                                .map(([key, value]) => `${key}: ${value}`)
-                                .join(', ');
-                            if (errorDetails) {
-                                errorMessage += ` (${errorDetails})`;
-                            }
-                        }
-                    } catch (e) {
-                        // If not JSON, use the text response
-                        if (responseText) {
-                            errorMessage = responseText.substring(0, 500);
-                        }
-                    }
-                    
-                    throw new Error(errorMessage);
-                }
-                
-                // Try to parse JSON response
-                let result;
-                try {
-                    result = JSON.parse(responseText);
-                    console.log('Response JSON:', result);
-                } catch (e) {
-                    // If not JSON, treat as success if status is 200
-                    if (response.status >= 200 && response.status < 300) {
-                        result = { success: true, message: responseText || 'Certification added successfully!' };
-                    } else {
-                        throw new Error(responseText || 'Failed to add certification');
-                    }
-                }
-                
-                // Check for success in result
-                // Power Automate might return 200 OK even on errors, so check the result
-                if (result.success !== false && (result.success === true || response.status >= 200 && response.status < 300)) {
+                if (response.ok && result.success) {
                     // Success
                     alert.textContent = `✓ ${result.message || 'Certification added successfully!'}`;
                     alert.classList.add('success', 'show');
@@ -574,19 +516,11 @@
                     // Scroll to top
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 } else {
-                    throw new Error(result.message || result.error || 'Failed to add certification');
+                    throw new Error(result.message || 'Failed to add certification');
                 }
             } catch (error) {
-                // Error handling
-                console.error('Certification submission error:', error);
-                let errorMessage = error.message;
-                
-                // Handle network errors
-                if (error instanceof TypeError && error.message.includes('fetch')) {
-                    errorMessage = 'Network error: Unable to connect to server. Please check your connection.';
-                }
-                
-                alert.textContent = `✗ Error: ${errorMessage}`;
+                // Error
+                alert.textContent = `✗ Error: ${error.message}`;
                 alert.classList.add('error', 'show');
             } finally {
                 // Re-enable submit button
