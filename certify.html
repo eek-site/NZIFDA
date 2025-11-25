@@ -483,21 +483,27 @@
             // Hide any previous alerts
             alert.classList.remove('show', 'success', 'error');
             
-            // Get form data
-            const formData = {
-                companyName: document.getElementById('companyName').value,
-                status: document.getElementById('status').value,
-                certificationDate: document.getElementById('certificationDate').value || null,
-                expiryDate: document.getElementById('expiryDate').value || null,
-                contactEmail: document.getElementById('contactEmail').value || null,
-                contactPhone: document.getElementById('contactPhone').value || null,
-                notes: document.getElementById('notes').value || null
-            };
+            // Get form data - only include fields with values
+            const formData = {};
+            const companyName = document.getElementById('companyName').value;
+            const status = document.getElementById('status').value;
+            const certificationDate = document.getElementById('certificationDate').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const contactEmail = document.getElementById('contactEmail').value;
+            const contactPhone = document.getElementById('contactPhone').value;
+            const notes = document.getElementById('notes').value;
+            
+            if (companyName) formData.companyName = companyName;
+            if (status) formData.status = status;
+            if (certificationDate) formData.certificationDate = certificationDate;
+            if (expiryDate) formData.expiryDate = expiryDate;
+            if (contactEmail) formData.contactEmail = contactEmail;
+            if (contactPhone) formData.contactPhone = contactPhone;
+            if (notes) formData.notes = notes;
             
             try {
                 const response = await fetch(POWER_AUTOMATE_URL, {
                     method: 'POST',
-                    mode: 'cors',
                     headers: {
                         'Content-Type': 'application/json',
                     },
