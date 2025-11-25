@@ -494,18 +494,56 @@
                 notes: document.getElementById('notes').value || null
             };
             
+            console.log('Submitting certification data:', formData);
+            
             try {
                 const response = await fetch(POWER_AUTOMATE_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify(formData)
                 });
                 
-                const result = await response.json();
+                console.log('Response status:', response.status, response.statusText);
+                console.log('Response headers:', Object.fromEntries(response.headers.entries()));
                 
-                if (response.ok && result.success) {
+                // Check if response is ok
+                if (!response.ok) {
+                    let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+                    try {
+                        const errorData = await response.json();
+                        errorMessage = errorData.message || errorData.error || errorMessage;
+                    } catch (e) {
+                        const errorText = await response.text();
+                        if (errorText) {
+                            errorMessage = errorText.substring(0, 200);
+                        }
+                    }
+                    throw new Error(errorMessage);
+                }
+                
+                // Try to parse JSON response
+                let result;
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    result = await response.json();
+                    console.log('Response JSON:', result);
+                } else {
+                    const text = await response.text();
+                    console.log('Response text:', text);
+                    // If response is just text, treat as success if status is 200
+                    if (response.status >= 200 && response.status < 300) {
+                        result = { success: true, message: text || 'Certification added successfully!' };
+                    } else {
+                        throw new Error(text || 'Failed to add certification');
+                    }
+                }
+                
+                // Check for success in result
+                // Power Automate might return 200 OK even on errors, so check the result
+                if (result.success !== false && (result.success === true || response.status >= 200 && response.status < 300)) {
                     // Success
                     alert.textContent = `✓ ${result.message || 'Certification added successfully!'}`;
                     alert.classList.add('success', 'show');
@@ -516,11 +554,19 @@
                     // Scroll to top
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 } else {
-                    throw new Error(result.message || 'Failed to add certification');
+                    throw new Error(result.message || result.error || 'Failed to add certification');
                 }
             } catch (error) {
-                // Error
-                alert.textContent = `✗ Error: ${error.message}`;
+                // Error handling
+                console.error('Certification submission error:', error);
+                let errorMessage = error.message;
+                
+                // Handle network errors
+                if (error instanceof TypeError && error.message.includes('fetch')) {
+                    errorMessage = 'Network error: Unable to connect to server. Please check your connection.';
+                }
+                
+                alert.textContent = `✗ Error: ${errorMessage}`;
                 alert.classList.add('error', 'show');
             } finally {
                 // Re-enable submit button
