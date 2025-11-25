@@ -55,13 +55,16 @@
         // Power Automate endpoint
         const POWER_AUTOMATE_URL = 'https://default61ffc6bcd9ce458b8120d32187c377.0d.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/9a207992d26c4e73bd974dab2623c9c0/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=EL1ZRvFplGo3NgrPzLqb1eUoe29BNQF-pxmOla6U0Cw';
         
-        // Function to submit form to Power Automate - sends all fields as-is
+        // Function to submit form to Power Automate
+        // Sends formType + all form fields at root level for dynamic table generation
+        // Power Automate flow uses @keys(triggerBody()) to loop through all fields
         async function submitToPowerAutomate(formType, formData) {
             try {
-                // Create payload with form type and all form fields
+                // Create payload: formType + all form fields spread at root level
+                // This matches Power Automate flow that dynamically builds table from all fields
                 const payload = {
                     formType: formType,
-                    ...formData  // Spread all form fields directly into payload
+                    ...formData  // All form fields spread directly - Power Automate will loop through them
                 };
                 
                 const response = await fetch(POWER_AUTOMATE_URL, {

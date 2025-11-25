@@ -1,166 +1,182 @@
-# Power Automate Setup Guide
+# Power Automate Integration - Complete Setup Guide
 
-## JSON Payload Structure
+## ✅ Website Implementation (Already Complete)
 
-The forms send a simple JSON payload with `formType` and all form fields at the root level:
+The website sends a simple JSON POST with `formType` + all form fields at root level:
 
-```json
-{
-  "formType": "General Contact" | "Certification Application" | "Compliance Report",
-  "name": "John Doe",
-  "email": "john@example.com",
-  "subject": "general",
-  "message": "My message here...",
-  // ... all other form fields as-is
-}
+```javascript
+const payload = {
+    formType: "Certification Application",
+    ...formData  // All form fields spread directly
+};
 ```
 
-## Example Payloads
-
-### General Contact Form
-```json
-{
-  "formType": "General Contact",
-  "name": "John Doe",
-  "email": "john@example.com",
-  "subject": "general",
-  "message": "I have a question about..."
-}
-```
-
-### Certification Application
+**Example JSON sent:**
 ```json
 {
   "formType": "Certification Application",
-  "cert-type": "compliant-operator",
   "cert-company": "ABC Fuel Services",
-  "cert-contact": "Jane Smith",
-  "cert-email": "jane@abc.com",
-  "cert-insurance": "XYZ Insurance - Policy #12345",
-  "cert-management": "We have...",
-  // ... other fields
+  "cert-contact": "John Doe",
+  "cert-email": "john@example.com",
+  "cert-insurance": "XYZ Policy 123",
+  "message": "Example notes here",
+  "extra-field-1": "anything",
+  "extra-field-2": "anything else"
 }
 ```
 
-### Compliance Report
-```json
-{
-  "formType": "Compliance Report",
-  "comp-reporter": "John Doe",
-  "comp-email": "john@example.com",
-  "comp-company": "XYZ Services",
-  "comp-location": "Auckland",
-  "comp-violation": "certification",
-  "comp-details": "Details here...",
-  "comp-date": "2024-01-15"
-}
-```
+**HTTP Request:**
+- Method: `POST`
+- Content-Type: `application/json`
+- Body: Any JSON object (all fields at root level)
+
+---
 
 ## Power Automate Flow Setup
 
 ### 1. HTTP Request Trigger
-- Method: POST
-- Body: JSON (automatic parsing)
 
-### 2. Create HTML Email Body (Two Columns)
-
-Use a "Compose" action or "Create HTML table" with this structure:
-
-**Option A: Using Compose Action**
-```
-<table style="border-collapse: collapse; width: 100%; font-family: Arial, sans-serif;">
-  <tr style="background-color: #f0f0f0;">
-    <th style="border: 1px solid #ddd; padding: 8px; text-align: left; width: 30%;">Field</th>
-    <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Value</th>
-  </tr>
-  <tr>
-    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">Form Type</td>
-    <td style="border: 1px solid #ddd; padding: 8px;">@{triggerBody()?['formType']}</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">Name</td>
-    <td style="border: 1px solid #ddd; padding: 8px;">@{triggerBody()?['name']}</td>
-  </tr>
-  <tr>
-    <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">Email</td>
-    <td style="border: 1px solid #ddd; padding: 8px;">@{triggerBody()?['email']}</td>
-  </tr>
-  <!-- Add more rows for each field -->
-</table>
-```
-
-**Option B: Dynamic Table (Recommended)**
-
-Use a loop to build the table dynamically:
-
-1. **Initialize variable**: `htmlTable` = 
-```
-<table style="border-collapse: collapse; width: 100%; font-family: Arial, sans-serif;">
-  <tr style="background-color: #f0f0f0;">
-    <th style="border: 1px solid #ddd; padding: 8px; text-align: left; width: 30%;">Field</th>
-    <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Value</th>
-  </tr>
-```
-
-2. **Apply to each** (loop through `triggerBody()`):
-   - Skip `formType` if you want it first
-   - For each key-value pair, add:
-   ```
-   <tr>
-     <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">@{items('Apply_to_each')?['key']}</td>
-     <td style="border: 1px solid #ddd; padding: 8px;">@{items('Apply_to_each')?['value']}</td>
-   </tr>
-   ```
-
-3. **Append to variable**: Add closing `</table>`
-
-### 3. Generate Subject Line
-
-Use a "Compose" action:
-
-```
-NZIFDA Form Submission: @{triggerBody()?['formType']} - @{if(equals(triggerBody()?['formType'], 'General Contact'), concat(triggerBody()?['subject'], ' from ', triggerBody()?['name']), if(equals(triggerBody()?['formType'], 'Certification Application'), concat(triggerBody()?['cert-type'], ' - ', triggerBody()?['cert-company']), concat(triggerBody()?['comp-violation'], ' - ', triggerBody()?['comp-company']))}
-```
-
-Or simpler:
-```
-NZIFDA @{triggerBody()?['formType']} - @{utcNow()}
-```
-
-### 4. Send Email Action
-
-- **To**: Your email address
-- **Subject**: Use the subject from step 3
-- **Body**: HTML format, use the HTML table from step 2
-- **Is HTML**: Yes
-
-### 5. Response Action
-
-Return a simple JSON response:
+**Schema (Maximum Flexibility):**
 ```json
 {
-  "status": "success",
-  "message": "Form submitted successfully"
+  "type": "object",
+  "additionalProperties": true
 }
 ```
 
-## Accessing Fields in Power Automate
+This allows **all fields**, including future ones, without needing to maintain a schema.
 
-All form fields are at the root level of the JSON payload. Access them using:
+---
 
-- `triggerBody()?['formType']` - Form type
-- `triggerBody()?['name']` - Name field (if exists)
-- `triggerBody()?['email']` - Email field (if exists)
-- `triggerBody()?['cert-company']` - Certification company (if exists)
-- `triggerBody()?['comp-violation']` - Compliance violation (if exists)
-- etc.
+### 2. Initialize HTML Container Variable
 
-Use `?` to handle missing fields gracefully.
+**Variable Name:** `html`
+
+**Value:**
+```html
+<h2>NZIFDA Form Submission</h2>
+<table style="border-collapse:collapse;width:100%;font-family:Arial,sans-serif;">
+  <tr style="background-color:#f0f0f0;">
+    <th style="border:1px solid #ddd;padding:8px;text-align:left;width:30%;">Field</th>
+    <th style="border:1px solid #ddd;padding:8px;text-align:left;">Value</th>
+  </tr>
+```
+
+---
+
+### 3. Extract All Keys
+
+**Action:** Compose
+
+**Expression:**
+```
+@keys(triggerBody())
+```
+
+This gets all field names from the JSON payload.
+
+---
+
+### 4. Loop Through Each Field
+
+**Action:** Apply to each (keys from step 3)
+
+**Inside the loop - Append to variable `html`:**
+
+```html
+<tr>
+  <td style="border:1px solid #ddd;padding:8px;font-weight:bold;">
+    @{items('Apply_to_each')}
+  </td>
+  <td style="border:1px solid #ddd;padding:8px;">
+    @{coalesce(triggerBody()?[items('Apply_to_each')],'')}
+  </td>
+</tr>
+```
+
+This creates a row for each field with:
+- **Field name** in the first column (bold)
+- **Field value** in the second column
+
+---
+
+### 5. Close the Table
+
+**Action:** Append to variable `html`
+
+**Value:**
+```html
+</table>
+```
+
+---
+
+### 6. Send Email
+
+**Action:** Send an Email (V2)
+
+**Settings:**
+- **To:** Your NZIFDA inbox email
+- **Subject:** 
+  ```
+  NZIFDA submission - @{utcNow()}
+  ```
+- **Body:** 
+  ```
+  @{variables('html')}
+  ```
+- **Is HTML:** Yes ✅
+
+**Important:** The body should contain ONLY `@{variables('html')}` - no other content, no `<p>` tags, no extra formatting. This inserts the dynamically generated table.
+
+---
+
+### 7. Response (Optional but Recommended)
+
+**Action:** Response
+
+**Body:**
+```json
+{
+  "status": "success",
+  "received": true
+}
+```
+
+---
+
+## Final Behavior
+
+✅ Any form on the website  
+✅ Any field names  
+✅ Any number of fields  
+✅ Automatically appear in email as a clean 2-column table  
+✅ Zero maintenance when forms change  
+
+The flow dynamically builds a table from whatever fields are sent, exactly like the Eek Dispatch System emails.
+
+---
 
 ## Testing
 
-1. Test the flow with a sample JSON payload
-2. Check that all fields appear in the email
-3. Verify the subject line is descriptive
-4. Ensure the HTML table renders correctly
+1. Submit a test form from the website
+2. Check your email - you should see a clean 2-column table with all fields
+3. Verify the subject line includes the timestamp
+4. Test with different forms to ensure all field types work
 
+---
+
+## Troubleshooting
+
+**If fields are missing:**
+- Check that the HTTP trigger schema allows `additionalProperties: true`
+- Verify the loop is iterating through all keys
+
+**If table doesn't render:**
+- Ensure "Is HTML" is checked in the email action
+- Verify the HTML variable contains the complete table structure
+
+**If response fails:**
+- Check the Power Automate endpoint URL is correct
+- Verify CORS is enabled if testing from localhost
+- Check browser console for fetch errors
