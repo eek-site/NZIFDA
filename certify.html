@@ -436,7 +436,7 @@
     </div>
     
     <script>
-        const POWER_AUTOMATE_URL = 'https://default61ffc6bcd9ce458b8120d32187c377.0d.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/dc1a59f9e488429c8ccb26403b3c4424/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=YPWujRM5mCI6hFL7CwaGqMVZBGrxKueFBwYM_266Mrw';
+        const POWER_AUTOMATE_URL = 'https://default61ffc6bcd9ce458b8120d32187c377.0d.environment.api.powerplatform.com/powerautomate/automations/direct/workflows/dc1a59f9e488429c8ccb26403b3c4424/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=YPWujRM5mCI6hFL7CwaGqMVZBGrxKueFBwYM_266Mrw';
         const ADMIN_PASSWORD = '090609#';
         
         const loginContainer = document.getElementById('loginContainer');
@@ -497,15 +497,21 @@
             try {
                 const response = await fetch(POWER_AUTOMATE_URL, {
                     method: 'POST',
+                    mode: 'cors',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(formData)
                 });
                 
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(errorText || `HTTP ${response.status}: ${response.statusText}`);
+                }
+                
                 const result = await response.json();
                 
-                if (response.ok && result.success) {
+                if (result.success) {
                     // Success
                     alert.textContent = `✓ ${result.message || 'Certification added successfully!'}`;
                     alert.classList.add('success', 'show');
