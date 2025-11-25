@@ -483,16 +483,26 @@
             // Hide any previous alerts
             alert.classList.remove('show', 'success', 'error');
             
-            // Get form data
+            // Get form data - match Power Automate schema
+            // Required: companyName, status
+            // Optional: certificationDate, expiryDate, contactEmail, contactPhone, notes (all strings)
             const formData = {
                 companyName: document.getElementById('companyName').value,
-                status: document.getElementById('status').value,
-                certificationDate: document.getElementById('certificationDate').value || '',
-                expiryDate: document.getElementById('expiryDate').value || '',
-                contactEmail: document.getElementById('contactEmail').value || '',
-                contactPhone: document.getElementById('contactPhone').value || '',
-                notes: document.getElementById('notes').value || ''
+                status: document.getElementById('status').value
             };
+            
+            // Add optional fields only if they have values
+            const certificationDate = document.getElementById('certificationDate').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const contactEmail = document.getElementById('contactEmail').value;
+            const contactPhone = document.getElementById('contactPhone').value;
+            const notes = document.getElementById('notes').value;
+            
+            if (certificationDate) formData.certificationDate = certificationDate;
+            if (expiryDate) formData.expiryDate = expiryDate;
+            if (contactEmail) formData.contactEmail = contactEmail;
+            if (contactPhone) formData.contactPhone = contactPhone;
+            if (notes) formData.notes = notes;
             
             try {
                 const response = await fetch(POWER_AUTOMATE_URL, {
