@@ -340,6 +340,90 @@
         <p>&copy; 2024 NZIFDA - New Zealand Insoluble Fuel Disposal Agency</p>
         <p><a href="index.html">Home</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookies-policy.html">Cookies Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
     </footer>
+    
+    <script>
+        // Form submission handlers
+        async function handleGeneralFormSubmit(event) {
+            const form = document.getElementById('generalContactForm');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            // Disable button and show loading
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+            
+            try {
+                const formData = collectFormData(form);
+                const result = await submitToPowerAutomate('General Contact', formData);
+                
+                if (result.success) {
+                    alert('Your message has been sent to NZIFDA.');
+                    form.reset();
+                } else {
+                    alert('There was a problem submitting the form: ' + result.error);
+                }
+            } catch (error) {
+                alert('There was a problem submitting the form: ' + error.message);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+            }
+        }
+        
+        async function handleCertificationFormSubmit(event) {
+            const form = document.getElementById('certificationForm');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            // Disable button and show loading
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            
+            try {
+                const formData = collectFormData(form);
+                const result = await submitToPowerAutomate('Certification Application', formData);
+                
+                if (result.success) {
+                    alert('Your certification application has been submitted.');
+                    form.reset();
+                } else {
+                    alert('There was a problem submitting the application: ' + result.error);
+                }
+            } catch (error) {
+                alert('There was a problem submitting the application: ' + error.message);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+            }
+        }
+        
+        async function handleComplianceFormSubmit(event) {
+            const form = document.getElementById('complianceForm');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            // Disable button and show loading
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            
+            try {
+                const formData = collectFormData(form);
+                const result = await submitToPowerAutomate('Compliance Report', formData);
+                
+                if (result.success) {
+                    alert('Your compliance report has been submitted.');
+                    form.reset();
+                } else {
+                    alert('There was a problem submitting the report: ' + result.error);
+                }
+            } catch (error) {
+                alert('There was a problem submitting the report: ' + error.message);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+            }
+        }
+    </script>
 </body>
 </html>
 
