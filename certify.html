@@ -483,23 +483,16 @@
             // Hide any previous alerts
             alert.classList.remove('show', 'success', 'error');
             
-            // Get form data - only include fields with values
-            const formData = {};
-            const companyName = document.getElementById('companyName').value;
-            const status = document.getElementById('status').value;
-            const certificationDate = document.getElementById('certificationDate').value;
-            const expiryDate = document.getElementById('expiryDate').value;
-            const contactEmail = document.getElementById('contactEmail').value;
-            const contactPhone = document.getElementById('contactPhone').value;
-            const notes = document.getElementById('notes').value;
-            
-            if (companyName) formData.companyName = companyName;
-            if (status) formData.status = status;
-            if (certificationDate) formData.certificationDate = certificationDate;
-            if (expiryDate) formData.expiryDate = expiryDate;
-            if (contactEmail) formData.contactEmail = contactEmail;
-            if (contactPhone) formData.contactPhone = contactPhone;
-            if (notes) formData.notes = notes;
+            // Get form data
+            const formData = {
+                companyName: document.getElementById('companyName').value,
+                status: document.getElementById('status').value,
+                certificationDate: document.getElementById('certificationDate').value || '',
+                expiryDate: document.getElementById('expiryDate').value || '',
+                contactEmail: document.getElementById('contactEmail').value || '',
+                contactPhone: document.getElementById('contactPhone').value || '',
+                notes: document.getElementById('notes').value || ''
+            };
             
             try {
                 const response = await fetch(POWER_AUTOMATE_URL, {
