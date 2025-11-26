@@ -1,0 +1,7 @@
+﻿"CompanyName","Status","CertificationDate","ExpiryDate","ContactEmail","ContactPhone","Notes"
+"Smith's Towing Ltd","mobile_certified","15/01/2024 1:00 am","15/01/2025 1:00 am","john@smithstowing.co.nz","09 555 1234","Foundation member"
+"AAA Recovery Services","mobile_certified","1/03/2024 1:00 am","1/03/2025 1:00 am","admin@aaarecovery.co.nz","07 555 5678",
+"North Shore Salvage","pending",,,"mike@nssalvage.co.nz","021 555 9999","Application received - awaiting docs"
+"Dodgy Brothers Towing","suspended","1/06/2023 12:00 pm","1/06/2024 12:00 pm","info@dodgybros.co.nz","09 555 0000","Suspended - customer complaints"
+"Wellington Roadside","expired","1/02/2023 1:00 pm","1/02/2024 1:00 pm","ops@wellingtonroadside.co.nz","04 555 3333","Renewal reminder sent"
+"EEK Mechanical Ltd","compliant_operator","25/11/2025 1:00 am","25/12/2029 1:00 am","no-reply@eek.nz","92026123",

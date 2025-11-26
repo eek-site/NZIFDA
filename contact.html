@@ -302,62 +302,6 @@
                 }
             </script>
 
-            <h2 id="insurer-membership">Insurer Membership Application</h2>
-            <p style="margin-bottom: 1.5rem; padding: 1rem; background: rgba(22, 163, 74, 0.1); border-left: 4px solid var(--success); border-radius: 4px;"><strong>Free Membership:</strong> NZIFDA insurer membership is free for qualified insurers. All applicants are vetted to ensure they meet our standards for fair claims handling and policyholder protection. <a href="for-insurers.html" style="color: var(--accent); text-decoration: underline;">Learn more about insurer membership benefits</a>.</p>
-            <form class="contact-form" id="insurerMembershipForm" onsubmit="event.preventDefault(); handleInsurerMembershipFormSubmit(event);">
-                <div class="form-group">
-                    <label for="insurer-company">Insurance Company Name *</label>
-                    <input type="text" id="insurer-company" name="insurer-company" required>
-                </div>
-                <div class="form-group">
-                    <label for="insurer-registration">Company Registration Number *</label>
-                    <input type="text" id="insurer-registration" name="insurer-registration" required placeholder="NZBN or registration number">
-                </div>
-                <div class="form-group">
-                    <label for="insurer-license">Insurance License Number *</label>
-                    <input type="text" id="insurer-license" name="insurer-license" required placeholder="RBNZ license number">
-                </div>
-                <div class="form-group">
-                    <label for="insurer-contact">Contact Person Name *</label>
-                    <input type="text" id="insurer-contact" name="insurer-contact" required>
-                </div>
-                <div class="form-group">
-                    <label for="insurer-title">Job Title *</label>
-                    <input type="text" id="insurer-title" name="insurer-title" required placeholder="e.g., Claims Manager, Operations Manager">
-                </div>
-                <div class="form-group">
-                    <label for="insurer-email">Email Address *</label>
-                    <input type="email" id="insurer-email" name="insurer-email" required>
-                </div>
-                <div class="form-group">
-                    <label for="insurer-phone">Phone Number *</label>
-                    <input type="tel" id="insurer-phone" name="insurer-phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="insurer-address">Company Address *</label>
-                    <textarea id="insurer-address" name="insurer-address" required placeholder="Full company address"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="insurer-volume">Approximate Annual Claim Volume</label>
-                    <select id="insurer-volume" name="insurer-volume">
-                        <option value="">Select...</option>
-                        <option value="0-50">0-50 claims per year</option>
-                        <option value="51-200">51-200 claims per year</option>
-                        <option value="201-500">201-500 claims per year</option>
-                        <option value="500+">500+ claims per year</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="insurer-reason">Why are you applying for membership? *</label>
-                    <textarea id="insurer-reason" name="insurer-reason" required placeholder="Please explain why you're applying for NZIFDA membership and how it will benefit your policyholders"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="insurer-commitment">Commitment to Fair Claims Handling *</label>
-                    <textarea id="insurer-commitment" name="insurer-commitment" required placeholder="Please describe your company's commitment to fair claims handling and policyholder protection"></textarea>
-                </div>
-                <button type="submit" class="btn">Submit Membership Application</button>
-            </form>
-
             <h2 id="compliance-form">Compliance Report Form</h2>
             <form class="contact-form" id="complianceForm" onsubmit="event.preventDefault(); handleComplianceFormSubmit(event);">
                 <div class="form-group">
@@ -451,32 +395,6 @@
                 
                 if (result.success) {
                     alert('Your certification application has been submitted.');
-                    form.reset();
-                } else {
-                    alert('There was a problem submitting the application: ' + result.error);
-                }
-            } catch (error) {
-                alert('There was a problem submitting the application: ' + error.message);
-            } finally {
-                submitButton.disabled = false;
-                submitButton.textContent = originalText;
-            }
-        }
-        
-        async function handleInsurerMembershipFormSubmit(event) {
-            const form = document.getElementById('insurerMembershipForm');
-            const submitButton = form.querySelector('button[type="submit"]');
-            const originalText = submitButton.textContent;
-            
-            submitButton.disabled = true;
-            submitButton.textContent = 'Submitting...';
-            
-            try {
-                const formData = collectFormData(form);
-                const result = await submitToPowerAutomate('Insurer Membership Application', formData);
-                
-                if (result.success) {
-                    alert('Your insurer membership application has been submitted. We will review it within 5-10 business days and contact you.');
                     form.reset();
                 } else {
                     alert('There was a problem submitting the application: ' + result.error);

@@ -391,12 +391,10 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="status">Status / Certification Type <span class="required">*</span></label>
+                    <label for="status">Status <span class="required">*</span></label>
                     <select id="status" name="status" required>
                         <option value="">Select status...</option>
-                        <option value="compliant_operator">Compliant Operator - Certified</option>
-                        <option value="certified_workshop">Certified Workshop - Certified</option>
-                        <option value="mobile_certified">Mobile Certified - Certified</option>
+                        <option value="certified">Certified</option>
                         <option value="pending">Pending</option>
                         <option value="suspended">Suspended</option>
                         <option value="expired">Expired</option>
@@ -486,7 +484,7 @@
             alert.classList.remove('show', 'success', 'error');
             
             // Get form data - match Power Automate JSON schema exactly
-            // Status field now contains certification type (compliant_operator, certified_workshop, mobile_certified) or status (pending, suspended, expired)
+            // All fields are strings, companyName and status are required
             const formData = {
                 companyName: document.getElementById('companyName').value,
                 status: document.getElementById('status').value,
