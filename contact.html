@@ -162,6 +162,12 @@
                     <p><a href="#compliance-form" class="btn" style="margin-top: 1rem; display: inline-block; padding: 0.5rem 1rem; font-size: 0.9rem;">Report Non-Compliance</a></p>
                 </div>
                 
+                <div class="contact-card" style="border-left: 4px solid var(--success);">
+                    <h3 style="color: var(--success);">Insurer Membership</h3>
+                    <p>Free membership for insurers - set rates, trusted repairs, mediation service</p>
+                    <p><a href="#insurer-membership" class="btn" style="margin-top: 1rem; display: inline-block; padding: 0.5rem 1rem; font-size: 0.9rem; background: var(--success);">Apply for Membership</a></p>
+                </div>
+                
                 <div class="contact-card">
                     <h3>Privacy & Data</h3>
                     <p>For privacy inquiries and data requests</p>
@@ -344,6 +350,67 @@
                 </div>
                 <button type="submit" class="btn">Submit Compliance Report</button>
             </form>
+
+            <h2 id="insurer-membership">Insurer Membership Application Form</h2>
+            <p style="margin-bottom: 1.5rem; padding: 1.5rem; background: rgba(22, 163, 74, 0.1); border-left: 4px solid var(--success); border-radius: 4px;">
+                <strong>Free Membership with Vetting:</strong> NZIFDA insurer membership is provided at no cost to approved insurers. All applicants are subject to a vetting process to ensure quality standards and network integrity. Members receive set rates, trusted repairs, and comprehensive mediation services including Disputes Tribunal representation.
+            </p>
+            <form class="contact-form" id="insurerMembershipForm" onsubmit="event.preventDefault(); handleInsurerMembershipFormSubmit(event);">
+                <div class="form-group">
+                    <label for="insurer-company">Insurance Company Name *</label>
+                    <input type="text" id="insurer-company" name="insurer-company" required placeholder="Full legal name of your insurance company">
+                </div>
+                <div class="form-group">
+                    <label for="insurer-trading">Trading Name (if different)</label>
+                    <input type="text" id="insurer-trading" name="insurer-trading" placeholder="Trading name if different from legal name">
+                </div>
+                <div class="form-group">
+                    <label for="insurer-license">Insurance License Number *</label>
+                    <input type="text" id="insurer-license" name="insurer-license" required placeholder="New Zealand insurance license number">
+                    <small style="display: block; margin-top: 0.5rem; color: #64748b;">Required for vetting process</small>
+                </div>
+                <div class="form-group">
+                    <label for="insurer-registered">Registered Office Address *</label>
+                    <textarea id="insurer-registered" name="insurer-registered" required placeholder="Full registered office address"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="insurer-contact">Primary Contact Person *</label>
+                    <input type="text" id="insurer-contact" name="insurer-contact" required placeholder="Name of primary contact">
+                </div>
+                <div class="form-group">
+                    <label for="insurer-title">Contact Title/Position *</label>
+                    <input type="text" id="insurer-title" name="insurer-title" required placeholder="e.g., Claims Manager, Operations Manager">
+                </div>
+                <div class="form-group">
+                    <label for="insurer-email">Email Address *</label>
+                    <input type="email" id="insurer-email" name="insurer-email" required placeholder="Primary contact email">
+                </div>
+                <div class="form-group">
+                    <label for="insurer-phone">Phone Number *</label>
+                    <input type="tel" id="insurer-phone" name="insurer-phone" required placeholder="Primary contact phone">
+                </div>
+                <div class="form-group">
+                    <label for="insurer-volume">Estimated Annual Misfuel Claim Volume</label>
+                    <select id="insurer-volume" name="insurer-volume">
+                        <option value="">Select volume range...</option>
+                        <option value="0-50">0-50 claims per year</option>
+                        <option value="51-200">51-200 claims per year</option>
+                        <option value="201-500">201-500 claims per year</option>
+                        <option value="501-1000">501-1,000 claims per year</option>
+                        <option value="1000+">1,000+ claims per year</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="insurer-commitment">Commitment to Standards *</label>
+                    <textarea id="insurer-commitment" name="insurer-commitment" required placeholder="Please confirm your commitment to using NZIFDA-certified operators for misfuel claims and maintaining quality standards"></textarea>
+                    <small style="display: block; margin-top: 0.5rem; color: #64748b;">Required: Please confirm your commitment to using NZIFDA-certified operators</small>
+                </div>
+                <div class="form-group">
+                    <label for="insurer-additional">Additional Information</label>
+                    <textarea id="insurer-additional" name="insurer-additional" placeholder="Any additional information about your company or operations"></textarea>
+                </div>
+                <button type="submit" class="btn">Submit Insurer Membership Application</button>
+            </form>
         </div>
     </div>
     <footer class="footer">
@@ -428,6 +495,33 @@
                 }
             } catch (error) {
                 alert('There was a problem submitting the report: ' + error.message);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+            }
+        }
+        
+        async function handleInsurerMembershipFormSubmit(event) {
+            const form = document.getElementById('insurerMembershipForm');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            // Disable button and show loading
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            
+            try {
+                const formData = collectFormData(form);
+                const result = await submitToPowerAutomate('Insurer Membership Application', formData);
+                
+                if (result.success) {
+                    alert('Your insurer membership application has been submitted. NZIFDA will review your application and contact you within 5-7 business days to complete the vetting process.');
+                    form.reset();
+                } else {
+                    alert('There was a problem submitting the application: ' + result.error);
+                }
+            } catch (error) {
+                alert('There was a problem submitting the application: ' + error.message);
             } finally {
                 submitButton.disabled = false;
                 submitButton.textContent = originalText;

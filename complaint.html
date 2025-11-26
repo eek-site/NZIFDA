@@ -8,21 +8,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/header-footer.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600&display=swap');
         :root { --primary: #1a1a1a; --danger: #dc2626; --warning: #f59e0b; --success: #16a34a; --accent: #0369a1; --surface: #f8fafc; --border: #e2e8f0; --text: #334155; --text-dark: #0f172a; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Barlow', sans-serif; background: var(--surface); color: var(--text); line-height: 1.8; }
-        .header { background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%); padding: 1rem 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative; }
-        .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { color: white; font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 700; }
-        .logo a { color: white; text-decoration: none; }
-        .back-link { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; display: none; }
-        .mobile-menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; }
-        .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--primary); padding: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-        .mobile-nav.active { display: block; }
-        .mobile-nav a { display: block; color: white; text-decoration: none; padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .mobile-nav a:hover { background: rgba(255,255,255,0.1); color: var(--danger); }
         .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
         .content { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
         h1 { font-family: 'Oswald', sans-serif; font-size: 2rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 4px solid var(--danger); padding-bottom: 1rem; }
@@ -35,14 +26,8 @@
         .btn { padding: 0.75rem 2rem; background: var(--danger); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: background 0.3s; }
         .btn:hover { background: #b91c1c; }
         .btn:disabled { background: #94a3b8; cursor: not-allowed; }
-        .footer { background: var(--primary); color: white; padding: 2rem 1rem; text-align: center; margin-top: 4rem; }
-        .footer a { color: var(--danger); text-decoration: none; }
         .info-box { background: rgba(59, 130, 246, 0.1); padding: 1.5rem; border-radius: 8px; margin: 2rem 0; border-left: 4px solid var(--accent); }
         @media (min-width: 768px) {
-            .header { padding: 1.5rem 2rem; }
-            .logo { font-size: 1.5rem; }
-            .back-link { display: inline-block; }
-            .mobile-menu-toggle { display: none; }
             .container { padding: 0 2rem; margin: 3rem auto; }
             .content { padding: 3rem; }
             h1 { font-size: 2.5rem; }
@@ -54,17 +39,21 @@
         const POWER_AUTOMATE_URL = 'https://default61ffc6bcd9ce458b8120d32187c377.0d.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/9a207992d26c4e73bd974dab2623c9c0/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=EL1ZRvFplGo3NgrPzLqb1eUoe29BNQF-pxmOla6U0Cw';
         
         // Function to submit form to Power Automate
+        // Sends formType + all form fields at root level + fields array for dynamic table generation
+        // Power Automate flow can use either @keys(triggerBody()) or triggerBody()?['fields'] to loop through all fields
         async function submitToPowerAutomate(formType, formData) {
             try {
+                // Turn {name: 'x', email: 'y'} into [{name:'name', value:'x'}, {name:'email', value:'y'}]
                 const fields = Object.entries(formData).map(([name, value]) => ({
                     name,
                     value
                 }));
                 
+                // Create payload: formType + all form fields spread at root level + fields array
                 const payload = {
                     formType: formType,
-                    ...formData,
-                    fields
+                    ...formData,  // All form fields spread directly at root level (for future use)
+                    fields        // Array used by Power Automate to build the table
                 };
                 
                 const response = await fetch(POWER_AUTOMATE_URL, {
@@ -87,6 +76,7 @@
             }
         }
         
+        // Function to collect form data
         function collectFormData(form) {
             const formData = {};
             const inputs = form.querySelectorAll('input, select, textarea');
@@ -108,27 +98,8 @@
     </script>
 </head>
 <body>
-    <header class="header">
-        <div class="header-content">
-            <div class="logo"><a href="index.html">NZIFDA</a></div>
-            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
-            <a href="index.html" class="back-link">← Back to Home</a>
-        </div>
-        <nav class="mobile-nav" id="mobileNav">
-            <a href="index.html">Home</a>
-            <a href="for-consumers.html">For Consumers</a>
-            <a href="for-operators.html">For Operators</a>
-            <a href="for-fuel-stations.html">For Fuel Stations</a>
-            <a href="for-insurers.html">For Insurers</a>
-            <a href="mediation.html">Mediation</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
-    <script>
-        function toggleMobileMenu() {
-            document.getElementById('mobileNav').classList.toggle('active');
-        }
-    </script>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
     <div class="container">
         <div class="content">
             <h1>File a Complaint or Request Mediation</h1>
@@ -196,17 +167,18 @@
             </form>
         </div>
     </div>
-    <footer class="footer">
-        <p>&copy; 2024 NZIFDA - New Zealand Insoluble Fuel Disposal Agency</p>
-        <p><a href="index.html">Home</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookies-policy.html">Cookies Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
-    </footer>
-    
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
     <script>
+        // Form submission handler
         async function handleComplaintFormSubmit(event) {
             const form = document.getElementById('complaintForm');
             const submitButton = form.querySelector('button[type="submit"]');
             const originalText = submitButton.textContent;
             
+            // Disable button and show loading
             submitButton.disabled = true;
             submitButton.textContent = 'Submitting...';
             

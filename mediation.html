@@ -8,154 +8,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/header-footer.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600&display=swap');
         :root { --primary: #1a1a1a; --danger: #dc2626; --warning: #f59e0b; --success: #16a34a; --accent: #0369a1; --surface: #f8fafc; --border: #e2e8f0; --text: #334155; --text-dark: #0f172a; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Barlow', sans-serif; background: var(--surface); color: var(--text); line-height: 1.8; }
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        }
-        
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-        
-        .logo-hexagons {
-            display: flex;
-            position: relative;
-            width: 65px;
-            height: 60px;
-        }
-        
-        .hex {
-            width: 24px;
-            height: 28px;
-            position: absolute;
-            clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
-            transition: all 0.4s ease;
-            opacity: 0.9;
-            animation: hexFloat 6s ease-in-out infinite;
-        }
-        
-        .hex-1 { background: #ef4444; left: 12px; top: 0; animation-delay: 0s; }
-        .hex-2 { background: #84cc16; left: 32px; top: 0; animation-delay: 0.5s; }
-        .hex-3 { background: #2563eb; left: 2px; top: 20px; animation-delay: 1s; }
-        .hex-4 { background: #fb923c; left: 42px; top: 20px; animation-delay: 1.5s; }
-        .hex-5 { background: #6b7280; left: 12px; bottom: 0; animation-delay: 2s; }
-        .hex-6 { background: #60a5fa; left: 32px; bottom: 0; animation-delay: 2.5s; }
-        
-        @keyframes hexFloat {
-            0%, 100% { transform: translateY(0) scale(1); filter: brightness(1); }
-            50% { transform: translateY(-3px) scale(1.05); filter: brightness(1.2); }
-        }
-        
-        .logo:hover .hex { transform: scale(1.15); filter: brightness(1.3); }
-        .logo:hover .hex-1 { transform: translate(-2px, -2px) scale(1.15); }
-        .logo:hover .hex-2 { transform: translate(2px, -2px) scale(1.15); }
-        .logo:hover .hex-3 { transform: translate(-2px, 0) scale(1.15); }
-        .logo:hover .hex-4 { transform: translate(2px, 0) scale(1.15); }
-        .logo:hover .hex-5 { transform: translate(-2px, 2px) scale(1.15); }
-        .logo:hover .hex-6 { transform: translate(2px, 2px) scale(1.15); }
-        
-        .logo-text { color: white; }
-        .logo-text h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            margin: 0;
-            display: flex;
-            align-items: baseline;
-            flex-wrap: nowrap;
-            white-space: nowrap;
-            line-height: 1;
-        }
-        .logo-text h1 a { display: flex; align-items: baseline; flex-wrap: nowrap; white-space: nowrap; text-decoration: none; color: inherit; }
-        .logo-text h1 .nz { color: #fff; }
-        .logo-text h1 .if { color: #dc2626; }
-        .logo-text h1 .da { color: #3b82f6; }
-        .logo-text span {
-            font-size: 0.7rem;
-            opacity: 0.9;
-            text-transform: none;
-            letter-spacing: 0.05em;
-            font-weight: 400;
-            display: block;
-            margin-top: 0.2rem;
-            line-height: 1.2;
-        }
-        
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-        .mobile-menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; }
-        .mobile-nav {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: var(--primary);
-            padding: 1rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            z-index: 999;
-        }
-        .mobile-nav.active { display: block; }
-        .mobile-nav a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            text-transform: uppercase;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-        .mobile-nav a:hover { background: rgba(255,255,255,0.1); color: var(--danger); }
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: color 0.3s;
-            position: relative;
-        }
-        .nav-links a:hover { color: var(--danger); }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--danger);
-            transition: width 0.3s;
-        }
-        .nav-links a:hover::after { width: 100%; }
-        
-        @media (max-width: 767px) {
-            .header { height: auto; min-height: 70px; }
-            .nav-links { display: none; }
-            .mobile-menu-toggle { display: block; }
-        }
         
         .container { max-width: 1000px; margin: 7rem auto 2rem; padding: 0 1rem; }
         .content { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
@@ -174,64 +32,28 @@
         .action-card h3 { margin-top: 0; }
         .btn { display: inline-block; padding: 1rem 2rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; font-weight: 600; margin: 0.5rem 0.5rem 0.5rem 0; transition: background 0.3s; }
         .btn:hover { background: var(--danger); }
-        .footer { background: var(--primary); color: white; padding: 2rem; text-align: center; margin-top: 4rem; }
-        .footer a { color: var(--danger); text-decoration: none; }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="nav-container">
-            <div class="logo">
-                <div class="logo-hexagons">
-                    <div class="hex hex-1"></div>
-                    <div class="hex hex-2"></div>
-                    <div class="hex hex-3"></div>
-                    <div class="hex hex-4"></div>
-                    <div class="hex hex-5"></div>
-                    <div class="hex hex-6"></div>
-                </div>
-                <div class="logo-text">
-                    <h1><a href="index.html" style="text-decoration: none; color: inherit;"><span class="nz">NZ</span><span class="if">IF</span><span class="da">DA</span></a></h1>
-                    <span>New Zealand Insoluble Fuel Disposal Agency</span>
-                </div>
-            </div>
-            <nav>
-                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
-                <ul class="nav-links">
-                    <li><a href="for-consumers.html">For Consumers</a></li>
-                    <li><a href="for-operators.html">For Operators</a></li>
-                    <li><a href="for-fuel-stations.html">For Fuel Stations</a></li>
-                    <li><a href="for-insurers.html">For Insurers</a></li>
-                    <li><a href="mediation.html">Mediation</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-            <nav class="mobile-nav" id="mobileNav">
-                <a href="index.html">Home</a>
-                <a href="for-consumers.html">For Consumers</a>
-                <a href="for-operators.html">For Operators</a>
-                <a href="for-fuel-stations.html">For Fuel Stations</a>
-                <a href="for-insurers.html">For Insurers</a>
-                <a href="mediation.html">Mediation</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-        </div>
-    </header>
-    <script>
-        function toggleMobileMenu() {
-            document.getElementById('mobileNav').classList.toggle('active');
-        }
-    </script>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
     <div class="container">
         <div class="content">
             <h1>Mediation & Dispute Resolution</h1>
-            <p style="font-size: 1.2rem; margin-bottom: 2rem;">NZIFDA provides professional mediation and dispute resolution services for issues related to fuel contamination remediation, helping parties reach fair and equitable solutions without costly litigation.</p>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">NZIFDA provides comprehensive dispute resolution services covering the full spectrum from initial mediation through to Disputes Tribunal representation. <strong>NZIFDA represents the complainant</strong> throughout the entire process, ensuring their interests are protected and their case is presented effectively.</p>
             
-            <div class="info-box">
-                <h2>Our Mediation Services</h2>
-                <p>NZIFDA offers comprehensive dispute resolution services covering a wide range of issues including service quality disputes, pricing disagreements, damage claims, warranty issues, and compliance concerns. Our mediation process is designed to be fair, efficient, and cost-effective for all parties.</p>
+            <div class="info-box" style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--accent);">
+                <h2>Complete Dispute Resolution Service</h2>
+                <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;">NZIFDA offers a full-service dispute resolution pathway:</p>
+                <ol style="font-size: 1.05rem;">
+                    <li><strong>Initial Mediation:</strong> Free mediation services to resolve disputes quickly and fairly</li>
+                    <li><strong>Formal Mediation:</strong> Structured mediation sessions with neutral NZIFDA mediators</li>
+                    <li><strong>Disputes Tribunal:</strong> If mediation fails, NZIFDA represents the complainant at the Disputes Tribunal</li>
+                    <li><strong>Ongoing Support:</strong> Continued assistance throughout the entire process</li>
+                </ol>
+                <p style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 6px; font-weight: 600; color: var(--accent);">
+                    <strong>Important:</strong> NZIFDA represents the complainant at all stages, including Disputes Tribunal proceedings. We advocate on your behalf to ensure your case is properly presented and your interests are protected.
+                </p>
             </div>
 
             <h2>What We Cover</h2>
@@ -248,29 +70,64 @@
                 </ul>
             </div>
 
-            <div class="action-card">
-                <h3>Disputes Tribunal Representation</h3>
-                <p>For disputes that cannot be resolved through mediation, NZIFDA can represent complainants at the Disputes Tribunal. We provide:</p>
-                <ul>
-                    <li>Professional representation and advocacy</li>
-                    <li>Preparation of case documentation</li>
-                    <li>Expert testimony and evidence presentation</li>
-                    <li>Support throughout the tribunal process</li>
+            <div class="action-card" style="background: rgba(220, 38, 38, 0.1); border-left: 4px solid var(--danger);">
+                <h3 style="color: var(--danger);">Disputes Tribunal Representation</h3>
+                <p style="font-size: 1.05rem; margin-bottom: 1rem;"><strong>When mediation cannot resolve a dispute, NZIFDA represents the complainant at the Disputes Tribunal.</strong> The Disputes Tribunal is New Zealand's low-cost alternative to court for disputes up to $30,000.</p>
+                <p style="font-weight: 600; margin-bottom: 1rem; color: var(--danger);">NZIFDA provides comprehensive representation including:</p>
+                <ul style="font-size: 1.05rem;">
+                    <li><strong>Professional advocacy:</strong> NZIFDA representatives present your case effectively at the tribunal</li>
+                    <li><strong>Case preparation:</strong> Complete preparation of all documentation, evidence, and submissions</li>
+                    <li><strong>Expert testimony:</strong> Industry expert testimony to support your case</li>
+                    <li><strong>Legal guidance:</strong> Advice on tribunal procedures and legal requirements</li>
+                    <li><strong>Evidence presentation:</strong> Professional presentation of all relevant evidence</li>
+                    <li><strong>Full representation:</strong> NZIFDA acts on your behalf throughout the entire tribunal process</li>
+                    <li><strong>Post-tribunal support:</strong> Assistance with enforcement of tribunal orders if needed</li>
                 </ul>
-                <p style="margin-top: 1rem;"><strong>Note:</strong> NZIFDA represents the complainant in Disputes Tribunal proceedings, ensuring their interests are properly represented and their case is presented effectively.</p>
+                <div style="background: white; padding: 1.5rem; border-radius: 6px; margin-top: 1rem;">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text-dark);">Disputes Tribunal Process:</p>
+                    <ol style="margin-left: 1.5rem; font-size: 1.05rem;">
+                        <li>Application is filed with the Disputes Tribunal</li>
+                        <li>NZIFDA prepares your case and all documentation</li>
+                        <li>Hearing is scheduled (usually within 4-6 weeks)</li>
+                        <li>NZIFDA represents you at the hearing</li>
+                        <li>Tribunal makes a binding decision</li>
+                        <li>NZIFDA assists with enforcement if necessary</li>
+                    </ol>
+                </div>
+                <p style="margin-top: 1rem; padding: 1rem; background: rgba(220, 38, 38, 0.1); border-radius: 6px; font-weight: 600; color: var(--danger);">
+                    <strong>Key Point:</strong> NZIFDA represents the complainant throughout the Disputes Tribunal process. You don't need to hire a lawyer - we handle everything on your behalf.
+                </p>
             </div>
 
-            <h2>How Mediation Works</h2>
+            <h2>The Complete Resolution Process</h2>
             <div class="action-card">
-                <h3>The Process</h3>
-                <ol>
-                    <li><strong>Initial Contact:</strong> Submit a mediation request through our complaint form or contact us directly</li>
-                    <li><strong>Case Review:</strong> We review the dispute and gather relevant information from all parties</li>
+                <h3>Step 1: Initial Mediation</h3>
+                <p style="font-size: 1.05rem; margin-bottom: 1rem;">The process begins with free initial mediation:</p>
+                <ol style="font-size: 1.05rem;">
+                    <li><strong>Submit Request:</strong> File a complaint or mediation request through our complaint form</li>
+                    <li><strong>Case Review:</strong> NZIFDA reviews the dispute and gathers information from all parties</li>
+                    <li><strong>Initial Assessment:</strong> We assess the case and determine the best approach</li>
                     <li><strong>Mediation Session:</strong> A neutral NZIFDA mediator facilitates discussion between parties</li>
-                    <li><strong>Resolution:</strong> Parties work together to reach a mutually acceptable solution</li>
+                    <li><strong>Resolution Attempt:</strong> Parties work together to reach a mutually acceptable solution</li>
                     <li><strong>Agreement:</strong> If successful, a written agreement is prepared and signed by all parties</li>
-                    <li><strong>Follow-up:</strong> We monitor compliance with the agreement and provide ongoing support if needed</li>
+                    <li><strong>Compliance Monitoring:</strong> We monitor compliance with the agreement and provide ongoing support</li>
                 </ol>
+            </div>
+
+            <div class="action-card" style="background: rgba(245, 158, 11, 0.1); border-left: 4px solid var(--warning);">
+                <h3 style="color: var(--warning);">Step 2: Disputes Tribunal (If Mediation Fails)</h3>
+                <p style="font-size: 1.05rem; margin-bottom: 1rem;">If mediation cannot resolve the dispute, NZIFDA represents the complainant at the Disputes Tribunal:</p>
+                <ol style="font-size: 1.05rem;">
+                    <li><strong>Tribunal Application:</strong> NZIFDA files the application with the Disputes Tribunal on your behalf</li>
+                    <li><strong>Case Preparation:</strong> Complete preparation of documentation, evidence, and legal submissions</li>
+                    <li><strong>Hearing Preparation:</strong> NZIFDA prepares you and all evidence for the tribunal hearing</li>
+                    <li><strong>Hearing Representation:</strong> NZIFDA represents you at the tribunal hearing, presenting your case</li>
+                    <li><strong>Decision:</strong> Tribunal makes a binding decision (usually on the day or within 14 days)</li>
+                    <li><strong>Enforcement:</strong> If the other party doesn't comply, NZIFDA assists with enforcement</li>
+                </ol>
+                <p style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 6px; font-weight: 600; color: var(--warning);">
+                    <strong>No Additional Cost:</strong> For NZIFDA member insurers and certified operator customers, Disputes Tribunal representation is included in the mediation service.
+                </p>
             </div>
 
             <div class="info-box">
@@ -312,10 +169,10 @@
             </div>
         </div>
     </div>
-    <footer class="footer">
-        <p>&copy; 2024 NZIFDA - New Zealand Insoluble Fuel Disposal Agency</p>
-        <p><a href="index.html">Home</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookies-policy.html">Cookies Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
-    </footer>
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
 </body>
 </html>
 

@@ -8,154 +8,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/header-footer.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600&display=swap');
         :root { --primary: #1a1a1a; --danger: #dc2626; --warning: #f59e0b; --success: #16a34a; --accent: #0369a1; --surface: #f8fafc; --border: #e2e8f0; --text: #334155; --text-dark: #0f172a; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Barlow', sans-serif; background: var(--surface); color: var(--text); line-height: 1.8; }
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-        }
-        
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-        
-        .logo-hexagons {
-            display: flex;
-            position: relative;
-            width: 65px;
-            height: 60px;
-        }
-        
-        .hex {
-            width: 24px;
-            height: 28px;
-            position: absolute;
-            clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
-            transition: all 0.4s ease;
-            opacity: 0.9;
-            animation: hexFloat 6s ease-in-out infinite;
-        }
-        
-        .hex-1 { background: #ef4444; left: 12px; top: 0; animation-delay: 0s; }
-        .hex-2 { background: #84cc16; left: 32px; top: 0; animation-delay: 0.5s; }
-        .hex-3 { background: #2563eb; left: 2px; top: 20px; animation-delay: 1s; }
-        .hex-4 { background: #fb923c; left: 42px; top: 20px; animation-delay: 1.5s; }
-        .hex-5 { background: #6b7280; left: 12px; bottom: 0; animation-delay: 2s; }
-        .hex-6 { background: #60a5fa; left: 32px; bottom: 0; animation-delay: 2.5s; }
-        
-        @keyframes hexFloat {
-            0%, 100% { transform: translateY(0) scale(1); filter: brightness(1); }
-            50% { transform: translateY(-3px) scale(1.05); filter: brightness(1.2); }
-        }
-        
-        .logo:hover .hex { transform: scale(1.15); filter: brightness(1.3); }
-        .logo:hover .hex-1 { transform: translate(-2px, -2px) scale(1.15); }
-        .logo:hover .hex-2 { transform: translate(2px, -2px) scale(1.15); }
-        .logo:hover .hex-3 { transform: translate(-2px, 0) scale(1.15); }
-        .logo:hover .hex-4 { transform: translate(2px, 0) scale(1.15); }
-        .logo:hover .hex-5 { transform: translate(-2px, 2px) scale(1.15); }
-        .logo:hover .hex-6 { transform: translate(2px, 2px) scale(1.15); }
-        
-        .logo-text { color: white; }
-        .logo-text h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            margin: 0;
-            display: flex;
-            align-items: baseline;
-            flex-wrap: nowrap;
-            white-space: nowrap;
-            line-height: 1;
-        }
-        .logo-text h1 a { display: flex; align-items: baseline; flex-wrap: nowrap; white-space: nowrap; text-decoration: none; color: inherit; }
-        .logo-text h1 .nz { color: #fff; }
-        .logo-text h1 .if { color: #dc2626; }
-        .logo-text h1 .da { color: #3b82f6; }
-        .logo-text span {
-            font-size: 0.7rem;
-            opacity: 0.9;
-            text-transform: none;
-            letter-spacing: 0.05em;
-            font-weight: 400;
-            display: block;
-            margin-top: 0.2rem;
-            line-height: 1.2;
-        }
-        
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-        .mobile-menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; }
-        .mobile-nav {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: var(--primary);
-            padding: 1rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            z-index: 999;
-        }
-        .mobile-nav.active { display: block; }
-        .mobile-nav a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            text-transform: uppercase;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-        .mobile-nav a:hover { background: rgba(255,255,255,0.1); color: var(--danger); }
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: color 0.3s;
-            position: relative;
-        }
-        .nav-links a:hover { color: var(--danger); }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--danger);
-            transition: width 0.3s;
-        }
-        .nav-links a:hover::after { width: 100%; }
-        
-        @media (max-width: 767px) {
-            .header { height: auto; min-height: 70px; }
-            .nav-links { display: none; }
-            .mobile-menu-toggle { display: block; }
-        }
         
         .container { max-width: 1000px; margin: 7rem auto 2rem; padding: 0 1rem; }
         .content { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
@@ -175,69 +33,64 @@
         .action-card h3 { margin-top: 0; }
         .btn { display: inline-block; padding: 1rem 2rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; font-weight: 600; margin: 0.5rem 0.5rem 0.5rem 0; transition: background 0.3s; }
         .btn:hover { background: var(--danger); }
-        .footer { background: var(--primary); color: white; padding: 2rem; text-align: center; margin-top: 4rem; }
-        .footer a { color: var(--danger); text-decoration: none; }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="nav-container">
-            <div class="logo">
-                <div class="logo-hexagons">
-                    <div class="hex hex-1"></div>
-                    <div class="hex hex-2"></div>
-                    <div class="hex hex-3"></div>
-                    <div class="hex hex-4"></div>
-                    <div class="hex hex-5"></div>
-                    <div class="hex hex-6"></div>
-                </div>
-                <div class="logo-text">
-                    <h1><a href="index.html" style="text-decoration: none; color: inherit;"><span class="nz">NZ</span><span class="if">IF</span><span class="da">DA</span></a></h1>
-                    <span>New Zealand Insoluble Fuel Disposal Agency</span>
-                </div>
-            </div>
-            <nav>
-                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
-                <ul class="nav-links">
-                    <li><a href="for-consumers.html">For Consumers</a></li>
-                    <li><a href="for-operators.html">For Operators</a></li>
-                    <li><a href="for-fuel-stations.html">For Fuel Stations</a></li>
-                    <li><a href="for-insurers.html">For Insurers</a></li>
-                    <li><a href="mediation.html">Mediation</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="resources.html">Resources</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-            <nav class="mobile-nav" id="mobileNav">
-                <a href="index.html">Home</a>
-                <a href="for-consumers.html">For Consumers</a>
-                <a href="for-operators.html">For Operators</a>
-                <a href="for-fuel-stations.html">For Fuel Stations</a>
-                <a href="for-insurers.html">For Insurers</a>
-                <a href="mediation.html">Mediation</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-        </div>
-    </header>
-    <script>
-        function toggleMobileMenu() {
-            document.getElementById('mobileNav').classList.toggle('active');
-        }
-    </script>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
     <div class="container">
         <div class="content">
             <h1>For Insurers</h1>
-            <p style="font-size: 1.2rem; margin-bottom: 2rem;">NZIFDA provides insurers with a reliable framework for managing misfuel claims, reducing risk, and ensuring compliance with New Zealand regulations.</p>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">NZIFDA provides insurers with a reliable framework for managing misfuel claims, reducing risk, controlling costs, and ensuring compliance with New Zealand regulations. Our certified operator network offers set rates, trusted repairs, and comprehensive mediation services.</p>
             
-            <div class="info-box">
-                <h2>Why Insurers Partner with NZIFDA</h2>
-                <p>NZIFDA certification provides insurers with verified, compliant operators who meet strict standards for fuel contamination remediation. This reduces claim costs, legal exposure, and ensures proper remediation that protects both policyholders and insurers.</p>
+            <div class="info-box" style="background: rgba(22, 163, 74, 0.1); border-left: 4px solid var(--success);">
+                <h2 style="color: var(--success);">Why Insurers Partner with NZIFDA</h2>
+                <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;">NZIFDA-certified operators provide insurers with:</p>
+                <ul style="font-size: 1.05rem;">
+                    <li><strong>Set rates for member insurers</strong> - No retail markups or surprise charges</li>
+                    <li><strong>Trusted repairs</strong> - Verified compliance and quality standards</li>
+                    <li><strong>Free mediation service</strong> - Dispute resolution through to Disputes Tribunal representation</li>
+                    <li><strong>Regulatory compliance</strong> - All operators meet strict New Zealand legal requirements</li>
+                    <li><strong>Cost control</strong> - Transparent pricing eliminates fake charges and inflated retail rates</li>
+                </ul>
             </div>
 
-            <h2>Legal Aspects & Regulatory Compliance</h2>
+            <h2>Legal Framework & Applicable Laws</h2>
             <div class="action-card">
-                <h3>Regulatory Framework</h3>
+                <h3>Consumer Guarantees Act 1993</h3>
+                <p>The Consumer Guarantees Act requires that services be provided with reasonable care and skill, be fit for purpose, and completed within a reasonable time. Insurers have obligations to ensure repair services meet these standards:</p>
+                <ul>
+                    <li><strong>Section 28:</strong> Services must be performed with reasonable care and skill</li>
+                    <li><strong>Section 29:</strong> Services must be fit for the particular purpose made known to the supplier</li>
+                    <li><strong>Section 30:</strong> Services must be completed within a reasonable time</li>
+                    <li><strong>Section 32:</strong> Consumers have rights to remedies for failure to meet guarantees</li>
+                </ul>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--danger);">Using non-certified operators increases the risk of Consumer Guarantees Act breaches, potentially exposing insurers to additional liability and claims.</p>
+            </div>
+
+            <div class="action-card">
+                <h3>Fair Trading Act 1986</h3>
+                <p>The Fair Trading Act prohibits misleading and deceptive conduct in trade. Key provisions relevant to vehicle repairs include:</p>
+                <ul>
+                    <li><strong>Section 9:</strong> Prohibits misleading or deceptive conduct</li>
+                    <li><strong>Section 13:</strong> Prohibits false or misleading representations about services</li>
+                    <li><strong>Section 13(g):</strong> Prohibits false representations about the need for services</li>
+                </ul>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--danger);">Non-certified operators may engage in practices that breach the Fair Trading Act, such as charging for unnecessary repairs (e.g., fake pump or injector replacements), creating liability for insurers who authorize such work.</p>
+            </div>
+
+            <div class="action-card">
+                <h3>Insurance Law Reform Acts 1977 & 1985</h3>
+                <p>These Acts govern insurance contracts and require insurers to act in good faith:</p>
+                <ul>
+                    <li>Insurers must ensure repairs are necessary and reasonable</li>
+                    <li>Insurers have a duty to investigate claims properly</li>
+                    <li>Insurers must ensure repair costs are reasonable and justified</li>
+                </ul>
+            </div>
+
+            <div class="action-card">
+                <h3>Regulatory Compliance Requirements</h3>
                 <p>NZIFDA-certified operators comply with all New Zealand regulations including:</p>
                 <ul>
                     <li>WorkSafe New Zealand Dangerous Goods licensing requirements</li>
@@ -245,74 +98,115 @@
                     <li>Hazardous Substances and New Organisms Act (HSNO) compliance</li>
                     <li>Resource Management Act (RMA) requirements</li>
                     <li>Waste tracking and documentation standards</li>
+                    <li>Health and Safety at Work Act 2015</li>
                 </ul>
             </div>
 
-            <div class="action-card">
-                <h3>Legal Protection</h3>
-                <p>Using NZIFDA-certified operators provides legal protection for insurers:</p>
-                <ul>
-                    <li>Verified compliance reduces regulatory liability</li>
-                    <li>Proper documentation supports claim defense</li>
-                    <li>Certified operators carry minimum $2M professional indemnity insurance</li>
-                    <li>Comprehensive warranties protect against future claims</li>
-                    <li>Fixed facility operations comply with all legal requirements</li>
+            <h2>Critical Risks of Non-Certified Operators</h2>
+            <div class="warning-box" style="background: rgba(220, 38, 38, 0.15); border-left: 4px solid var(--danger);">
+                <h3 style="color: var(--danger);">⚠️ Significant Financial and Legal Risks</h3>
+                <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;">Using non-certified operators exposes insurers to substantial risks:</p>
+                <ul style="font-size: 1.05rem;">
+                    <li><strong>Regulatory violations:</strong> Mobile extraction services often violate Dangerous Goods Act, RMA, and EPA regulations, potentially creating liability for insurers who authorize such work</li>
+                    <li><strong>Inadequate insurance:</strong> Non-certified operators may not carry sufficient professional indemnity coverage ($2M+ required), leaving insurers exposed to uncovered claims</li>
+                    <li><strong>Improper remediation:</strong> Inadequate fuel extraction can cause engine damage, fuel system contamination, and catalytic converter failure, leading to significantly higher claim costs</li>
+                    <li><strong>Non-compliant disposal:</strong> Environmental violations can result in regulatory action and liability for insurers who authorized non-compliant work</li>
+                    <li><strong>Lack of documentation:</strong> Insufficient records make claim defense difficult and may breach insurance contract requirements</li>
+                    <li><strong>No warranties:</strong> Future failures may result in additional claims with no recourse against the operator</li>
+                    <li><strong>Consumer Guarantees Act breaches:</strong> Poor quality work may breach statutory guarantees, creating additional liability</li>
+                    <li><strong>Fair Trading Act violations:</strong> Misleading conduct or false representations by operators can create liability for insurers</li>
+                    <li><strong>Legal exposure:</strong> Insurers may be held jointly liable for regulatory breaches and environmental damage caused by non-certified operators</li>
                 </ul>
             </div>
 
-            <h2>Risks of Non-Certified Operators</h2>
-            <div class="warning-box">
-                <h3>⚠️ Significant Risks</h3>
-                <p>Non-certified operators pose substantial risks to insurers:</p>
-                <ul>
-                    <li><strong>Regulatory violations:</strong> Mobile extraction services are illegal and can result in fines and legal action</li>
-                    <li><strong>Inadequate insurance:</strong> May not carry sufficient professional indemnity coverage</li>
-                    <li><strong>Improper remediation:</strong> Can cause additional damage, leading to higher claim costs</li>
-                    <li><strong>Non-compliant disposal:</strong> Environmental violations can result in liability for insurers</li>
-                    <li><strong>Lack of documentation:</strong> Insufficient records make claim defense difficult</li>
-                    <li><strong>No warranties:</strong> Future failures may result in additional claims</li>
+            <h2>Cost Control & Pricing Transparency</h2>
+            <div class="warning-box" style="background: rgba(245, 158, 11, 0.15); border-left: 4px solid var(--warning);">
+                <h3 style="color: var(--warning);">⚠️ The Hidden Costs of Non-Certified Operators</h3>
+                <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;">Non-certified operators often charge significantly higher rates due to:</p>
+                <ul style="font-size: 1.05rem;">
+                    <li><strong>Retail rates:</strong> Non-certified operators typically charge retail rates (often 30-50% higher than trade rates), inflating claim costs unnecessarily</li>
+                    <li><strong>Fake charges:</strong> Common fraudulent practices include:
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Charging for fuel pump replacement when not needed</li>
+                            <li>Billing for injector cleaning/replacement that wasn't performed</li>
+                            <li>Inflating labor hours for simple extraction work</li>
+                            <li>Adding unnecessary "diagnostic" fees</li>
+                            <li>Charging premium rates for standard services</li>
+                        </ul>
+                    </li>
+                    <li><strong>Lack of transparency:</strong> Non-certified operators often provide vague invoices without detailed breakdowns, making cost verification difficult</li>
+                    <li><strong>No rate agreements:</strong> Without set rates, insurers have no leverage to negotiate fair pricing</li>
+                    <li><strong>Repeat claims:</strong> Improper remediation often requires additional work, doubling or tripling claim costs</li>
                 </ul>
             </div>
 
-            <h2>Cost Benefits</h2>
-            <div class="action-card">
-                <h3>Reduced Claim Costs</h3>
-                <p>NZIFDA certification helps insurers manage costs:</p>
-                <ul>
-                    <li>Proper remediation prevents additional damage and future claims</li>
-                    <li>Transparent pricing reduces disputes</li>
-                    <li>Comprehensive warranties protect against recurring issues</li>
-                    <li>Efficient processes reduce administrative overhead</li>
-                    <li>Verified compliance reduces legal and regulatory costs</li>
+            <div class="info-box" style="background: rgba(22, 163, 74, 0.1); border-left: 4px solid var(--success);">
+                <h3 style="color: var(--success);">✅ NZIFDA Member Benefits: Set Rates & Cost Control</h3>
+                <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;">NZIFDA member insurers receive:</p>
+                <ul style="font-size: 1.05rem;">
+                    <li><strong>Set rates:</strong> Pre-negotiated trade rates for all certified operators, eliminating retail markups</li>
+                    <li><strong>Transparent pricing:</strong> Detailed, itemized invoices with no hidden fees or fake charges</li>
+                    <li><strong>Rate protection:</strong> Certified operators are contractually bound to member rates, preventing price gouging</li>
+                    <li><strong>Cost verification:</strong> All invoices are verified against standard rates before payment</li>
+                    <li><strong>No fake charges:</strong> Certified operators are audited to prevent fraudulent billing practices</li>
+                    <li><strong>Efficient processes:</strong> Streamlined workflows reduce administrative overhead and processing time</li>
+                    <li><strong>Proper remediation:</strong> Quality work prevents repeat claims and additional costs</li>
+                </ul>
+                <p style="margin-top: 1.5rem; padding: 1rem; background: white; border-radius: 6px; font-weight: 600; color: var(--success);">
+                    <strong>Typical savings:</strong> NZIFDA member insurers typically save 25-40% on claim costs compared to non-certified operators, while receiving higher quality work and comprehensive warranties.
+                </p>
+            </div>
+
+            <h2>NZIFDA Insurer Membership Program</h2>
+            <div class="info-box" style="background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--accent);">
+                <h3>Comprehensive Membership Benefits</h3>
+                <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;">NZIFDA membership provides insurers with:</p>
+                <ul style="font-size: 1.05rem;">
+                    <li><strong>Set rates:</strong> Pre-negotiated trade rates with all certified operators, eliminating retail markups and ensuring cost control</li>
+                    <li><strong>Trusted repairs:</strong> Access to a network of verified, compliant operators who meet strict quality and regulatory standards</li>
+                    <li><strong>Free mediation service:</strong> Comprehensive dispute resolution from initial mediation through to Disputes Tribunal representation (NZIFDA represents the complainant)</li>
+                    <li><strong>Priority access:</strong> Direct referral system for claims with guaranteed response times</li>
+                    <li><strong>Compliance assurance:</strong> All operators are verified for regulatory compliance, insurance coverage, and quality standards</li>
+                    <li><strong>Transparent invoicing:</strong> Detailed, itemized invoices with no hidden fees or fake charges</li>
+                    <li><strong>Comprehensive warranties:</strong> All work is backed by operator warranties, protecting against future claims</li>
+                    <li><strong>Regular reporting:</strong> Compliance reports, cost analysis, and industry updates</li>
+                    <li><strong>Training resources:</strong> Access to educational materials and regulatory updates</li>
+                    <li><strong>Industry insights:</strong> Early notification of regulatory changes and industry developments</li>
                 </ul>
             </div>
 
-            <h2>Membership Benefits</h2>
-            <div class="info-box">
-                <h3>Insurer Membership Program</h3>
-                <p>NZIFDA offers membership programs for insurers that provide:</p>
-                <ul>
-                    <li>Priority access to certified operator network</li>
-                    <li>Direct referral system for claims</li>
-                    <li>Regular compliance reports and updates</li>
-                    <li>Training and education resources</li>
-                    <li>Dispute resolution and mediation services</li>
-                    <li>Industry insights and regulatory updates</li>
+            <div class="action-card" style="background: rgba(22, 163, 74, 0.1); border-left: 4px solid var(--success);">
+                <h3 style="color: var(--success);">Membership is Free - But Insurers Are Vetted</h3>
+                <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>NZIFDA membership is provided at no cost to approved insurers.</strong> However, to maintain the integrity of our network and ensure quality standards, all insurer applicants are subject to a vetting process:</p>
+                <ul style="font-size: 1.05rem;">
+                    <li><strong>Company verification:</strong> Confirmation of legitimate insurance business operations in New Zealand</li>
+                    <li><strong>Regulatory compliance:</strong> Verification of insurance license and regulatory standing</li>
+                    <li><strong>Financial stability:</strong> Assessment of company financial standing and claims handling capacity</li>
+                    <li><strong>Commitment to standards:</strong> Agreement to use NZIFDA-certified operators for misfuel claims</li>
+                    <li><strong>Quality assurance:</strong> Commitment to proper claims handling and customer service standards</li>
                 </ul>
+                <p style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 6px; font-weight: 600;">
+                    <strong>Why vetting matters:</strong> Vetting ensures that only reputable insurers with proper claims handling processes join the network, protecting both the integrity of the NZIFDA system and the interests of policyholders.
+                </p>
             </div>
 
             <h2>Application Process</h2>
             <div class="action-card">
-                <h3>How to Apply</h3>
-                <p>To become an NZIFDA insurer member:</p>
-                <ol>
-                    <li>Review membership requirements and benefits</li>
-                    <li>Complete the insurer membership application form</li>
-                    <li>Provide company information and contact details</li>
-                    <li>Submit application for review</li>
-                    <li>Upon approval, receive access to certified operator network and member resources</li>
+                <h3>How to Apply for Insurer Membership</h3>
+                <p style="font-size: 1.05rem; margin-bottom: 1rem;">The application process is straightforward:</p>
+                <ol style="font-size: 1.05rem;">
+                    <li><strong>Review membership benefits:</strong> Understand the advantages of NZIFDA membership</li>
+                    <li><strong>Complete application form:</strong> Provide company information, contact details, and claims volume estimates</li>
+                    <li><strong>Submit for vetting:</strong> NZIFDA reviews your application and verifies company details</li>
+                    <li><strong>Approval notification:</strong> Upon approval, you'll receive access credentials and member resources</li>
+                    <li><strong>Onboarding:</strong> Receive training on the certified operator network, set rates, and member services</li>
+                    <li><strong>Start saving:</strong> Begin using certified operators at set rates with full mediation support</li>
                 </ol>
-                <p style="margin-top: 1.5rem;"><a href="contact.html#insurer-membership" class="btn">Apply for Insurer Membership</a></p>
+                <div style="background: rgba(59, 130, 246, 0.1); padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; border-left: 4px solid var(--accent);">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem;">Ready to reduce claim costs and improve service quality?</p>
+                    <p style="margin-bottom: 1rem;">Apply for free NZIFDA insurer membership today and gain access to set rates, trusted repairs, and comprehensive mediation services.</p>
+                    <a href="contact.html#insurer-membership" class="btn" style="font-size: 1.1rem; padding: 1.2rem 2.5rem;">Apply for Insurer Membership</a>
+                </div>
             </div>
 
             <div class="info-box">
@@ -321,10 +215,10 @@
             </div>
         </div>
     </div>
-    <footer class="footer">
-        <p>&copy; 2024 NZIFDA - New Zealand Insoluble Fuel Disposal Agency</p>
-        <p><a href="index.html">Home</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookies-policy.html">Cookies Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
-    </footer>
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
 </body>
 </html>
 
