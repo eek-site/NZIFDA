@@ -20,7 +20,23 @@ export default {
         companyName = data.company || '';
       }
 
-      const badge = generateBadge(status, companyName, hashId);
+      // Detect mobile or static request
+      const userAgent = request.headers.get('User-Agent') || '';
+      const isMobileUA = /Mobile|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+      const forceStatic = url.searchParams.get('static') === 'true';
+      const forceMobile = url.searchParams.get('mobile') === 'true';
+      const forceDesktop = url.searchParams.get('desktop') === 'true';
+
+      let variant = 'desktop'; // default
+      if (forceDesktop) {
+        variant = 'desktop';
+      } else if (forceStatic) {
+        variant = 'static';
+      } else if (forceMobile || isMobileUA) {
+        variant = 'mobile';
+      }
+
+      const badge = generateBadge(status, companyName, hashId, variant);
 
       return new Response(badge, {
         headers: {
@@ -35,7 +51,7 @@ export default {
   },
 };
 
-function generateBadge(status, companyName, hashId) {
+function generateBadge(status, companyName, hashId, variant = 'desktop') {
   const configs = {
     // COMPLIANT OPERATOR statuses
     compliant_operator: {
@@ -200,15 +216,21 @@ function generateBadge(status, companyName, hashId) {
   };
 
   const cfg = configs[status] || configs.notfound;
+
+  // Route to appropriate badge generator
+  if (variant === 'mobile' || variant === 'static') {
+    return generateMobileBadge(cfg, companyName, hashId, variant === 'static', status);
+  } else {
+    return generateDesktopBadge(cfg, companyName, hashId, status);
+  }
+}
+
+function generateDesktopBadge(cfg, companyName, hashId, status) {
   const displayName = companyName && companyName.length > 30 ? companyName.substring(0, 27) + '...' : companyName || 'Unknown Operator';
   const shortHash = hashId ? hashId.substring(0, 20) + '…' : '';
 
-  // Encode certificate data for the link (base64 encoding for Cloudflare Workers)
-  const certData = {
-    hash: hashId,
-    company: companyName,
-    status: status
-  };
+  // Encode certificate data for the link - use actual status value, not label
+  const certData = { hash: hashId, company: companyName, status: status };
   const jsonStr = JSON.stringify(certData);
   const encodedData = base64Encode(jsonStr).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   const verifyUrl = `https://nzifda.org/index.html#certification?encoded=${encodedData}`;
@@ -391,6 +413,189 @@ function generateBadge(status, companyName, hashId) {
 </svg>`;
 }
 
+function generateMobileBadge(cfg, companyName, hashId, isStatic = false, status) {
+  const displayName = companyName && companyName.length > 28 ? companyName.substring(0, 25) + '...' : companyName || 'Unknown Operator';
+  const shortHash = hashId ? hashId.substring(0, 18) + '…' : '';
+
+  // Encode certificate data for the link - use actual status value, not label
+  const certData = { hash: hashId, company: companyName, status: status };
+  const jsonStr = JSON.stringify(certData);
+  const encodedData = base64Encode(jsonStr).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  const verifyUrl = `https://nzifda.org/index.html#certification?encoded=${encodedData}`;
+
+  // Hexagon positions for logo
+  const hexPositions = [
+    { x: 8, y: 0, color: '#ef4444' },
+    { x: 22, y: 0, color: '#84cc16' },
+    { x: 1, y: 16, color: '#2563eb' },
+    { x: 29, y: 16, color: '#fb923c' },
+    { x: 8, y: 32, color: '#6b7280' },
+    { x: 22, y: 32, color: '#60a5fa' }
+  ];
+  const hexPath = 'M 5 0 L 11 0 L 16 9.2 L 11 18.4 L 5 18.4 L 0 9.2 Z';
+
+  // CSS animations only if not static
+  const animationCSS = isStatic ? '' : `
+    <style>
+      @keyframes hexFloat {
+        0%, 100% {
+          transform: translateY(0) scale(1);
+          filter: brightness(1);
+          opacity: 0.9;
+        }
+        50% {
+          transform: translateY(-1.5px) scale(1.03);
+          filter: brightness(1.15);
+          opacity: 1;
+        }
+      }
+      .hex {
+        animation: hexFloat 6s ease-in-out infinite;
+      }
+      .hex-1 { animation-delay: 0s; }
+      .hex-2 { animation-delay: 0.5s; }
+      .hex-3 { animation-delay: 1s; }
+      .hex-4 { animation-delay: 1.5s; }
+      .hex-5 { animation-delay: 2s; }
+      .hex-6 { animation-delay: 2.5s; }
+    </style>`;
+
+  const hexClass = isStatic ? '' : 'hex';
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 700" width="400" height="700" style="max-width: 100%; height: auto;">
+  <defs>${animationCSS}
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+    <linearGradient id="markLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#dc2626;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0369a1;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Main container background -->
+  <rect width="400" height="700" rx="12" fill="#ffffff" stroke="${cfg.borderColor}" stroke-width="3"/>
+
+  <!-- Section 1: NZIFDA Mark & Logo -->
+  <g transform="translate(0, 20)">
+    <rect x="30" y="0" width="340" height="200" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+    
+    <!-- Hexagon Logo -->
+    <g transform="translate(175, 25)">
+      ${hexPositions.map((hex, i) => `
+        <path
+          d="${hexPath}"
+          fill="${hex.color}"
+          class="${hexClass} ${hexClass ? hexClass + '-' + (i + 1) : ''}"
+          opacity="0.9"
+          transform="translate(${hex.x}, ${hex.y})"
+        />
+      `).join('')}
+    </g>
+
+    <!-- NZIFDA Text -->
+    <text x="200" y="95" text-anchor="middle" font-family="Oswald, sans-serif" font-size="32" font-weight="700" letter-spacing="1">
+      <tspan fill="#0f172a">NZ</tspan><tspan fill="#dc2626">IF</tspan><tspan fill="#0369a1">DA</tspan>
+    </text>
+    
+    <!-- Gradient line -->
+    <rect x="120" y="105" width="160" height="4" rx="2" fill="url(#markLine)"/>
+    
+    <!-- Certified text -->
+    <text x="200" y="130" text-anchor="middle" font-family="Barlow, system-ui, sans-serif" font-size="13" font-weight="700" fill="#334155" letter-spacing="2">
+      CERTIFIED
+    </text>
+    
+    <!-- Agency name -->
+    <text x="200" y="152" text-anchor="middle" font-family="Barlow, system-ui, sans-serif" font-size="10" fill="#64748b" font-weight="500">
+      New Zealand Insoluble Fuel Disposal Agency
+    </text>
+    
+    <!-- Official mark text -->
+    <text x="200" y="175" text-anchor="middle" font-family="Barlow, system-ui, sans-serif" font-size="10" fill="#0369a1" font-weight="600">
+      Official Certification Mark
+    </text>
+    <text x="200" y="190" text-anchor="middle" font-family="Barlow, system-ui, sans-serif" font-size="9" fill="#64748b" font-weight="500">
+      Verified Compliance &amp; Standards
+    </text>
+  </g>
+
+  <!-- Section 2: Company & Certification Type -->
+  <g transform="translate(0, 240)">
+    <rect x="30" y="0" width="340" height="180" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+    
+    <!-- Company Name -->
+    <text x="200" y="35" text-anchor="middle" font-family="Oswald, sans-serif" font-size="22" font-weight="700" fill="#0f172a">
+      ${escapeXml(displayName)}
+    </text>
+    
+    <!-- Divider -->
+    <rect x="50" y="48" width="300" height="2" fill="#e2e8f0"/>
+    
+    <!-- Certification Type Badge -->
+    <rect x="60" y="65" width="280" height="36" rx="18" fill="${cfg.certBg}" stroke="${cfg.certColor}" stroke-width="2.5"/>
+    <text x="200" y="88" text-anchor="middle" font-family="Oswald, sans-serif" font-size="13" font-weight="700" fill="${cfg.certColor}" letter-spacing="1.5">
+      ${escapeXml(cfg.certType)}
+    </text>
+    
+    <!-- Certification Description -->
+    <text x="200" y="115" text-anchor="middle" font-family="Barlow, system-ui, sans-serif" font-size="11" fill="#64748b" font-weight="500" font-style="italic">
+      ${cfg.certDesc}
+    </text>
+    
+    <!-- Key Points -->
+    <text x="200" y="145" text-anchor="middle" font-family="Barlow, system-ui, sans-serif" font-size="9" fill="#64748b">
+      ✓ Dangerous Goods Licensed  ✓ $2M+ Indemnity
+    </text>
+    <text x="200" y="160" text-anchor="middle" font-family="Barlow, system-ui, sans-serif" font-size="9" fill="#64748b">
+      ✓ Waste Tracking Compliant  ✓ EPA Regulations Met
+    </text>
+  </g>
+
+  <!-- Section 3: Status -->
+  <g transform="translate(0, 440)">
+    <rect x="30" y="0" width="340" height="120" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+    
+    <!-- Status Badge -->
+    <rect x="70" y="20" width="260" height="40" rx="20" fill="${cfg.statusBg}" stroke="${cfg.borderColor}" stroke-width="3"/>
+    <text x="200" y="47" text-anchor="middle" font-family="Oswald, sans-serif" font-size="15" font-weight="700" fill="${cfg.statusColor}" letter-spacing="2">
+      ${escapeXml(cfg.statusLabel)}
+    </text>
+    
+    <!-- Status Description -->
+    <text x="200" y="80" text-anchor="middle" font-family="Barlow, system-ui, sans-serif" font-size="11" fill="#64748b" font-weight="500">
+      ${escapeXml(cfg.sub1)}
+    </text>
+    <text x="200" y="95" text-anchor="middle" font-family="Barlow, system-ui, sans-serif" font-size="11" fill="#64748b" font-weight="500">
+      ${escapeXml(cfg.sub2)}
+    </text>
+  </g>
+
+  <!-- Section 4: Verification -->
+  <g transform="translate(0, 580)">
+    <rect x="30" y="0" width="340" height="90" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+    
+    <text x="200" y="25" text-anchor="middle" font-family="Barlow, system-ui, sans-serif" font-size="10" font-weight="600" fill="#0f172a">
+      Verification Code
+    </text>
+    <text x="200" y="45" text-anchor="middle" font-family="ui-monospace, monospace" font-size="9" fill="#64748b" letter-spacing="0.5">
+      ${escapeXml(shortHash)}
+    </text>
+    
+    <!-- Verify Link -->
+    <rect x="120" y="57" width="160" height="2" rx="1" fill="url(#markLine)"/>
+    <text x="200" y="75" text-anchor="middle" font-family="Oswald, sans-serif" font-size="12" font-weight="700" fill="#0369a1">
+      Verify at nzifda.org
+    </text>
+  </g>
+
+  <!-- Clickable overlay linking to verification -->
+  <a href="${verifyUrl}" target="_blank" style="cursor: pointer;">
+    <rect width="400" height="700" rx="12" fill="transparent"/>
+  </a>
+</svg>`;
+}
+
 function base64Encode(str) {
   // Base64 encoding for Cloudflare Workers
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -422,3 +627,4 @@ function escapeXml(unsafe) {
     }
   });
 }
+
