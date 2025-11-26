@@ -203,13 +203,14 @@ function generateBadge(status, companyName, hashId) {
   const displayName = companyName && companyName.length > 30 ? companyName.substring(0, 27) + '...' : companyName || 'Unknown Operator';
   const shortHash = hashId ? hashId.substring(0, 20) + '…' : '';
 
-  // Encode certificate data for the link
+  // Encode certificate data for the link (base64 encoding for Cloudflare Workers)
   const certData = {
     hash: hashId,
     company: companyName,
     status: status
   };
-  const encodedData = btoa(JSON.stringify(certData)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  const jsonStr = JSON.stringify(certData);
+  const encodedData = base64Encode(jsonStr).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   const verifyUrl = `https://nzifda.org/index.html#certification?encoded=${encodedData}`;
 
   // Hexagon positions for animated logo
@@ -388,6 +389,24 @@ function generateBadge(status, companyName, hashId) {
     <rect width="800" height="320" rx="16" fill="transparent"/>
   </a>
 </svg>`;
+}
+
+function base64Encode(str) {
+  // Base64 encoding for Cloudflare Workers
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+  let result = '';
+  let i = 0;
+  while (i < str.length) {
+    const a = str.charCodeAt(i++);
+    const b = i < str.length ? str.charCodeAt(i++) : 0;
+    const c = i < str.length ? str.charCodeAt(i++) : 0;
+    const bitmap = (a << 16) | (b << 8) | c;
+    result += chars.charAt((bitmap >> 18) & 63);
+    result += chars.charAt((bitmap >> 12) & 63);
+    result += i - 2 < str.length ? chars.charAt((bitmap >> 6) & 63) : '=';
+    result += i - 1 < str.length ? chars.charAt(bitmap & 63) : '=';
+  }
+  return result;
 }
 
 function escapeXml(unsafe) {
