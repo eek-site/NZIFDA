@@ -1038,6 +1038,20 @@
             </div>
         </section>
 
+        <!-- Certificate Verification Display (shown when encoded parameter present) -->
+        <div id="certificateDetails" style="display: none; max-width: 1000px; margin: 2rem auto; padding: 0 1rem;">
+            <div style="background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); border: 3px solid var(--accent);">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <h2 style="font-family: 'Oswald', sans-serif; font-size: 2rem; color: var(--text-dark); margin-bottom: 0.5rem;">Certificate Verification</h2>
+                    <div style="width: 100px; height: 4px; background: linear-gradient(90deg, var(--danger) 0%, var(--accent) 100%); margin: 0 auto; border-radius: 2px;"></div>
+                </div>
+                <div id="certDetailsContent" style="font-size: 1.1rem; line-height: 1.8;"></div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button onclick="closeCertificateDetails()" style="padding: 0.75rem 2rem; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1rem;">Close</button>
+                </div>
+            </div>
+        </div>
+
         <!-- NZIFDA Mark -->
         <section class="section" id="certification">
             <div class="section-header">
@@ -1727,6 +1741,134 @@
         if (!getCookie('cookieConsent')) {
             document.getElementById('cookieConsent').style.display = 'block';
         }
+
+        // Certificate verification handler
+        function decodeCertificateData() {
+            const urlParams = new URLSearchParams(window.location.hash.substring(1).split('?')[1] || '');
+            const encoded = urlParams.get('encoded');
+            
+            if (encoded) {
+                try {
+                    // Decode base64 (handle URL-safe encoding)
+                    const decoded = atob(encoded.replace(/-/g, '+').replace(/_/g, '/'));
+                    const certData = JSON.parse(decoded);
+                    displayCertificateDetails(certData);
+                } catch (e) {
+                    console.error('Error decoding certificate data:', e);
+                }
+            }
+        }
+
+        function displayCertificateDetails(certData) {
+            const container = document.getElementById('certificateDetails');
+            const content = document.getElementById('certDetailsContent');
+            
+            if (!container || !content) return;
+
+            // Status configurations
+            const statusConfigs = {
+                compliant_operator: { type: 'Compliant Operator', color: '#0369a1', desc: 'Management & Customer Service' },
+                compliant_operator_pending: { type: 'Compliant Operator', color: '#0369a1', desc: 'Management & Customer Service', status: 'Pending Review' },
+                compliant_operator_expired: { type: 'Compliant Operator', color: '#0369a1', desc: 'Management & Customer Service', status: 'Expired' },
+                compliant_operator_suspended: { type: 'Compliant Operator', color: '#0369a1', desc: 'Management & Customer Service', status: 'Suspended' },
+                certified_workshop: { type: 'Certified Workshop', color: '#16a34a', desc: 'Service Delivery Facility' },
+                workshop_pending: { type: 'Certified Workshop', color: '#16a34a', desc: 'Service Delivery Facility', status: 'Pending Review' },
+                workshop_expired: { type: 'Certified Workshop', color: '#16a34a', desc: 'Service Delivery Facility', status: 'Expired' },
+                workshop_suspended: { type: 'Certified Workshop', color: '#16a34a', desc: 'Service Delivery Facility', status: 'Suspended' },
+                mobile_certified: { type: 'Mobile Certified', color: '#7c3aed', desc: 'Mobile Service Unit' },
+                mobile_pending: { type: 'Mobile Certified', color: '#7c3aed', desc: 'Mobile Service Unit', status: 'Pending Review' },
+                mobile_expired: { type: 'Mobile Certified', color: '#7c3aed', desc: 'Mobile Service Unit', status: 'Expired' },
+                mobile_suspended: { type: 'Mobile Certified', color: '#7c3aed', desc: 'Mobile Service Unit', status: 'Suspended' },
+                notfound: { type: 'Unknown', color: '#64748b', desc: 'Not Verified', status: 'Not Verified' }
+            };
+
+            const config = statusConfigs[certData.status] || statusConfigs.notfound;
+            const isCertified = !config.status || config.status === 'Certified';
+            const statusColor = isCertified ? '#16a34a' : (config.status === 'Pending Review' ? '#f59e0b' : '#dc2626');
+
+            content.innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem;">
+                    <!-- Company Information -->
+                    <div style="background: var(--surface); padding: 1.5rem; border-radius: 8px; border-left: 4px solid ${config.color};">
+                        <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: var(--text-dark); margin-bottom: 1rem;">Company Information</h3>
+                        <p style="font-size: 1.2rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem;">${escapeHtml(certData.company || 'Unknown')}</p>
+                        <p style="color: #64748b; font-size: 0.95rem;">Verification Code: <code style="background: #f1f5f9; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace;">${escapeHtml(certData.hash || '')}</code></p>
+                    </div>
+
+                    <!-- Certification Type -->
+                    <div style="background: ${config.color}15; padding: 1.5rem; border-radius: 8px; border: 2px solid ${config.color};">
+                        <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: ${config.color}; margin-bottom: 1rem;">Certification Type</h3>
+                        <p style="font-size: 1.1rem; font-weight: 600; color: ${config.color}; margin-bottom: 0.5rem;">${escapeHtml(config.type)}</p>
+                        <p style="color: #64748b; font-size: 0.95rem;">${escapeHtml(config.desc)}</p>
+                    </div>
+
+                    <!-- Status -->
+                    <div style="background: ${statusColor}15; padding: 1.5rem; border-radius: 8px; border: 2px solid ${statusColor};">
+                        <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: ${statusColor}; margin-bottom: 1rem;">Certification Status</h3>
+                        <p style="font-size: 1.1rem; font-weight: 600; color: ${statusColor}; margin-bottom: 0.5rem;">${escapeHtml(config.status || 'CERTIFIED')}</p>
+                        <p style="color: #64748b; font-size: 0.95rem;">
+                            ${isCertified ? 'This operator is currently certified and authorized to provide fuel contamination remediation services.' : 
+                              config.status === 'Pending Review' ? 'Certification application is currently under review. Verify status before engagement.' :
+                              config.status === 'Expired' ? 'This certification has expired and is no longer valid.' :
+                              'This certification has been suspended pending review.'}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Compliance Points -->
+                <div style="background: var(--surface); padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                    <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.2rem; color: var(--text-dark); margin-bottom: 1rem;">Compliance Verification</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="color: #16a34a; font-size: 1.2rem;">✓</span>
+                            <span>Dangerous Goods Licensed</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="color: #16a34a; font-size: 1.2rem;">✓</span>
+                            <span>$2M+ Professional Indemnity</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="color: #16a34a; font-size: 1.2rem;">✓</span>
+                            <span>Waste Tracking Compliant</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="color: #16a34a; font-size: 1.2rem;">✓</span>
+                            <span>EPA Regulations Met</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Badge Image -->
+                <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: var(--surface); border-radius: 8px;">
+                    <p style="margin-bottom: 1rem; font-weight: 600; color: var(--text-dark);">Official Badge</p>
+                    <img src="https://nzifda.org/badge/${escapeHtml(certData.hash || '')}" alt="NZIFDA Certification Badge" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+                </div>
+            `;
+
+            container.style.display = 'block';
+            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function closeCertificateDetails() {
+            const container = document.getElementById('certificateDetails');
+            if (container) {
+                container.style.display = 'none';
+                // Remove encoded parameter from URL
+                const url = new URL(window.location);
+                url.hash = url.hash.split('?')[0];
+                window.history.replaceState({}, '', url);
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Check for encoded parameter on page load and hash change
+        window.addEventListener('load', decodeCertificateData);
+        window.addEventListener('hashchange', decodeCertificateData);
     </script>
 </body>
 </html>
