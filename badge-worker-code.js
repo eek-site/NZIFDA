@@ -16,9 +16,9 @@ export default {
       let companyName = '';
 
       if (data) {
-        // Handle both lowercase and capitalized field names (SharePoint uses capitalized)
-        status = (data.status || data.Status || 'notfound').toLowerCase();
-        companyName = data.company || data.CompanyName || data.Company || '';
+        // SharePoint uses capitalized field names: CompanyName, Status
+        status = (data.Status || data.status || 'notfound').toLowerCase();
+        companyName = data.CompanyName || data.company || '';
       }
 
       // Detect mobile or static request
