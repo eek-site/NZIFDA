@@ -1363,11 +1363,138 @@
                 try {
                     // Decode base64 (handle URL-safe encoding)
                     const decoded = atob(encoded.replace(/-/g, '+').replace(/_/g, '/'));
-                    const certData = JSON.parse(decoded);
-                    displayCertificateDetails(certData);
+                    
+                    // Try to parse as JSON first (new format with hash, company, status)
+                    let certData;
+                    try {
+                        certData = JSON.parse(decoded);
+                        // Validate it has the expected structure
+                        if (certData.hash || certData.company || certData.status) {
+                            // Valid JSON structure
+                            displayCertificateDetails(certData);
+                            return;
+                        }
+                    } catch (jsonError) {
+                        // JSON parse failed - continue to handle as hash/company name
+                    }
+                    
+                    // If JSON parse failed or structure invalid, treat as hash/company name
+                    // The decoded string is the hashId - use it to fetch from badge
+                    const hashId = decoded.trim();
+                    fetchCertificateFromBadge(hashId);
                 } catch (e) {
                     console.error('Error decoding certificate data:', e);
                 }
+            }
+        }
+        
+        async function fetchCertificateFromBadge(hashId) {
+            try {
+                // The hashId might be base64 encoded company name
+                // Try to decode it first to get the actual company name
+                let companyName = hashId;
+                try {
+                    // If hashId is base64, decode it
+                    const decoded = atob(hashId.replace(/-/g, '+').replace(/_/g, '/'));
+                    if (decoded && decoded.length > 0 && !decoded.includes('{') && !decoded.includes('}')) {
+                        companyName = decoded;
+                    }
+                } catch (e) {
+                    // Not base64, use as-is
+                }
+                
+                // Fetch the badge SVG to extract status information
+                // The badge URL format is: https://nzifda.org/badge/{hashId}
+                const badgeUrl = `https://nzifda.org/badge/${encodeURIComponent(hashId)}`;
+                
+                let status = 'notfound';
+                
+                try {
+                    const response = await fetch(badgeUrl);
+                    if (response.ok) {
+                        const svgText = await response.text();
+                        
+                        // Extract company name from SVG if we can find a better one
+                        const textMatches = svgText.match(/<text[^>]*x="[^"]*"[^>]*y="[^"]*"[^>]*>([^<]+)<\/text>/g);
+                        if (textMatches) {
+                            for (let match of textMatches) {
+                                const textContent = match.replace(/<[^>]+>/g, '').trim();
+                                // Look for company name (not NZIFDA, CERTIFIED, etc.)
+                                if (textContent && 
+                                    textContent.length > 3 &&
+                                    textContent.length < 100 &&
+                                    !textContent.match(/^(NZIFDA|CERTIFIED|VERIFIED|PENDING|EXPIRED|SUSPENDED|NOT VERIFIED|New Zealand|Insoluble|Fuel|Disposal|Agency|Official|Certification|Mark|Verified|Compliance|Standards|Management|Customer|Service|Delivery|Facility|Mobile|Service|Unit)$/i) &&
+                                    !textContent.match(/^[A-Z\s]{1,3}$/)) { // Not just initials
+                                    companyName = textContent;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        // Determine status from badge colors and text
+                        if (svgText.includes('CERTIFIED') && (svgText.includes('stroke="#16a34a"') || svgText.includes('fill="#16a34a"'))) {
+                            // Green with CERTIFIED - determine type
+                            if (svgText.includes('COMPLIANT OPERATOR')) {
+                                status = 'compliant_operator';
+                            } else if (svgText.includes('CERTIFIED WORKSHOP')) {
+                                status = 'certified_workshop';
+                            } else if (svgText.includes('MOBILE CERTIFIED')) {
+                                status = 'mobile_certified';
+                            } else {
+                                status = 'compliant_operator'; // Default
+                            }
+                        } else if (svgText.includes('PENDING REVIEW') || svgText.includes('PENDING')) {
+                            if (svgText.includes('COMPLIANT OPERATOR')) {
+                                status = 'compliant_operator_pending';
+                            } else if (svgText.includes('CERTIFIED WORKSHOP')) {
+                                status = 'workshop_pending';
+                            } else if (svgText.includes('MOBILE CERTIFIED')) {
+                                status = 'mobile_pending';
+                            } else {
+                                status = 'compliant_operator_pending';
+                            }
+                        } else if (svgText.includes('EXPIRED')) {
+                            if (svgText.includes('COMPLIANT OPERATOR')) {
+                                status = 'compliant_operator_expired';
+                            } else if (svgText.includes('CERTIFIED WORKSHOP')) {
+                                status = 'workshop_expired';
+                            } else if (svgText.includes('MOBILE CERTIFIED')) {
+                                status = 'mobile_expired';
+                            } else {
+                                status = 'compliant_operator_expired';
+                            }
+                        } else if (svgText.includes('SUSPENDED')) {
+                            if (svgText.includes('COMPLIANT OPERATOR')) {
+                                status = 'compliant_operator_suspended';
+                            } else if (svgText.includes('CERTIFIED WORKSHOP')) {
+                                status = 'workshop_suspended';
+                            } else if (svgText.includes('MOBILE CERTIFIED')) {
+                                status = 'mobile_suspended';
+                            } else {
+                                status = 'compliant_operator_suspended';
+                            }
+                        }
+                    }
+                } catch (fetchError) {
+                    // Badge fetch failed, use defaults
+                }
+                
+                const certData = {
+                    hash: hashId,
+                    company: companyName,
+                    status: status
+                };
+                
+                displayCertificateDetails(certData);
+            } catch (e) {
+                console.error('Error fetching certificate from badge:', e);
+                // Fallback: display with hash/company name
+                const certData = {
+                    hash: hashId,
+                    company: hashId,
+                    status: 'notfound'
+                };
+                displayCertificateDetails(certData);
             }
         }
 
