@@ -909,7 +909,6 @@
                     <li><a href="for-consumers.html">For Consumers</a></li>
                     <li><a href="for-operators.html">For Operators</a></li>
                     <li><a href="for-fuel-stations.html">For Fuel Stations</a></li>
-                    <li><a href="for-insurers.html">For Insurers</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="resources.html">Resources</a></li>
                     <li><a href="contact.html">Contact</a></li>
@@ -919,7 +918,6 @@
                 <a href="for-consumers.html">For Consumers</a>
                 <a href="for-operators.html">For Operators</a>
                 <a href="for-fuel-stations.html">For Fuel Stations</a>
-                <a href="for-insurers.html">For Insurers</a>
                 <a href="about.html">About</a>
                 <a href="resources.html">Resources</a>
                 <a href="contact.html">Contact</a>
@@ -1307,42 +1305,6 @@
             </div>
         </section>
 
-        <!-- Mediation & Dispute Resolution Section -->
-        <section class="section" id="mediation">
-            <div class="section-header">
-                <h2>Mediation & Dispute Resolution</h2>
-            </div>
-            <div style="max-width: 1000px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8;">
-                <div style="background: white; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 2rem;">
-                    <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--text-dark);">Free Mediation & Disputes Tribunal Representation</h3>
-                    <p style="margin-bottom: 1.5rem;">NZIFDA provides comprehensive dispute resolution services, from initial mediation through to Disputes Tribunal representation. Our expert mediators help resolve disputes between consumers, insurers, fuel stations, and operators fairly and efficiently.</p>
-                    
-                    <div style="background: rgba(22, 163, 74, 0.1); padding: 2rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid var(--success);">
-                        <h4 style="font-family: 'Oswald', sans-serif; color: var(--success); margin-bottom: 1rem; font-size: 1.3rem;">Free Mediation Available</h4>
-                        <p style="margin-bottom: 1rem; font-weight: 600;">Mediation services are <strong>free</strong> for:</p>
-                        <ul style="margin-left: 2rem; margin-bottom: 1rem;">
-                            <li>NZIFDA member insurers and their policyholders</li>
-                            <li>Consumers who used NZIFDA-certified operators</li>
-                            <li>Fuel stations working with certified operators</li>
-                        </ul>
-                        <p style="margin-top: 1rem; margin-bottom: 0;"><a href="mediation.html" style="color: var(--accent); text-decoration: underline; font-weight: 600;">Learn more about our mediation service →</a></p>
-                    </div>
-                    
-                    <div style="background: var(--surface); padding: 2rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid var(--accent);">
-                        <h4 style="font-family: 'Oswald', sans-serif; color: var(--accent); margin-bottom: 1rem; font-size: 1.3rem;">Disputes Tribunal Representation</h4>
-                        <p style="margin-bottom: 1rem;">If mediation doesn't resolve your dispute, NZIFDA can represent you at the Disputes Tribunal:</p>
-                        <ul style="margin-left: 2rem; margin-bottom: 1rem;">
-                            <li><strong>Free Representation:</strong> No legal fees for eligible parties</li>
-                            <li><strong>Expert Preparation:</strong> We prepare all documentation and evidence</li>
-                            <li><strong>Full Support:</strong> We handle the entire tribunal process</li>
-                            <li><strong>Technical Expertise:</strong> Our representatives understand fuel contamination remediation</li>
-                        </ul>
-                        <p style="margin-top: 1rem; margin-bottom: 0;"><a href="complaint.html" style="color: var(--accent); text-decoration: underline; font-weight: 600;">File a complaint or request mediation →</a></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Report Section -->
         <section class="section" id="report">
             <div class="report-section">
@@ -1540,8 +1502,6 @@
                     <li style="color: #cbd5e1;">General: <a href="contact.html#general-form" style="color: var(--danger);">Contact Form</a></li>
                     <li style="color: #cbd5e1;">Certification: <a href="contact.html#certification-form" style="color: var(--danger);">Application Form</a></li>
                     <li style="color: #cbd5e1;">Compliance: <a href="contact.html#compliance-form" style="color: var(--danger);">Report Form</a></li>
-                    <li style="color: #cbd5e1;">Complaints: <a href="complaint.html" style="color: var(--danger);">File Complaint</a></li>
-                    <li style="color: #cbd5e1;">Mediation: <a href="mediation.html" style="color: var(--danger);">Mediation Service</a></li>
                 </ul>
             </div>
         </div>
@@ -1744,7 +1704,13 @@
 
         // Certificate verification handler
         function decodeCertificateData() {
-            const urlParams = new URLSearchParams(window.location.hash.substring(1).split('?')[1] || '');
+            const hash = window.location.hash;
+            if (!hash || !hash.includes('?')) return;
+            
+            const hashParts = hash.split('?');
+            if (hashParts.length < 2) return;
+            
+            const urlParams = new URLSearchParams(hashParts[1]);
             const encoded = urlParams.get('encoded');
             
             if (encoded) {
@@ -1765,25 +1731,59 @@
             
             if (!container || !content) return;
 
+            // Map status values - handle both display labels and actual status values
+            const statusMap = {
+                // Display labels (legacy support)
+                'CERTIFIED': 'compliant_operator',
+                'PENDING': 'compliant_operator_pending',
+                'EXPIRED': 'compliant_operator_expired',
+                'SUSPENDED': 'compliant_operator_suspended',
+                'NOT VERIFIED': 'notfound',
+                // Actual status values
+                'compliant_operator': 'compliant_operator',
+                'compliant_operator_pending': 'compliant_operator_pending',
+                'compliant_operator_expired': 'compliant_operator_expired',
+                'compliant_operator_suspended': 'compliant_operator_suspended',
+                'certified_workshop': 'certified_workshop',
+                'workshop_pending': 'workshop_pending',
+                'workshop_expired': 'workshop_expired',
+                'workshop_suspended': 'workshop_suspended',
+                'mobile_certified': 'mobile_certified',
+                'mobile_pending': 'mobile_pending',
+                'mobile_expired': 'mobile_expired',
+                'mobile_suspended': 'mobile_suspended',
+                'notfound': 'notfound'
+            };
+
+            // Normalize status - convert to lowercase and map if needed
+            let normalizedStatus = (certData.status || '').toLowerCase();
+            if (statusMap[normalizedStatus]) {
+                normalizedStatus = statusMap[normalizedStatus];
+            } else if (statusMap[certData.status]) {
+                normalizedStatus = statusMap[certData.status];
+            } else {
+                normalizedStatus = 'notfound';
+            }
+
             // Status configurations
             const statusConfigs = {
-                compliant_operator: { type: 'Compliant Operator', color: '#0369a1', desc: 'Management & Customer Service' },
+                compliant_operator: { type: 'Compliant Operator', color: '#0369a1', desc: 'Management & Customer Service', status: 'Certified' },
                 compliant_operator_pending: { type: 'Compliant Operator', color: '#0369a1', desc: 'Management & Customer Service', status: 'Pending Review' },
                 compliant_operator_expired: { type: 'Compliant Operator', color: '#0369a1', desc: 'Management & Customer Service', status: 'Expired' },
                 compliant_operator_suspended: { type: 'Compliant Operator', color: '#0369a1', desc: 'Management & Customer Service', status: 'Suspended' },
-                certified_workshop: { type: 'Certified Workshop', color: '#16a34a', desc: 'Service Delivery Facility' },
+                certified_workshop: { type: 'Certified Workshop', color: '#16a34a', desc: 'Service Delivery Facility', status: 'Certified' },
                 workshop_pending: { type: 'Certified Workshop', color: '#16a34a', desc: 'Service Delivery Facility', status: 'Pending Review' },
                 workshop_expired: { type: 'Certified Workshop', color: '#16a34a', desc: 'Service Delivery Facility', status: 'Expired' },
                 workshop_suspended: { type: 'Certified Workshop', color: '#16a34a', desc: 'Service Delivery Facility', status: 'Suspended' },
-                mobile_certified: { type: 'Mobile Certified', color: '#7c3aed', desc: 'Mobile Service Unit' },
+                mobile_certified: { type: 'Mobile Certified', color: '#7c3aed', desc: 'Mobile Service Unit', status: 'Certified' },
                 mobile_pending: { type: 'Mobile Certified', color: '#7c3aed', desc: 'Mobile Service Unit', status: 'Pending Review' },
                 mobile_expired: { type: 'Mobile Certified', color: '#7c3aed', desc: 'Mobile Service Unit', status: 'Expired' },
                 mobile_suspended: { type: 'Mobile Certified', color: '#7c3aed', desc: 'Mobile Service Unit', status: 'Suspended' },
                 notfound: { type: 'Unknown', color: '#64748b', desc: 'Not Verified', status: 'Not Verified' }
             };
 
-            const config = statusConfigs[certData.status] || statusConfigs.notfound;
-            const isCertified = !config.status || config.status === 'Certified';
+            const config = statusConfigs[normalizedStatus] || statusConfigs.notfound;
+            const isCertified = config.status === 'Certified';
             const statusColor = isCertified ? '#16a34a' : (config.status === 'Pending Review' ? '#f59e0b' : '#dc2626');
 
             content.innerHTML = `
@@ -1805,12 +1805,13 @@
                     <!-- Status -->
                     <div style="background: ${statusColor}15; padding: 1.5rem; border-radius: 8px; border: 2px solid ${statusColor};">
                         <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: ${statusColor}; margin-bottom: 1rem;">Certification Status</h3>
-                        <p style="font-size: 1.1rem; font-weight: 600; color: ${statusColor}; margin-bottom: 0.5rem;">${escapeHtml(config.status || 'CERTIFIED')}</p>
+                        <p style="font-size: 1.1rem; font-weight: 600; color: ${statusColor}; margin-bottom: 0.5rem;">${escapeHtml(config.status)}</p>
                         <p style="color: #64748b; font-size: 0.95rem;">
                             ${isCertified ? 'This operator is currently certified and authorized to provide fuel contamination remediation services.' : 
                               config.status === 'Pending Review' ? 'Certification application is currently under review. Verify status before engagement.' :
                               config.status === 'Expired' ? 'This certification has expired and is no longer valid.' :
-                              'This certification has been suspended pending review.'}
+                              config.status === 'Suspended' ? 'This certification has been suspended pending review.' :
+                              'This operator is not verified by NZIFDA.'}
                         </p>
                     </div>
                 </div>
@@ -1861,6 +1862,7 @@
         }
 
         function escapeHtml(text) {
+            if (!text) return '';
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
