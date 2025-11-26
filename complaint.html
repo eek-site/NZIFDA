@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File a Complaint - NZIFDA</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600&display=swap');
+        :root { --primary: #1a1a1a; --danger: #dc2626; --warning: #f59e0b; --success: #16a34a; --accent: #0369a1; --surface: #f8fafc; --border: #e2e8f0; --text: #334155; --text-dark: #0f172a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Barlow', sans-serif; background: var(--surface); color: var(--text); line-height: 1.8; }
+        .header { background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%); padding: 1rem 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative; }
+        .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: white; font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 700; }
+        .logo a { color: white; text-decoration: none; }
+        .back-link { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; display: none; }
+        .mobile-menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; }
+        .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--primary); padding: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .mobile-nav.active { display: block; }
+        .mobile-nav a { display: block; color: white; text-decoration: none; padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .mobile-nav a:hover { background: rgba(255,255,255,0.1); color: var(--danger); }
+        .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+        .content { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        h1 { font-family: 'Oswald', sans-serif; font-size: 2rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 4px solid var(--danger); padding-bottom: 1rem; }
+        h2 { font-family: 'Oswald', sans-serif; font-size: 1.5rem; color: var(--text-dark); margin-top: 2.5rem; margin-bottom: 1rem; }
+        .contact-form { margin: 2rem 0; padding: 1.5rem; background: var(--surface); border-radius: 8px; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.95rem; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 6px; font-family: inherit; font-size: 1rem; }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .btn { padding: 0.75rem 2rem; background: var(--danger); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: background 0.3s; }
+        .btn:hover { background: #b91c1c; }
+        .btn:disabled { background: #94a3b8; cursor: not-allowed; }
+        .footer { background: var(--primary); color: white; padding: 2rem 1rem; text-align: center; margin-top: 4rem; }
+        .footer a { color: var(--danger); text-decoration: none; }
+        .info-box { background: rgba(59, 130, 246, 0.1); padding: 1.5rem; border-radius: 8px; margin: 2rem 0; border-left: 4px solid var(--accent); }
+        @media (min-width: 768px) {
+            .header { padding: 1.5rem 2rem; }
+            .logo { font-size: 1.5rem; }
+            .back-link { display: inline-block; }
+            .mobile-menu-toggle { display: none; }
+            .container { padding: 0 2rem; margin: 3rem auto; }
+            .content { padding: 3rem; }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.8rem; }
+        }
+    </style>
+    <script>
+        // Power Automate endpoint
+        const POWER_AUTOMATE_URL = 'https://default61ffc6bcd9ce458b8120d32187c377.0d.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/9a207992d26c4e73bd974dab2623c9c0/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=EL1ZRvFplGo3NgrPzLqb1eUoe29BNQF-pxmOla6U0Cw';
+        
+        // Function to submit form to Power Automate
+        async function submitToPowerAutomate(formType, formData) {
+            try {
+                const fields = Object.entries(formData).map(([name, value]) => ({
+                    name,
+                    value
+                }));
+                
+                const payload = {
+                    formType: formType,
+                    ...formData,
+                    fields
+                };
+                
+                const response = await fetch(POWER_AUTOMATE_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const result = await response.json();
+                return { success: true, result: result };
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                return { success: false, error: error.message };
+            }
+        }
+        
+        function collectFormData(form) {
+            const formData = {};
+            const inputs = form.querySelectorAll('input, select, textarea');
+            
+            inputs.forEach(input => {
+                if (input.name && input.name !== '') {
+                    if (input.type === 'checkbox' || input.type === 'radio') {
+                        if (input.checked) {
+                            formData[input.name] = input.value;
+                        }
+                    } else {
+                        formData[input.name] = input.value || '';
+                    }
+                }
+            });
+            
+            return formData;
+        }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><a href="index.html">NZIFDA</a></div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <a href="index.html" class="back-link">← Back to Home</a>
+        </div>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="for-consumers.html">For Consumers</a>
+            <a href="for-operators.html">For Operators</a>
+            <a href="for-fuel-stations.html">For Fuel Stations</a>
+            <a href="for-insurers.html">For Insurers</a>
+            <a href="mediation.html">Mediation</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+    </script>
+    <div class="container">
+        <div class="content">
+            <h1>File a Complaint or Request Mediation</h1>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Use this form to file a complaint about a service provider, request mediation services, or report a dispute related to fuel contamination remediation.</p>
+            
+            <div class="info-box">
+                <h3>What Happens Next?</h3>
+                <p>After you submit your complaint, NZIFDA will review your case and contact you to discuss the next steps. This may include:</p>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li>Mediation services to resolve the dispute</li>
+                    <li>Investigation of compliance issues</li>
+                    <li>Support for Disputes Tribunal proceedings</li>
+                    <li>Referral to appropriate regulatory authorities if needed</li>
+                </ul>
+            </div>
+
+            <form class="contact-form" id="complaintForm" onsubmit="event.preventDefault(); handleComplaintFormSubmit(event);">
+                <div class="form-group">
+                    <label for="name">Your Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="complaint-type">Complaint Type *</label>
+                    <select id="complaint-type" name="complaint-type" required>
+                        <option value="">Select complaint type...</option>
+                        <option value="service-quality">Service Quality Issue</option>
+                        <option value="pricing">Pricing Dispute</option>
+                        <option value="damage">Damage Claim</option>
+                        <option value="warranty">Warranty Issue</option>
+                        <option value="documentation">Documentation Problem</option>
+                        <option value="compliance">Compliance Concern</option>
+                        <option value="mediation">Request Mediation</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company/Operator Name (Being Complained About)</label>
+                    <input type="text" id="company" name="company" placeholder="Name of the company or operator">
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" placeholder="City, region">
+                </div>
+                <div class="form-group">
+                    <label for="incident-date">Incident Date</label>
+                    <input type="date" id="incident-date" name="incident-date">
+                </div>
+                <div class="form-group">
+                    <label for="description">Detailed Description *</label>
+                    <textarea id="description" name="description" required placeholder="Please provide as much detail as possible about your complaint, including what happened, when it occurred, and what resolution you are seeking"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="resolution">Desired Resolution</label>
+                    <textarea id="resolution" name="resolution" placeholder="What resolution are you seeking? (e.g., refund, repair, mediation, etc.)"></textarea>
+                </div>
+                <button type="submit" class="btn">Submit Complaint</button>
+            </form>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 NZIFDA - New Zealand Insoluble Fuel Disposal Agency</p>
+        <p><a href="index.html">Home</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookies-policy.html">Cookies Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+    </footer>
+    
+    <script>
+        async function handleComplaintFormSubmit(event) {
+            const form = document.getElementById('complaintForm');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            
+            try {
+                const formData = collectFormData(form);
+                const result = await submitToPowerAutomate('Complaint/Mediation Request', formData);
+                
+                if (result.success) {
+                    alert('Your complaint has been submitted. NZIFDA will review your case and contact you shortly.');
+                    form.reset();
+                } else {
+                    alert('There was a problem submitting the complaint: ' + result.error);
+                }
+            } catch (error) {
+                alert('There was a problem submitting the complaint: ' + error.message);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+            }
+        }
+    </script>
+</body>
+</html>
+

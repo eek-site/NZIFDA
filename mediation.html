@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mediation & Dispute Resolution - NZIFDA</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600&display=swap');
+        :root { --primary: #1a1a1a; --danger: #dc2626; --warning: #f59e0b; --success: #16a34a; --accent: #0369a1; --surface: #f8fafc; --border: #e2e8f0; --text: #334155; --text-dark: #0f172a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Barlow', sans-serif; background: var(--surface); color: var(--text); line-height: 1.8; }
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .logo-hexagons {
+            display: flex;
+            position: relative;
+            width: 65px;
+            height: 60px;
+        }
+        
+        .hex {
+            width: 24px;
+            height: 28px;
+            position: absolute;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+            transition: all 0.4s ease;
+            opacity: 0.9;
+            animation: hexFloat 6s ease-in-out infinite;
+        }
+        
+        .hex-1 { background: #ef4444; left: 12px; top: 0; animation-delay: 0s; }
+        .hex-2 { background: #84cc16; left: 32px; top: 0; animation-delay: 0.5s; }
+        .hex-3 { background: #2563eb; left: 2px; top: 20px; animation-delay: 1s; }
+        .hex-4 { background: #fb923c; left: 42px; top: 20px; animation-delay: 1.5s; }
+        .hex-5 { background: #6b7280; left: 12px; bottom: 0; animation-delay: 2s; }
+        .hex-6 { background: #60a5fa; left: 32px; bottom: 0; animation-delay: 2.5s; }
+        
+        @keyframes hexFloat {
+            0%, 100% { transform: translateY(0) scale(1); filter: brightness(1); }
+            50% { transform: translateY(-3px) scale(1.05); filter: brightness(1.2); }
+        }
+        
+        .logo:hover .hex { transform: scale(1.15); filter: brightness(1.3); }
+        .logo:hover .hex-1 { transform: translate(-2px, -2px) scale(1.15); }
+        .logo:hover .hex-2 { transform: translate(2px, -2px) scale(1.15); }
+        .logo:hover .hex-3 { transform: translate(-2px, 0) scale(1.15); }
+        .logo:hover .hex-4 { transform: translate(2px, 0) scale(1.15); }
+        .logo:hover .hex-5 { transform: translate(-2px, 2px) scale(1.15); }
+        .logo:hover .hex-6 { transform: translate(2px, 2px) scale(1.15); }
+        
+        .logo-text { color: white; }
+        .logo-text h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin: 0;
+            display: flex;
+            align-items: baseline;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+            line-height: 1;
+        }
+        .logo-text h1 a { display: flex; align-items: baseline; flex-wrap: nowrap; white-space: nowrap; text-decoration: none; color: inherit; }
+        .logo-text h1 .nz { color: #fff; }
+        .logo-text h1 .if { color: #dc2626; }
+        .logo-text h1 .da { color: #3b82f6; }
+        .logo-text span {
+            font-size: 0.7rem;
+            opacity: 0.9;
+            text-transform: none;
+            letter-spacing: 0.05em;
+            font-weight: 400;
+            display: block;
+            margin-top: 0.2rem;
+            line-height: 1.2;
+        }
+        
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .mobile-menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; }
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--primary);
+            padding: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 999;
+        }
+        .mobile-nav.active { display: block; }
+        .mobile-nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-transform: uppercase;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .mobile-nav a:hover { background: rgba(255,255,255,0.1); color: var(--danger); }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a:hover { color: var(--danger); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--danger);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+        
+        @media (max-width: 767px) {
+            .header { height: auto; min-height: 70px; }
+            .nav-links { display: none; }
+            .mobile-menu-toggle { display: block; }
+        }
+        
+        .container { max-width: 1000px; margin: 7rem auto 2rem; padding: 0 1rem; }
+        .content { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        @media (min-width: 768px) {
+            .container { margin: 3rem auto; padding: 0 2rem; }
+            .content { padding: 3rem; }
+        }
+        h1 { font-family: 'Oswald', sans-serif; font-size: 2.5rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 4px solid var(--danger); padding-bottom: 1rem; }
+        h2 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; color: var(--text-dark); margin-top: 2.5rem; margin-bottom: 1rem; }
+        h3 { font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: var(--text-dark); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        p { margin-bottom: 1rem; }
+        ul, ol { margin-left: 2rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.5rem; }
+        .info-box { background: rgba(59, 130, 246, 0.1); padding: 2rem; border-radius: 8px; margin: 2rem 0; border-left: 4px solid var(--accent); }
+        .action-card { background: var(--surface); padding: 2rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid var(--accent); }
+        .action-card h3 { margin-top: 0; }
+        .btn { display: inline-block; padding: 1rem 2rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; font-weight: 600; margin: 0.5rem 0.5rem 0.5rem 0; transition: background 0.3s; }
+        .btn:hover { background: var(--danger); }
+        .footer { background: var(--primary); color: white; padding: 2rem; text-align: center; margin-top: 4rem; }
+        .footer a { color: var(--danger); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-hexagons">
+                    <div class="hex hex-1"></div>
+                    <div class="hex hex-2"></div>
+                    <div class="hex hex-3"></div>
+                    <div class="hex hex-4"></div>
+                    <div class="hex hex-5"></div>
+                    <div class="hex hex-6"></div>
+                </div>
+                <div class="logo-text">
+                    <h1><a href="index.html" style="text-decoration: none; color: inherit;"><span class="nz">NZ</span><span class="if">IF</span><span class="da">DA</span></a></h1>
+                    <span>New Zealand Insoluble Fuel Disposal Agency</span>
+                </div>
+            </div>
+            <nav>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+                <ul class="nav-links">
+                    <li><a href="for-consumers.html">For Consumers</a></li>
+                    <li><a href="for-operators.html">For Operators</a></li>
+                    <li><a href="for-fuel-stations.html">For Fuel Stations</a></li>
+                    <li><a href="for-insurers.html">For Insurers</a></li>
+                    <li><a href="mediation.html">Mediation</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <nav class="mobile-nav" id="mobileNav">
+                <a href="index.html">Home</a>
+                <a href="for-consumers.html">For Consumers</a>
+                <a href="for-operators.html">For Operators</a>
+                <a href="for-fuel-stations.html">For Fuel Stations</a>
+                <a href="for-insurers.html">For Insurers</a>
+                <a href="mediation.html">Mediation</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+    </script>
+    <div class="container">
+        <div class="content">
+            <h1>Mediation & Dispute Resolution</h1>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">NZIFDA provides professional mediation and dispute resolution services for issues related to fuel contamination remediation, helping parties reach fair and equitable solutions without costly litigation.</p>
+            
+            <div class="info-box">
+                <h2>Our Mediation Services</h2>
+                <p>NZIFDA offers comprehensive dispute resolution services covering a wide range of issues including service quality disputes, pricing disagreements, damage claims, warranty issues, and compliance concerns. Our mediation process is designed to be fair, efficient, and cost-effective for all parties.</p>
+            </div>
+
+            <h2>What We Cover</h2>
+            <div class="action-card">
+                <h3>Service Disputes</h3>
+                <p>We mediate disputes related to:</p>
+                <ul>
+                    <li>Quality of fuel extraction and remediation services</li>
+                    <li>Pricing and billing disputes</li>
+                    <li>Warranty claims and coverage</li>
+                    <li>Damage claims and liability</li>
+                    <li>Documentation and record-keeping issues</li>
+                    <li>Compliance and certification disputes</li>
+                </ul>
+            </div>
+
+            <div class="action-card">
+                <h3>Disputes Tribunal Representation</h3>
+                <p>For disputes that cannot be resolved through mediation, NZIFDA can represent complainants at the Disputes Tribunal. We provide:</p>
+                <ul>
+                    <li>Professional representation and advocacy</li>
+                    <li>Preparation of case documentation</li>
+                    <li>Expert testimony and evidence presentation</li>
+                    <li>Support throughout the tribunal process</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Note:</strong> NZIFDA represents the complainant in Disputes Tribunal proceedings, ensuring their interests are properly represented and their case is presented effectively.</p>
+            </div>
+
+            <h2>How Mediation Works</h2>
+            <div class="action-card">
+                <h3>The Process</h3>
+                <ol>
+                    <li><strong>Initial Contact:</strong> Submit a mediation request through our complaint form or contact us directly</li>
+                    <li><strong>Case Review:</strong> We review the dispute and gather relevant information from all parties</li>
+                    <li><strong>Mediation Session:</strong> A neutral NZIFDA mediator facilitates discussion between parties</li>
+                    <li><strong>Resolution:</strong> Parties work together to reach a mutually acceptable solution</li>
+                    <li><strong>Agreement:</strong> If successful, a written agreement is prepared and signed by all parties</li>
+                    <li><strong>Follow-up:</strong> We monitor compliance with the agreement and provide ongoing support if needed</li>
+                </ol>
+            </div>
+
+            <div class="info-box">
+                <h3>Benefits of Mediation</h3>
+                <ul>
+                    <li><strong>Cost-effective:</strong> Much less expensive than litigation</li>
+                    <li><strong>Faster resolution:</strong> Disputes can often be resolved in days or weeks rather than months</li>
+                    <li><strong>Confidential:</strong> Mediation proceedings are private and confidential</li>
+                    <li><strong>Preserves relationships:</strong> Parties can maintain working relationships</li>
+                    <li><strong>Mutually acceptable:</strong> Solutions are agreed upon by all parties</li>
+                    <li><strong>Flexible:</strong> Creative solutions can be developed that courts cannot provide</li>
+                </ul>
+            </div>
+
+            <h2>When to Use Mediation</h2>
+            <div class="action-card">
+                <h3>Ideal Situations</h3>
+                <p>Mediation is particularly effective for:</p>
+                <ul>
+                    <li>Disputes where parties want to maintain a relationship</li>
+                    <li>Cases where both parties want a quick resolution</li>
+                    <li>Situations where cost is a concern</li>
+                    <li>Disputes involving technical or industry-specific issues</li>
+                    <li>Cases where creative solutions are needed</li>
+                    <li>Situations where privacy is important</li>
+                </ul>
+            </div>
+
+            <h2>Request Mediation</h2>
+            <div class="info-box">
+                <h3>Get Started</h3>
+                <p>To request mediation services or file a complaint, please use our complaint form. We will review your case and contact you to discuss the mediation process.</p>
+                <p style="margin-top: 1.5rem;"><a href="complaint.html" class="btn">File a Complaint or Request Mediation</a></p>
+            </div>
+
+            <div class="action-card">
+                <h3>Questions About Mediation?</h3>
+                <p>If you have questions about our mediation services or need more information, please <a href="contact.html" style="color: var(--accent); text-decoration: underline; font-weight: 600;">contact us</a>. Our team is here to help resolve disputes fairly and efficiently.</p>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 NZIFDA - New Zealand Insoluble Fuel Disposal Agency</p>
+        <p><a href="index.html">Home</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookies-policy.html">Cookies Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+    </footer>
+</body>
+</html>
+
