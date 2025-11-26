@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mediation & Dispute Resolution - NZIFDA</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600&display=swap');
+        :root { --primary: #1a1a1a; --danger: #dc2626; --warning: #f59e0b; --success: #16a34a; --accent: #0369a1; --surface: #f8fafc; --border: #e2e8f0; --text: #334155; --text-dark: #0f172a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Barlow', sans-serif; background: var(--surface); color: var(--text); line-height: 1.8; }
+        .header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .logo-hexagons {
+            display: flex;
+            position: relative;
+            width: 65px;
+            height: 60px;
+        }
+        .hex {
+            width: 24px;
+            height: 28px;
+            position: absolute;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+            transition: all 0.4s ease;
+            opacity: 0.9;
+            animation: hexFloat 6s ease-in-out infinite;
+        }
+        .hex-1 { background: #ef4444; left: 12px; top: 0; animation-delay: 0s; }
+        .hex-2 { background: #84cc16; left: 32px; top: 0; animation-delay: 0.5s; }
+        .hex-3 { background: #2563eb; left: 2px; top: 20px; animation-delay: 1s; }
+        .hex-4 { background: #fb923c; left: 42px; top: 20px; animation-delay: 1.5s; }
+        .hex-5 { background: #6b7280; left: 12px; bottom: 0; animation-delay: 2s; }
+        .hex-6 { background: #60a5fa; left: 32px; bottom: 0; animation-delay: 2.5s; }
+        @keyframes hexFloat {
+            0%, 100% { transform: translateY(0) scale(1); filter: brightness(1); }
+            50% { transform: translateY(-3px) scale(1.05); filter: brightness(1.2); }
+        }
+        .logo:hover .hex { transform: scale(1.15); filter: brightness(1.3); }
+        .logo:hover .hex-1 { transform: translate(-2px, -2px) scale(1.15); }
+        .logo:hover .hex-2 { transform: translate(2px, -2px) scale(1.15); }
+        .logo:hover .hex-3 { transform: translate(-2px, 0) scale(1.15); }
+        .logo:hover .hex-4 { transform: translate(2px, 0) scale(1.15); }
+        .logo:hover .hex-5 { transform: translate(-2px, 2px) scale(1.15); }
+        .logo:hover .hex-6 { transform: translate(2px, 2px) scale(1.15); }
+        .logo-text { color: white; }
+        .logo-text h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin: 0;
+            display: flex;
+            align-items: baseline;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+            line-height: 1;
+        }
+        .logo-text h1 a { display: flex; align-items: baseline; flex-wrap: nowrap; white-space: nowrap; text-decoration: none; color: inherit; }
+        .logo-text h1 .nz { color: #fff; }
+        .logo-text h1 .if { color: #dc2626; }
+        .logo-text h1 .da { color: #3b82f6; }
+        .logo-text span { font-size: 0.7rem; opacity: 0.9; text-transform: none; letter-spacing: 0.05em; font-weight: 400; display: block; margin-top: 0.2rem; line-height: 1.2; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .mobile-menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; }
+        .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--primary); padding: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 999; }
+        .mobile-nav.active { display: block; }
+        .mobile-nav a { display: block; color: white; text-decoration: none; padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); text-transform: uppercase; font-weight: 500; font-size: 0.95rem; }
+        .mobile-nav a:hover { background: rgba(255,255,255,0.1); color: var(--danger); }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.3s; position: relative; }
+        .nav-links a:hover { color: var(--danger); }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--danger); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-toggle { display: block; }
+        }
+        .container { max-width: 1000px; margin: 7rem auto 2rem; padding: 0 1rem; }
+        .content { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        @media (min-width: 768px) {
+            .container { margin: 7rem auto 2rem; padding: 0 2rem; }
+            .content { padding: 3rem; }
+        }
+        h1 { font-family: 'Oswald', sans-serif; font-size: 2.5rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 4px solid var(--danger); padding-bottom: 1rem; }
+        h2 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; color: var(--text-dark); margin-top: 2.5rem; margin-bottom: 1rem; }
+        h3 { font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: var(--text-dark); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        p { margin-bottom: 1rem; }
+        ul, ol { margin-left: 2rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.5rem; }
+        .info-box { background: var(--surface); padding: 1.5rem; border-radius: 6px; margin: 1.5rem 0; border-left: 4px solid var(--accent); }
+        .success-box { background: rgba(22, 163, 74, 0.1); padding: 1.5rem; border-radius: 6px; margin: 1.5rem 0; border-left: 4px solid var(--success); }
+        .warning-box { background: rgba(220, 38, 38, 0.1); padding: 1.5rem; border-radius: 6px; margin: 1.5rem 0; border-left: 4px solid var(--danger); }
+        .process-step { background: white; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .process-step h3 { margin-top: 0; color: var(--accent); }
+        .step-number { display: inline-block; width: 40px; height: 40px; background: var(--accent); color: white; border-radius: 50%; text-align: center; line-height: 40px; font-weight: 700; margin-right: 1rem; }
+        .footer { background: var(--primary); color: white; padding: 2rem; text-align: center; margin-top: 4rem; }
+        .footer a { color: var(--danger); text-decoration: none; }
+        .btn { display: inline-block; padding: 0.75rem 1.5rem; background: var(--accent); color: white; text-decoration: none; border-radius: 6px; font-weight: 600; margin-top: 1rem; transition: background 0.3s; }
+        .btn:hover { background: var(--danger); }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-hexagons">
+                    <div class="hex hex-1"></div>
+                    <div class="hex hex-2"></div>
+                    <div class="hex hex-3"></div>
+                    <div class="hex hex-4"></div>
+                    <div class="hex hex-5"></div>
+                    <div class="hex hex-6"></div>
+                </div>
+                <div class="logo-text">
+                    <h1><a href="index.html"><span class="nz">NZ</span><span class="if">IF</span><span class="da">DA</span></a></h1>
+                    <span>New Zealand Insoluble Fuel Disposal Agency</span>
+                </div>
+            </div>
+            <nav>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+                <ul class="nav-links">
+                    <li><a href="for-consumers.html">For Consumers</a></li>
+                    <li><a href="for-operators.html">For Operators</a></li>
+                    <li><a href="for-fuel-stations.html">For Fuel Stations</a></li>
+                    <li><a href="for-insurers.html">For Insurers</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <nav class="mobile-nav" id="mobileNav">
+                <a href="for-consumers.html">For Consumers</a>
+                <a href="for-operators.html">For Operators</a>
+                <a href="for-fuel-stations.html">For Fuel Stations</a>
+                <a href="for-insurers.html">For Insurers</a>
+                <a href="about.html">About</a>
+                <a href="resources.html">Resources</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+    </script>
+    <div class="container">
+        <div class="content">
+            <h1>Mediation & Dispute Resolution</h1>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">NZIFDA provides comprehensive dispute resolution services, from initial mediation through to Disputes Tribunal representation. Our expert mediators help resolve disputes between consumers, insurers, fuel stations, and operators fairly and efficiently.</p>
+            
+            <div class="success-box">
+                <h3 style="color: var(--success); margin-bottom: 1rem;">Free Mediation for Members</h3>
+                <p style="margin-bottom: 1rem; font-weight: 600;">Mediation services are <strong>free</strong> for:</p>
+                <ul style="margin-bottom: 0;">
+                    <li>NZIFDA member insurers and their policyholders</li>
+                    <li>Consumers who used NZIFDA-certified operators</li>
+                    <li>Fuel stations working with certified operators</li>
+                </ul>
+            </div>
+            
+            <h2>Our Mediation Process</h2>
+            
+            <div class="process-step">
+                <h3><span class="step-number">1</span>Initial Complaint & Assessment</h3>
+                <p>When a dispute arises, parties can file a complaint through our <a href="complaint.html" style="color: var(--accent); text-decoration: underline; font-weight: 600;">complaint form</a>. Our team will:</p>
+                <ul>
+                    <li>Review the complaint and gather relevant documentation</li>
+                    <li>Assess whether the matter is suitable for mediation</li>
+                    <li>Contact all parties to understand their positions</li>
+                    <li>Determine if the dispute involves a certified operator or member insurer</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Timeline:</strong> Initial assessment typically completed within 5 business days.</p>
+            </div>
+            
+            <div class="process-step">
+                <h3><span class="step-number">2</span>Mediation Session</h3>
+                <p>If mediation is appropriate, we arrange a mediation session with an independent, qualified mediator:</p>
+                <ul>
+                    <li><strong>Neutral Mediator:</strong> Experienced in fuel contamination remediation and insurance disputes</li>
+                    <li><strong>Expert Assessment:</strong> Technical evaluation of repair quality, compliance, and costs</li>
+                    <li><strong>Fair Process:</strong> All parties have equal opportunity to present their case</li>
+                    <li><strong>Confidential:</strong> Mediation discussions are confidential and without prejudice</li>
+                    <li><strong>Flexible Format:</strong> Can be conducted in person, via video conference, or through written submissions</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Timeline:</strong> Mediation sessions typically scheduled within 10-15 business days of complaint assessment.</p>
+            </div>
+            
+            <div class="process-step">
+                <h3><span class="step-number">3</span>Mediation Outcome</h3>
+                <p>The mediator works with all parties to reach a mutually acceptable resolution:</p>
+                <ul>
+                    <li><strong>Agreement Reached:</strong> If parties agree, a written settlement agreement is prepared</li>
+                    <li><strong>Partial Resolution:</strong> Some issues may be resolved while others proceed to next stage</li>
+                    <li><strong>No Agreement:</strong> If mediation doesn't resolve the dispute, parties can proceed to Disputes Tribunal</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Success Rate:</strong> Over 75% of disputes are resolved through mediation, avoiding the need for tribunal proceedings.</p>
+            </div>
+            
+            <div class="process-step">
+                <h3><span class="step-number">4</span>Disputes Tribunal Representation</h3>
+                <p>If mediation doesn't resolve the dispute, NZIFDA can represent complainants at the Disputes Tribunal:</p>
+                <ul>
+                    <li><strong>Free Representation:</strong> No legal fees for NZIFDA members and consumers who used certified operators</li>
+                    <li><strong>Expert Preparation:</strong> We prepare all documentation, evidence, and submissions</li>
+                    <li><strong>Technical Expertise:</strong> Our representatives understand fuel contamination remediation and can present technical evidence</li>
+                    <li><strong>Full Support:</strong> We handle the entire tribunal process on behalf of the complainant</li>
+                    <li><strong>No Win, No Fee:</strong> If the tribunal doesn't award in your favor, you pay nothing</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Eligibility:</strong> Available for disputes involving certified operators, member insurers, or where the complaint relates to NZIFDA certification standards.</p>
+            </div>
+            
+            <h2>Types of Disputes We Handle</h2>
+            
+            <div class="info-box">
+                <h3>Consumer Disputes</h3>
+                <ul>
+                    <li>Disputes about repair quality or completeness</li>
+                    <li>Disputes about excessive charges or unnecessary work</li>
+                    <li>Disputes about warranty coverage or follow-up issues</li>
+                    <li>Disputes about operator conduct or service standards</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3>Insurer Disputes</h3>
+                <ul>
+                    <li>Disputes about claim costs or charges</li>
+                    <li>Disputes about repair quality or compliance</li>
+                    <li>Disputes about unnecessary parts or work (fuel pumps, injectors, etc.)</li>
+                    <li>Disputes about operator compliance with insurance requirements</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3>Fuel Station Disputes</h3>
+                <ul>
+                    <li>Disputes about operator compliance or certification</li>
+                    <li>Disputes about service quality or safety</li>
+                    <li>Disputes about environmental compliance or waste tracking</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3>Operator Disputes</h3>
+                <ul>
+                    <li>Disputes about payment or invoicing</li>
+                    <li>Disputes about certification requirements or compliance</li>
+                    <li>Disputes about standards or procedures</li>
+                </ul>
+            </div>
+            
+            <h2>Benefits of NZIFDA Mediation</h2>
+            
+            <div class="success-box">
+                <h3 style="color: var(--success); margin-bottom: 1rem;">Why Choose NZIFDA Mediation?</h3>
+                <ul>
+                    <li><strong>Free Service:</strong> No cost for members and consumers using certified operators</li>
+                    <li><strong>Expert Knowledge:</strong> Our mediators understand fuel contamination remediation, insurance, and regulatory requirements</li>
+                    <li><strong>Fast Resolution:</strong> Most disputes resolved within 2-4 weeks</li>
+                    <li><strong>Confidential:</strong> All discussions are confidential and without prejudice</li>
+                    <li><strong>Fair Process:</strong> Neutral mediators ensure all parties are heard</li>
+                    <li><strong>Technical Assessment:</strong> Expert evaluation of repair quality and compliance</li>
+                    <li><strong>Full Support:</strong> We handle everything from initial complaint through to tribunal if needed</li>
+                    <li><strong>No Legal Fees:</strong> Representation at Disputes Tribunal included at no cost</li>
+                </ul>
+            </div>
+            
+            <h2>Disputes Tribunal Process</h2>
+            
+            <div class="info-box">
+                <h3>What is the Disputes Tribunal?</h3>
+                <p>The Disputes Tribunal is a New Zealand court that handles disputes up to $30,000. It's designed to be:</p>
+                <ul>
+                    <li><strong>Accessible:</strong> No lawyers required, informal process</li>
+                    <li><strong>Fast:</strong> Hearings typically scheduled within 6-8 weeks</li>
+                    <li><strong>Low Cost:</strong> Filing fees are minimal ($45-$180 depending on claim amount)</li>
+                    <li><strong>Final:</strong> Tribunal decisions are binding and enforceable</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3>NZIFDA Representation at Tribunal</h3>
+                <p>When NZIFDA represents you at the Disputes Tribunal, we:</p>
+                <ul>
+                    <li><strong>Prepare Your Case:</strong> Gather all evidence, documentation, and technical assessments</li>
+                    <li><strong>File the Claim:</strong> Complete all tribunal paperwork and filing requirements</li>
+                    <li><strong>Present Your Case:</strong> Represent you at the tribunal hearing</li>
+                    <li><strong>Handle Appeals:</strong> Manage any appeals or follow-up proceedings if necessary</li>
+                    <li><strong>Enforce Decisions:</strong> Assist with enforcement if the tribunal awards in your favor</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>Cost:</strong> Free for eligible parties. We cover all tribunal fees and costs.</p>
+            </div>
+            
+            <h2>How to Request Mediation</h2>
+            
+            <div class="success-box">
+                <h3 style="color: var(--success); margin-bottom: 1rem;">Start the Process</h3>
+                <p style="margin-bottom: 1rem;">To request mediation or file a complaint:</p>
+                <ol>
+                    <li><strong>File a Complaint:</strong> Complete our <a href="complaint.html" style="color: var(--accent); text-decoration: underline; font-weight: 600;">complaint form</a> with details of your dispute</li>
+                    <li><strong>Provide Documentation:</strong> Include all relevant documents, invoices, correspondence, and evidence</li>
+                    <li><strong>Initial Assessment:</strong> We'll review your complaint and contact you within 5 business days</li>
+                    <li><strong>Mediation Arranged:</strong> If suitable, we'll arrange a mediation session within 10-15 business days</li>
+                </ol>
+                <p style="margin-top: 1rem;"><a href="complaint.html" class="btn">File a Complaint or Request Mediation</a></p>
+            </div>
+            
+            <h2>Eligibility & Costs</h2>
+            
+            <div class="info-box">
+                <h3>Who is Eligible for Free Mediation?</h3>
+                <ul>
+                    <li><strong>NZIFDA Member Insurers:</strong> Free mediation for all disputes involving member insurers</li>
+                    <li><strong>Policyholders of Member Insurers:</strong> Free mediation when using certified operators</li>
+                    <li><strong>Consumers Using Certified Operators:</strong> Free mediation for disputes with NZIFDA-certified operators</li>
+                    <li><strong>Fuel Stations:</strong> Free mediation for disputes involving certified operators</li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <h3>Costs for Non-Members</h3>
+                <p>For disputes not involving certified operators or member insurers, mediation may be available at a reduced cost. Contact us to discuss your specific situation.</p>
+            </div>
+            
+            <h2>Confidentiality & Privacy</h2>
+            
+            <div class="info-box">
+                <p>All mediation discussions are:</p>
+                <ul>
+                    <li><strong>Confidential:</strong> Information shared in mediation cannot be used in tribunal proceedings</li>
+                    <li><strong>Without Prejudice:</strong> Offers and discussions cannot be used as evidence</li>
+                    <li><strong>Private:</strong> Only parties involved and the mediator are present</li>
+                    <li><strong>Protected:</strong> All documentation is handled in accordance with privacy laws</li>
+                </ul>
+            </div>
+            
+            <h2>Contact Us</h2>
+            <div class="success-box">
+                <p style="margin-bottom: 1rem;">For questions about mediation or to discuss a dispute:</p>
+                <p><a href="contact.html" style="color: var(--accent); text-decoration: underline; font-weight: 600;">Contact NZIFDA</a> or <a href="complaint.html" style="color: var(--accent); text-decoration: underline; font-weight: 600;">file a complaint</a> to start the process.</p>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 NZIFDA - New Zealand Insoluble Fuel Disposal Agency</p>
+        <p><a href="index.html">Home</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookies-policy.html">Cookies Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+    </footer>
+</body>
+</html>
+
