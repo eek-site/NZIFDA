@@ -8,28 +8,12 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/header-footer.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600&display=swap');
         :root { --primary: #1a1a1a; --danger: #dc2626; --warning: #f59e0b; --success: #16a34a; --accent: #0369a1; --surface: #f8fafc; --border: #e2e8f0; --text: #334155; --text-dark: #0f172a; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Barlow', sans-serif; background: var(--surface); color: var(--text); line-height: 1.8; }
-        .header { background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%); padding: 1rem 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative; }
-        .header-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { color: white; font-family: 'Oswald', sans-serif; font-size: 1.25rem; font-weight: 700; }
-        .logo a { color: white; text-decoration: none; }
-        .back-link { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; display: none; }
-        .back-link:hover { color: var(--danger); }
-        .mobile-menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 0.5rem; }
-        .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--primary); padding: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 999; }
-        .mobile-nav.active { display: block; }
-        .mobile-nav a { display: block; color: white; text-decoration: none; padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .mobile-nav a:hover { background: rgba(255,255,255,0.1); color: var(--danger); }
-        @media (min-width: 768px) {
-            .header { padding: 1.5rem 2rem; }
-            .logo { font-size: 1.5rem; }
-            .back-link { display: inline-block; }
-            .mobile-menu-toggle { display: none; }
-        }
         .container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
         .content { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
         @media (min-width: 768px) {
@@ -43,78 +27,206 @@
         .news-item { background: var(--surface); padding: 2rem; border-radius: 8px; margin: 2rem 0; border-left: 4px solid var(--accent); }
         .news-date { color: #64748b; font-size: 0.9rem; margin-bottom: 0.5rem; }
         .news-item h3 { margin-top: 0; }
-        .footer { background: var(--primary); color: white; padding: 2rem; text-align: center; margin-top: 4rem; }
-        .footer a { color: var(--danger); text-decoration: none; }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header-content">
-            <div class="logo"><a href="index.html">NZIFDA</a></div>
-            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
-            <a href="index.html" class="back-link">← Back to Home</a>
-        </div>
-        <nav class="mobile-nav" id="mobileNav">
-            <a href="index.html">Home</a>
-            <a href="for-consumers.html">For Consumers</a>
-            <a href="for-operators.html">For Operators</a>
-            <a href="for-fuel-stations.html">For Fuel Stations</a>
-            <a href="news.html">News</a>
-            <a href="resources.html">Resources</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
-    <script>
-        function toggleMobileMenu() {
-            document.getElementById('mobileNav').classList.toggle('active');
-        }
-    </script>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
     <div class="container">
         <div class="content">
             <h1>Industry News & Updates</h1>
             <p>Stay informed about the latest developments in misfuel remediation, regulatory changes, and industry best practices.</p>
             
             <div class="news-item">
-                <div class="news-date">December 2024</div>
-                <h3>NZIFDA Launches Comprehensive Certification Program</h3>
-                <p>NZIFDA has officially launched its certification program for fuel contamination remediation operators. The program establishes rigorous standards to ensure quality service and regulatory compliance across New Zealand.</p>
-                <p>Operators can now apply for certification through our streamlined process. The two-tier structure includes Compliant Operators (Tier 1) who manage customer relationships and allocate work, and Certified Workshops and Mobile Operators (Tier 2) that perform remediation services under Compliant Operator licenses. All certified operators, workshops, and mobile operators carry the NZIFDA Mark, providing consumers with confidence in service quality.</p>
+                <div class="news-date">November 2025</div>
+                <h3>NZIFDA Officially Launches: Certification Program Goes Live</h3>
+                <p>After nearly four years of development, NZIFDA has officially launched its certification program for fuel contamination remediation operators across New Zealand. The launch represents the culmination of extensive industry research, stakeholder engagement, pilot testing, and system development that began in December 2021.</p>
+                <p>The Two-Tier Certification Structure is now operational, with Compliant Operators (Tier 1) managing customer relationships and Certified Workshops and Mobile Operators (Tier 2) performing remediation services. All certified operators carry the NZIFDA Mark, providing consumers, insurers, and fuel stations with confidence in service quality and regulatory compliance.</p>
+                <p>The launch includes a fully functional website with certificate verification, comprehensive resources for all stakeholders, and streamlined application processes. Operators can now apply for certification through our online portal.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">October 2025</div>
+                <h3>Final System Testing and Launch Preparation</h3>
+                <p>NZIFDA completed comprehensive testing of all systems in preparation for launch. The certification badge system, powered by Cloudflare Workers and KV storage, underwent rigorous testing to ensure reliable verification and display across all platforms.</p>
+                <p>Final refinements were made to the website, including the certificate verification system, form submission workflows, and integration with Power Automate for seamless data processing. All documentation was finalized, including certification standards, application processes, and compliance requirements.</p>
+                <p>Stakeholder communications were prepared, and the team conducted final reviews of all public-facing content to ensure accuracy and clarity.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">September 2025</div>
+                <h3>Website Development and Digital Infrastructure Complete</h3>
+                <p>The NZIFDA website development reached completion, featuring comprehensive information for consumers, operators, fuel stations, and insurers. The site includes detailed certification information, resources, training materials, and contact forms integrated with Power Automate workflows.</p>
+                <p>Key technical achievements include the development of the dynamic badge generation system using Cloudflare Workers, real-time certificate verification, and automated data synchronization between SharePoint and Cloudflare KV storage. The certificate verification system supports both new JSON-encoded certificates and legacy hash-based verification for backward compatibility.</p>
+                <p>All pages were standardized with consistent header and footer components, ensuring a uniform user experience across the entire site.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">August 2025</div>
+                <h3>Certification Badge System Development</h3>
+                <p>Development of the NZIFDA certification badge system was completed. The system generates dynamic SVG badges that display operator certification status, company name, and certification type in real-time.</p>
+                <p>The badge system integrates with Cloudflare Workers for serverless badge generation and Cloudflare KV for data storage. Power Automate workflows were configured to automatically sync certification data from SharePoint to Cloudflare KV, ensuring badges always reflect current certification status.</p>
+                <p>Each certified operator receives a unique verification link that can be shared with customers, insurers, and fuel stations to verify certification status instantly.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">July 2025</div>
+                <h3>Pilot Program Evaluation and Standards Refinement</h3>
+                <p>Following the successful completion of the pilot program, NZIFDA conducted comprehensive evaluation of feedback from all four pilot operators: <a href="https://www.ein.nz/" target="_blank" rel="noopener">EIN</a>, <a href="https://www.formanpacific.com" target="_blank" rel="noopener">Forman Pacific</a>, <a href="https://www.roadandrescue.com" target="_blank" rel="noopener">Road and Rescue</a>, and <a href="https://www.eek.nz" target="_blank" rel="noopener">EEK Mechanical</a>.</p>
+                <p>Key learnings from the pilot program included insights into operational workflows, certification documentation requirements, and the practical application of standards in real-world scenarios. These learnings informed final refinements to certification standards, application processes, and compliance verification procedures.</p>
+                <p>The evaluation confirmed the viability of the Two-Tier Certification Structure and validated the certification requirements as both rigorous and achievable for qualified operators.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">June 2025</div>
+                <h3>Pilot Program Phase 2: Full Operational Testing</h3>
+                <p>The pilot program entered its second phase with all four operators (EIN, Forman Pacific, Road and Rescue, and EEK Mechanical) operating under provisional certification. This phase focused on testing the full operational workflow, from customer engagement through service delivery to compliance verification.</p>
+                <p>Operators provided detailed feedback on certification processes, documentation requirements, and the practical application of NZIFDA standards in their daily operations. This feedback was invaluable in refining certification requirements and identifying areas for improvement.</p>
+                <p>Regular check-ins and site visits ensured that standards were being met consistently and that any operational challenges were addressed promptly.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">May 2025</div>
+                <h3>Pilot Program Launch with Four Industry Leaders</h3>
+                <p>NZIFDA launched its pilot certification program with four leading operators: EIN, Forman Pacific, Road and Rescue, and EEK Mechanical.</p>
+                <p>These operators were selected based on their established track records, commitment to quality, and willingness to participate in the development of industry standards. The pilot program allowed NZIFDA to test certification processes, standards application, and compliance verification in real-world conditions.</p>
+                <p>Each pilot operator worked closely with NZIFDA to document their processes, demonstrate compliance with standards, and provide feedback on certification requirements. This collaborative approach ensured that the final certification program would be both rigorous and practical.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">April 2025</div>
+                <h3>Pilot Program Design and Operator Selection</h3>
+                <p>NZIFDA designed its pilot certification program, establishing criteria for operator selection and developing the framework for testing certification processes. The program was designed to validate certification standards, test application processes, and gather real-world feedback from operators.</p>
+                <p>Four operators were selected to participate in the pilot program: EIN, Forman Pacific, Road and Rescue, and EEK Mechanical. These operators represented different operational models, including fixed facilities and mobile services, ensuring comprehensive testing of the certification framework.</p>
+                <p>Pilot program documentation was developed, including provisional certification agreements, compliance checklists, and feedback mechanisms to capture operator experiences and insights.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">March 2025</div>
+                <h3>Legal Framework Documentation and Compliance Requirements Finalized</h3>
+                <p>NZIFDA completed comprehensive documentation of the legal framework governing fuel contamination remediation in New Zealand. This included detailed analysis of the Consumer Guarantees Act, Fair Trading Act, Insurance Law Reform Acts, EPA Hazardous Substances Regulations, and Dangerous Goods Act requirements.</p>
+                <p>Compliance requirements were finalized, including mandatory Dangerous Goods licenses, minimum $2 million Professional Indemnity insurance, waste tracking compliance, and EPA regulatory adherence. These requirements were integrated into the certification standards to ensure all certified operators meet legal obligations.</p>
+                <p>The documentation process also identified key risks for insurers, fuel stations, and consumers when using non-certified operators, which informed the development of educational materials and certification value propositions.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">February 2025</div>
+                <h3>Certification Standards Development</h3>
+                <p>Building on insights from stakeholder interviews, NZIFDA began developing comprehensive certification standards. The standards were designed to ensure quality service delivery, regulatory compliance, and consumer protection across all aspects of fuel contamination remediation.</p>
+                <p>Key areas addressed in the standards included fuel extraction procedures, system remediation techniques, component replacement protocols, waste management and disposal, quality assurance processes, and customer service requirements. The standards were structured to accommodate the Two-Tier Certification Structure, with specific requirements for Compliant Operators, Certified Workshops, and Mobile Operators.</p>
+                <p>Draft standards were reviewed by industry experts and legal advisors to ensure they were comprehensive, achievable, and aligned with New Zealand regulations.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">January 2025</div>
+                <h3>Stakeholder Interview Program: Comprehensive Industry Research</h3>
+                <p>NZIFDA conducted an extensive program of stakeholder interviews to understand industry needs, operational challenges, and regulatory requirements. Interviews were conducted with operators, insurers, fuel station operators, consumers, legal advisors, and regulatory bodies.</p>
+                <p>Key insights from the interviews included the need for clear certification standards, reliable verification mechanisms, and protection for all parties in the remediation process. Operators emphasized the importance of practical, achievable standards, while insurers highlighted the need for verified compliance and risk mitigation.</p>
+                <p>The interview program also identified the need for a two-tier certification structure to accommodate different operational models, including operators who manage customer relationships and workshops that perform remediation services.</p>
             </div>
             
             <div class="news-item">
                 <div class="news-date">December 2024</div>
-                <h3>New EPA Regulations for Hazardous Substances</h3>
-                <p>The Environmental Protection Authority has updated regulations for handling hazardous substances, including contaminated fuel. All operators must ensure compliance with the latest EPA notices and rules.</p>
-                <p>Key changes include updated labeling requirements, enhanced safety data sheet provisions, and revised disposal protocols. NZIFDA-certified operators receive regular updates on regulatory changes.</p>
-                <p><a href="https://www.epa.govt.nz/hazardous-substances/rules-notices-and-how-to-comply/epa-notices-rules-you-must-follow/" target="_blank" rel="noopener">View EPA Requirements</a></p>
+                <h3>Accelerated Development Phase: Preparing for Pilot Program</h3>
+                <p>With three years of foundational work complete, NZIFDA entered an accelerated development phase to prepare for the pilot program. All previous research, documentation, and standards development work was consolidated and refined.</p>
+                <p>Key focus areas included finalizing the certification application process, developing compliance verification procedures, and creating the framework for the pilot program. The team worked to ensure all systems and processes were ready for real-world testing with selected operators.</p>
+                <p>This phase represented a significant milestone, transitioning from research and development to practical implementation and testing.</p>
             </div>
             
             <div class="news-item">
-                <div class="news-date">November 2024</div>
-                <h3>Fuel Industry Act 2020 Implementation</h3>
-                <p>The Fuel Industry Act 2020 continues to shape industry standards. NZIFDA works closely with industry stakeholders to ensure operators understand and comply with all requirements.</p>
-                <p>Key focus areas include fuel quality standards, consumer protection measures, and industry resilience requirements.</p>
+                <div class="news-date">September 2024</div>
+                <h3>Standards Documentation and Framework Refinement</h3>
+                <p>NZIFDA completed comprehensive documentation of certification standards and began refining the framework based on ongoing research and stakeholder feedback. The documentation process involved creating detailed specifications for each certification tier and operational requirement.</p>
+                <p>Key areas of focus included service delivery standards, quality assurance processes, compliance verification procedures, and customer service requirements. The documentation was designed to be clear, comprehensive, and practical for operators to implement.</p>
+                <p>This work built upon the extensive research and development conducted over the previous three years, bringing together all insights and learnings into a cohesive certification framework.</p>
             </div>
             
             <div class="news-item">
-                <div class="news-date">November 2024</div>
-                <h3>Training Programs Now Available</h3>
-                <p>NZIFDA has launched comprehensive training programs for operators seeking certification. Courses cover fundamentals, advanced techniques, regulatory compliance, and equipment operation.</p>
-                <p>Training is available throughout New Zealand, with both in-person and online options. See our <a href="training.html">Training Programs</a> page for details.</p>
+                <div class="news-date">June 2024</div>
+                <h3>Legal Framework Research and Compliance Analysis</h3>
+                <p>NZIFDA conducted in-depth research into the legal framework governing fuel contamination remediation in New Zealand. This included comprehensive analysis of relevant legislation, regulations, and industry requirements.</p>
+                <p>Key areas of research included the Consumer Guarantees Act, Fair Trading Act, Insurance Law Reform Acts, EPA Hazardous Substances Regulations, Dangerous Goods Act, and waste management requirements. The research identified critical compliance requirements that would need to be incorporated into certification standards.</p>
+                <p>This legal framework research was essential for ensuring that NZIFDA certification would help operators meet all regulatory obligations and protect consumers, insurers, and fuel stations.</p>
             </div>
             
             <div class="news-item">
-                <div class="news-date">October 2024</div>
-                <h3>Misfuel Prevention Campaign Launched</h3>
-                <p>NZIFDA has launched a public awareness campaign to help prevent misfuelling incidents. The campaign focuses on education and prevention strategies for both individual drivers and fleet operators.</p>
-                <p>Resources include prevention guides, visual reminders, and best practice recommendations. See our <a href="misfuel-prevention.html">Misfuel Prevention</a> page for tips and resources.</p>
+                <div class="news-date">March 2024</div>
+                <h3>Industry Stakeholder Engagement and Feedback Collection</h3>
+                <p>NZIFDA expanded its stakeholder engagement program, conducting interviews and consultations with a wide range of industry participants. This included operators, insurers, fuel station operators, consumers, legal advisors, and regulatory bodies.</p>
+                <p>The engagement program gathered valuable feedback on industry needs, operational challenges, and the potential value of certification. Stakeholders provided insights into what certification should cover, how it should be structured, and what benefits it should provide.</p>
+                <p>This feedback was instrumental in shaping the certification framework and ensuring it would meet the needs of all stakeholders in the fuel contamination remediation process.</p>
             </div>
             
             <div class="news-item">
-                <div class="news-date">October 2024</div>
-                <h3>Industry Standards Published</h3>
-                <p>NZIFDA has published comprehensive industry standards for fuel contamination remediation. These standards cover fuel extraction, system remediation, component replacement, waste management, and quality assurance.</p>
-                <p>All certified operators and workshops carrying the NZIFDA Mark must meet these standards. See our <a href="index.html#standards">Industry Standards</a> section for complete details.</p>
+                <div class="news-date">December 2023</div>
+                <h3>Two-Tier Certification Structure Concept Development</h3>
+                <p>NZIFDA developed the concept of a Two-Tier Certification Structure, recognizing that different operators play different roles in the remediation process. The structure distinguishes between Compliant Operators (Tier 1), who manage customer relationships and allocate work, and Certified Workshops and Mobile Operators (Tier 2), who perform remediation services.</p>
+                <p>This structure was developed based on extensive industry research and stakeholder feedback, recognizing that a one-size-fits-all approach would not work for the diverse operational models in the industry.</p>
+                <p>The Two-Tier Structure became a cornerstone of the NZIFDA certification program, allowing for appropriate certification requirements for each type of operator while ensuring quality and compliance across the industry.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">September 2023</div>
+                <h3>Comprehensive Industry Research and Analysis</h3>
+                <p>NZIFDA conducted comprehensive research into the fuel contamination remediation industry in New Zealand. This research included analysis of operator practices, service quality variations, regulatory compliance issues, and industry challenges.</p>
+                <p>Key findings included significant variation in operator quality, inconsistent compliance with regulations, and a lack of standardized verification mechanisms. The research confirmed the need for a certification body that could establish and enforce industry standards.</p>
+                <p>This research phase was critical for understanding the current state of the industry and identifying where certification could add the most value for all stakeholders.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">June 2023</div>
+                <h3>Initial Stakeholder Discussions and Industry Consultation</h3>
+                <p>NZIFDA began formal stakeholder discussions with operators, insurers, and fuel station operators to understand industry needs and gather input on certification requirements. These discussions were essential for ensuring that the certification program would be practical, valuable, and widely supported.</p>
+                <p>Initial consultations revealed widespread support for a certification program that would establish quality standards, ensure regulatory compliance, and provide reliable verification mechanisms. Stakeholders emphasized the importance of practical, achievable standards that would improve industry quality without creating unnecessary barriers.</p>
+                <p>These early discussions laid the groundwork for the comprehensive stakeholder engagement program that would follow.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">March 2023</div>
+                <h3>Regulatory Framework Research and Documentation</h3>
+                <p>NZIFDA began comprehensive research into the regulatory framework governing fuel contamination remediation in New Zealand. This research included analysis of relevant legislation, regulations, and industry requirements.</p>
+                <p>Key areas of focus included EPA Hazardous Substances Regulations, Dangerous Goods Act requirements, waste management regulations, and consumer protection legislation. The research identified critical compliance requirements that would need to be incorporated into certification standards.</p>
+                <p>This regulatory research was essential for ensuring that NZIFDA certification would help operators meet all legal obligations and protect all parties in the remediation process.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">December 2022</div>
+                <h3>Industry Analysis and Gap Identification</h3>
+                <p>NZIFDA conducted detailed analysis of the fuel contamination remediation industry to identify gaps in service quality, regulatory compliance, and industry standards. This analysis involved reviewing operator practices, service outcomes, and industry challenges.</p>
+                <p>Key findings included significant variation in operator quality, inconsistent compliance with regulations, and a lack of standardized verification mechanisms. The analysis confirmed the need for a certification body that could establish and enforce industry standards while providing reliable verification for consumers, insurers, and fuel stations.</p>
+                <p>This analysis phase was critical for understanding where certification could add the most value and what standards would be most effective.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">September 2022</div>
+                <h3>Initial Industry Research and Concept Development</h3>
+                <p>NZIFDA began comprehensive research into the fuel contamination remediation industry, focusing on understanding current practices, service quality variations, and industry challenges. This research phase involved reviewing industry practices, service outcomes, and regulatory requirements.</p>
+                <p>Initial research revealed significant variation in operator quality and inconsistent compliance with regulations. This confirmed the need for a certification body that could establish and enforce industry standards while providing reliable verification mechanisms.</p>
+                <p>This research phase laid the foundation for all subsequent development work, providing the insights needed to design an effective certification program.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">June 2022</div>
+                <h3>Early Stakeholder Engagement and Industry Consultation</h3>
+                <p>NZIFDA began early engagement with industry stakeholders, including operators, insurers, and fuel station operators, to understand industry needs and gather initial feedback on the certification concept. These early discussions were essential for ensuring that the certification program would be practical and valuable.</p>
+                <p>Initial consultations revealed widespread support for a certification program that would establish quality standards, ensure regulatory compliance, and provide reliable verification mechanisms. Stakeholders emphasized the importance of practical, achievable standards.</p>
+                <p>These early discussions informed the direction of subsequent research and development work, ensuring that the certification program would meet industry needs.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">March 2022</div>
+                <h3>Foundation Work and Initial Planning</h3>
+                <p>Following the initial concept development in December 2021, NZIFDA began foundation work to establish the framework for the certification program. This included initial planning, research scoping, and stakeholder identification.</p>
+                <p>Key focus areas included understanding the current state of the industry, identifying key stakeholders, and developing a roadmap for the certification program. This foundation work was essential for ensuring that subsequent development would be well-structured and effective.</p>
+                <p>The foundation work set the stage for the comprehensive research and development program that would follow over the next three years.</p>
+            </div>
+            
+            <div class="news-item">
+                <div class="news-date">December 6, 2021</div>
+                <h3>NZIFDA Inception: Concept Development During COVID-19</h3>
+                <p>The New Zealand Insoluble Fuel Disposal Agency (NZIFDA) was conceived on December 6, 2021, during the COVID-19 pandemic. The concept emerged in response to growing concerns about inconsistent quality and regulatory compliance in the fuel contamination remediation industry.</p>
+                <p>During this challenging period, the need for industry standards and reliable certification became increasingly apparent. With varying levels of operator competency and inconsistent service quality, there was a clear need for a certification body that could establish and enforce industry standards while providing reliable verification for consumers, insurers, and fuel stations.</p>
+                <p>Initial discussions with industry stakeholders confirmed widespread support for a certification program that would establish quality standards, ensure regulatory compliance, and provide reliable verification mechanisms. This foundation work set the stage for a comprehensive four-year development program to create a robust, practical certification system that would benefit all stakeholders in the fuel contamination remediation process.</p>
             </div>
             
             <h2>Subscribe to Updates</h2>
@@ -128,10 +240,10 @@
             </ul>
         </div>
     </div>
-    <footer class="footer">
-        <p>&copy; 2024 NZIFDA - New Zealand Insoluble Fuel Disposal Agency</p>
-        <p><a href="index.html">Home</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="cookies-policy.html">Cookies Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
-    </footer>
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
 </body>
 </html>
 
