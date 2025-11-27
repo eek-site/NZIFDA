@@ -8,7 +8,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="stylesheet" href="css/header-footer.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600&display=swap');
         :root { --primary: #1a1a1a; --danger: #dc2626; --warning: #f59e0b; --success: #16a34a; --accent: #0369a1; --surface: #f8fafc; --border: #e2e8f0; --text: #334155; --text-dark: #0f172a; }
@@ -39,11 +38,374 @@
         .quick-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
         .quick-link-card { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-left: 4px solid var(--accent); }
         .quick-link-card h3 { margin-top: 0; font-size: 1.2rem; }
+        
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo-hexagons {
+            display: flex;
+            position: relative;
+            width: 65px;
+            height: 60px;
+        }
+
+        .hex {
+            width: 24px;
+            height: 28px;
+            position: absolute;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+            transition: all 0.4s ease;
+            opacity: 0.9;
+            animation: hexFloat 6s ease-in-out infinite;
+        }
+
+        .hex-1 { 
+            background: #ef4444; 
+            left: 12px; 
+            top: 0; 
+            animation-delay: 0s;
+        }
+        .hex-2 { 
+            background: #84cc16; 
+            left: 32px; 
+            top: 0; 
+            animation-delay: 0.5s;
+        }
+        .hex-3 { 
+            background: #2563eb; 
+            left: 2px; 
+            top: 20px; 
+            animation-delay: 1s;
+        }
+        .hex-4 { 
+            background: #fb923c; 
+            left: 42px; 
+            top: 20px; 
+            animation-delay: 1.5s;
+        }
+        .hex-5 { 
+            background: #6b7280; 
+            left: 12px; 
+            bottom: 0; 
+            animation-delay: 2s;
+        }
+        .hex-6 { 
+            background: #60a5fa; 
+            left: 32px; 
+            bottom: 0; 
+            animation-delay: 2.5s;
+        }
+
+        @keyframes hexFloat {
+            0%, 100% { 
+                transform: translateY(0) scale(1); 
+                filter: brightness(1);
+            }
+            50% { 
+                transform: translateY(-3px) scale(1.05); 
+                filter: brightness(1.2);
+            }
+        }
+
+        .logo:hover .hex {
+            transform: scale(1.15);
+            filter: brightness(1.3);
+        }
+
+        .logo:hover .hex-1 { transform: translate(-2px, -2px) scale(1.15); }
+        .logo:hover .hex-2 { transform: translate(2px, -2px) scale(1.15); }
+        .logo:hover .hex-3 { transform: translate(-2px, 0) scale(1.15); }
+        .logo:hover .hex-4 { transform: translate(2px, 0) scale(1.15); }
+        .logo:hover .hex-5 { transform: translate(-2px, 2px) scale(1.15); }
+        .logo:hover .hex-6 { transform: translate(2px, 2px) scale(1.15); }
+
+        .logo-text {
+            color: white;
+        }
+
+        .logo-text h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin: 0;
+            display: flex;
+            align-items: baseline;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+            line-height: 1;
+        }
+
+        .logo-text h1 a {
+            display: flex;
+            align-items: baseline;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-text h1 .nz {
+            color: #fff;
+        }
+
+        .logo-text h1 .if {
+            color: #dc2626;
+        }
+
+        .logo-text h1 .da {
+            color: #3b82f6;
+        }
+
+        .logo-text span {
+            font-size: 0.7rem;
+            opacity: 0.9;
+            text-transform: none;
+            letter-spacing: 0.05em;
+            font-weight: 400;
+            display: block;
+            margin-top: 0.2rem;
+            line-height: 1.2;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--primary);
+            padding: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 999;
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
+        .mobile-nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-transform: uppercase;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .mobile-nav a:hover,
+        .mobile-nav a.active {
+            background: rgba(255,255,255,0.1);
+            color: var(--danger);
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--danger);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--danger);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--danger);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        .footer-bottom a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom a:hover {
+            color: white;
+        }
+
+        @media (max-width: 767px) {
+            .header {
+                height: auto;
+                min-height: 70px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .nav-container {
+                padding: 1rem;
+            }
+            
+            .footer {
+                padding: 2rem 1rem 1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <div id="header-placeholder"></div>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-hexagons">
+                    <div class="hex hex-1"></div>
+                    <div class="hex hex-2"></div>
+                    <div class="hex hex-3"></div>
+                    <div class="hex hex-4"></div>
+                    <div class="hex hex-5"></div>
+                    <div class="hex hex-6"></div>
+                </div>
+                <div class="logo-text">
+                    <h1><a href="index.html" style="text-decoration: none; color: inherit;"><span class="nz">NZ</span><span class="if">IF</span><span class="da">DA</span></a></h1>
+                    <span>New Zealand Insoluble Fuel Disposal Agency</span>
+                </div>
+            </div>
+            <nav>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">☰</button>
+                <ul class="nav-links">
+                    <li><a href="for-consumers.html">For Consumers</a></li>
+                    <li><a href="for-operators.html">For Operators</a></li>
+                    <li><a href="for-fuel-stations.html" class="active">For Fuel Stations</a></li>
+                    <li><a href="for-insurers.html">For Insurers</a></li>
+                    <li><a href="mediation.html">Mediation</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="resources.html">Resources</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <nav class="mobile-nav" id="mobileNav">
+                <a href="index.html">Home</a>
+                <a href="for-consumers.html">For Consumers</a>
+                <a href="for-operators.html">For Operators</a>
+                <a href="for-fuel-stations.html" class="active">For Fuel Stations</a>
+                <a href="for-insurers.html">For Insurers</a>
+                <a href="mediation.html">Mediation</a>
+                <a href="about.html">About</a>
+                <a href="resources.html">Resources</a>
+                <a href="contact.html">Contact</a>
+                <a href="emergency-response.html">Emergency Response</a>
+                <a href="misfuel-prevention.html">Prevention Guide</a>
+                <a href="faq.html">FAQ</a>
+            </nav>
+        </div>
+    </header>
     <div class="container">
         <div class="content">
             <h1>For Fuel Stations</h1>
@@ -203,9 +565,81 @@
         </div>
     </div>
     <!-- Footer -->
-    <div id="footer-placeholder"></div>
-    <script src="js/header.js"></script>
-    <script src="js/footer.js"></script>
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>NZIFDA</h3>
+                <p style="color: #cbd5e1; margin-top: 1rem;">
+                    New Zealand Insoluble Fuel Disposal Agency<br>
+                    Independent Industry Authority<br>
+                    Est. 2024
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="certification.html">Certification Process</a></li>
+                    <li><a href="index.html#certification">NZIFDA Mark</a></li>
+                    <li><a href="index.html#standards">Industry Standards</a></li>
+                    <li><a href="for-consumers.html">For Consumers</a></li>
+                    <li><a href="for-operators.html">For Operators</a></li>
+                    <li><a href="for-fuel-stations.html">For Fuel Stations</a></li>
+                    <li><a href="for-insurers.html">For Insurers</a></li>
+                    <li><a href="mediation.html">Mediation</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="https://www.epa.govt.nz/hazardous-substances/rules-notices-and-how-to-comply/epa-notices-rules-you-must-follow/" target="_blank" rel="noopener">EPA Notices & Rules</a></li>
+                    <li><a href="resources.html#mfe-guidelines">MfE Guidelines</a></li>
+                    <li><a href="resources.html#dangerous-goods">Dangerous Goods Act</a></li>
+                    <li><a href="resources.html">All Resources</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Legal & Compliance</h3>
+                <ul>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="cookies-policy.html">Cookies Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    <li><a href="accessibility.html">Accessibility</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li style="color: #cbd5e1;">General: <a href="contact.html#general-form" style="color: var(--danger);">Contact Form</a></li>
+                    <li style="color: #cbd5e1;">Certification: <a href="contact.html#certification-form" style="color: var(--danger);">Application Form</a></li>
+                    <li style="color: #cbd5e1;">Compliance: <a href="contact.html#compliance-form" style="color: var(--danger);">Report Form</a></li>
+                    <li style="color: #cbd5e1;">Mediation: <a href="complaint.html" style="color: var(--danger);">Complaint Form</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 NZIFDA - New Zealand Insoluble Fuel Disposal Agency. Ensuring compliance and excellence in fuel management services.</p>
+            <p style="margin-top: 1rem;">
+                <a href="privacy-policy.html">Privacy Policy</a> | 
+                <a href="cookies-policy.html">Cookies Policy</a> | 
+                <a href="terms-of-service.html">Terms of Service</a> | 
+                <a href="accessibility.html">Accessibility</a>
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            if (mobileNav) {
+                mobileNav.classList.toggle('active');
+            }
+        }
+    </script>
 </body>
 </html>
 
