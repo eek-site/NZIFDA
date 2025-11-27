@@ -1375,12 +1375,13 @@
                             return;
                         }
                     } catch (jsonError) {
-                        // JSON parse failed - continue to handle as hash/company name
+                        // JSON parse failed - continue to handle as encoded company name
                     }
                     
-                    // If JSON parse failed or structure invalid, treat as hash/company name
-                    // The decoded string is the hashId - use it to fetch from badge
-                    const hashId = decoded.trim();
+                    // If JSON parse failed or structure invalid, treat encoded value as hashId
+                    // Use the original encoded value as the hashId to fetch from badge
+                    // The encoded value is the identifier, not the decoded company name
+                    const hashId = encoded.trim();
                     fetchCertificateFromBadge(hashId);
                 } catch (e) {
                     console.error('Error decoding certificate data:', e);
