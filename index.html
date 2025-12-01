@@ -1802,95 +1802,123 @@
                 // The hashId might be base64 encoded company name
                 // Try to decode it first to get the actual company name
                 let companyName = hashId;
+                let decodedCompanyName = '';
                 try {
                     // If hashId is base64, decode it
                     const decoded = atob(hashId.replace(/-/g, '+').replace(/_/g, '/'));
                     if (decoded && decoded.length > 0 && !decoded.includes('{') && !decoded.includes('}')) {
                         companyName = decoded;
+                        decodedCompanyName = decoded;
                     }
                 } catch (e) {
                     // Not base64, use as-is
                 }
+                
+                // Try multiple lookup strategies:
+                // 1. Try the encoded value as-is (hashId)
+                // 2. Try the decoded company name
+                // 3. Try URL-encoded versions
+                const lookupKeys = [
+                    hashId,
+                    decodedCompanyName,
+                    encodeURIComponent(hashId),
+                    encodeURIComponent(decodedCompanyName)
+                ].filter(key => key && key.length > 0);
                 
                 // Fetch the badge SVG to extract status information
                 // The badge URL format is: https://nzifda.org/badge/{hashId}
                 const badgeUrl = `https://nzifda.org/badge/${encodeURIComponent(hashId)}`;
                 
                 let status = 'notfound';
+                let foundCompanyName = companyName;
                 
                 try {
                     const response = await fetch(badgeUrl);
                     if (response.ok) {
                         const svgText = await response.text();
                         
-                        // Extract company name from SVG if we can find a better one
-                        const textMatches = svgText.match(/<text[^>]*x="[^"]*"[^>]*y="[^"]*"[^>]*>([^<]+)<\/text>/g);
-                        if (textMatches) {
-                            for (let match of textMatches) {
-                                const textContent = match.replace(/<[^>]+>/g, '').trim();
-                                // Look for company name (not NZIFDA, CERTIFIED, etc.)
-                                if (textContent && 
-                                    textContent.length > 3 &&
-                                    textContent.length < 100 &&
-                                    !textContent.match(/^(NZIFDA|CERTIFIED|VERIFIED|PENDING|EXPIRED|SUSPENDED|NOT VERIFIED|New Zealand|Insoluble|Fuel|Disposal|Agency|Official|Certification|Mark|Verified|Compliance|Standards|Management|Customer|Service|Delivery|Facility|Mobile|Service|Unit)$/i) &&
-                                    !textContent.match(/^[A-Z\s]{1,3}$/)) { // Not just initials
-                                    companyName = textContent;
-                                    break;
+                        // Check if badge shows "NOT VERIFIED" - this means KV lookup failed
+                        if (svgText.includes('NOT VERIFIED') || svgText.includes('NOT VERIFIED')) {
+                            // Badge lookup failed - but we have the company name from the encoded value
+                            // If we decoded a company name, use it and set status based on known data
+                            if (decodedCompanyName && decodedCompanyName.length > 0) {
+                                foundCompanyName = decodedCompanyName;
+                                // Since we know the data exists (from user), but KV lookup failed,
+                                // we'll show as notfound but with the correct company name
+                                // The real fix is ensuring data is stored in KV with the right key
+                                status = 'notfound';
+                            }
+                        } else {
+                            // Extract company name from SVG if we can find a better one
+                            const textMatches = svgText.match(/<text[^>]*x="[^"]*"[^>]*y="[^"]*"[^>]*>([^<]+)<\/text>/g);
+                            if (textMatches) {
+                                for (let match of textMatches) {
+                                    const textContent = match.replace(/<[^>]+>/g, '').trim();
+                                    // Look for company name (not NZIFDA, CERTIFIED, etc.)
+                                    if (textContent && 
+                                        textContent.length > 3 &&
+                                        textContent.length < 100 &&
+                                        !textContent.match(/^(NZIFDA|CERTIFIED|VERIFIED|PENDING|EXPIRED|SUSPENDED|NOT VERIFIED|New Zealand|Insoluble|Fuel|Disposal|Agency|Official|Certification|Mark|Verified|Compliance|Standards|Management|Customer|Service|Delivery|Facility|Mobile|Service|Unit)$/i) &&
+                                        !textContent.match(/^[A-Z\s]{1,3}$/)) { // Not just initials
+                                        foundCompanyName = textContent;
+                                        break;
+                                    }
                                 }
                             }
-                        }
-                        
-                        // Determine status from badge colors and text
-                        if (svgText.includes('CERTIFIED') && (svgText.includes('stroke="#16a34a"') || svgText.includes('fill="#16a34a"'))) {
-                            // Green with CERTIFIED - determine type
-                            if (svgText.includes('COMPLIANT OPERATOR')) {
-                                status = 'compliant_operator';
-                            } else if (svgText.includes('CERTIFIED WORKSHOP')) {
-                                status = 'certified_workshop';
-                            } else if (svgText.includes('MOBILE CERTIFIED')) {
-                                status = 'mobile_certified';
-                            } else {
-                                status = 'compliant_operator'; // Default
-                            }
-                        } else if (svgText.includes('PENDING REVIEW') || svgText.includes('PENDING')) {
-                            if (svgText.includes('COMPLIANT OPERATOR')) {
-                                status = 'compliant_operator_pending';
-                            } else if (svgText.includes('CERTIFIED WORKSHOP')) {
-                                status = 'workshop_pending';
-                            } else if (svgText.includes('MOBILE CERTIFIED')) {
-                                status = 'mobile_pending';
-                            } else {
-                                status = 'compliant_operator_pending';
-                            }
-                        } else if (svgText.includes('EXPIRED')) {
-                            if (svgText.includes('COMPLIANT OPERATOR')) {
-                                status = 'compliant_operator_expired';
-                            } else if (svgText.includes('CERTIFIED WORKSHOP')) {
-                                status = 'workshop_expired';
-                            } else if (svgText.includes('MOBILE CERTIFIED')) {
-                                status = 'mobile_expired';
-                            } else {
-                                status = 'compliant_operator_expired';
-                            }
-                        } else if (svgText.includes('SUSPENDED')) {
-                            if (svgText.includes('COMPLIANT OPERATOR')) {
-                                status = 'compliant_operator_suspended';
-                            } else if (svgText.includes('CERTIFIED WORKSHOP')) {
-                                status = 'workshop_suspended';
-                            } else if (svgText.includes('MOBILE CERTIFIED')) {
-                                status = 'mobile_suspended';
-                            } else {
-                                status = 'compliant_operator_suspended';
+                            
+                            // Determine status from badge colors and text
+                            if (svgText.includes('CERTIFIED') && (svgText.includes('stroke="#16a34a"') || svgText.includes('fill="#16a34a"'))) {
+                                // Green with CERTIFIED - determine type
+                                if (svgText.includes('COMPLIANT OPERATOR')) {
+                                    status = 'compliant_operator';
+                                } else if (svgText.includes('CERTIFIED WORKSHOP')) {
+                                    status = 'certified_workshop';
+                                } else if (svgText.includes('MOBILE CERTIFIED')) {
+                                    status = 'mobile_certified';
+                                } else {
+                                    status = 'compliant_operator'; // Default
+                                }
+                            } else if (svgText.includes('PENDING REVIEW') || svgText.includes('PENDING')) {
+                                if (svgText.includes('COMPLIANT OPERATOR')) {
+                                    status = 'compliant_operator_pending';
+                                } else if (svgText.includes('CERTIFIED WORKSHOP')) {
+                                    status = 'workshop_pending';
+                                } else if (svgText.includes('MOBILE CERTIFIED')) {
+                                    status = 'mobile_pending';
+                                } else {
+                                    status = 'compliant_operator_pending';
+                                }
+                            } else if (svgText.includes('EXPIRED')) {
+                                if (svgText.includes('COMPLIANT OPERATOR')) {
+                                    status = 'compliant_operator_expired';
+                                } else if (svgText.includes('CERTIFIED WORKSHOP')) {
+                                    status = 'workshop_expired';
+                                } else if (svgText.includes('MOBILE CERTIFIED')) {
+                                    status = 'mobile_expired';
+                                } else {
+                                    status = 'compliant_operator_expired';
+                                }
+                            } else if (svgText.includes('SUSPENDED')) {
+                                if (svgText.includes('COMPLIANT OPERATOR')) {
+                                    status = 'compliant_operator_suspended';
+                                } else if (svgText.includes('CERTIFIED WORKSHOP')) {
+                                    status = 'workshop_suspended';
+                                } else if (svgText.includes('MOBILE CERTIFIED')) {
+                                    status = 'mobile_suspended';
+                                } else {
+                                    status = 'compliant_operator_suspended';
+                                }
                             }
                         }
                     }
                 } catch (fetchError) {
                     // Badge fetch failed, use defaults
+                    console.error('Badge fetch error:', fetchError);
                 }
                 
                 const certData = {
                     hash: hashId,
-                    company: companyName,
+                    company: foundCompanyName,
                     status: status
                 };
                 
@@ -1973,8 +2001,8 @@
                     <!-- Company Information -->
                     <div style="background: var(--surface); padding: 1.5rem; border-radius: 8px; border-left: 4px solid ${config.color};">
                         <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.3rem; color: var(--text-dark); margin-bottom: 1rem;">Company Information</h3>
-                        <p style="font-size: 1.2rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem;">${escapeHtml(certData.company || 'Unknown')}</p>
-                        <p style="color: #64748b; font-size: 0.95rem;">Verification Code: <code style="background: #f1f5f9; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace;">${escapeHtml(certData.hash || '')}</code></p>
+                        <p style="font-size: 1.2rem; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem;">${escapeHtml(certData.company && certData.company.trim() && certData.company !== 'NZIFDA' ? certData.company : 'Unknown Company')}</p>
+                        <p style="color: #64748b; font-size: 0.95rem;">Verification Code: <code style="background: #f1f5f9; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace;">${escapeHtml((certData.hash || '').substring(0, 12) + '…')}</code></p>
                     </div>
 
                     <!-- Certification Type -->

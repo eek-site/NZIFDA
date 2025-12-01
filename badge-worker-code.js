@@ -4,21 +4,72 @@ export default {
     const path = url.pathname;
 
     if (path.startsWith('/badge/')) {
-      const hashId = path.replace('/badge/', '').trim();
+      let hashId = path.replace('/badge/', '').trim();
+      
+      // Remove any trailing slashes
+      hashId = hashId.replace(/\/+$/, '');
+      
+      // URL decode the hashId in case it was encoded
+      try {
+        hashId = decodeURIComponent(hashId);
+      } catch (e) {
+        // If decoding fails, use original
+      }
 
       if (!hashId) {
         return new Response('Badge ID required', { status: 400 });
       }
 
-      const data = await env.NZIFDA_CERTIFIED.get(hashId, 'json');
+      // Normalize the key - remove any whitespace and ensure consistent encoding
+      hashId = hashId.trim().replace(/\s+/g, '');
+      
+      // Try to get data with the hashId as key (exact match)
+      let data = await env.NZIFDA_CERTIFIED.get(hashId, 'json');
+      
+      // If not found, try with URL encoding variations
+      if (!data) {
+        try {
+          const urlEncoded = encodeURIComponent(hashId);
+          if (urlEncoded !== hashId) {
+            data = await env.NZIFDA_CERTIFIED.get(urlEncoded, 'json');
+          }
+        } catch (e) {
+          // Continue
+        }
+      }
+      
+      // If still not found, try decoding the hashId (in case it's base64 encoded company name)
+      // and use that as a lookup key
+      if (!data) {
+        try {
+          const decoded = atob(hashId.replace(/-/g, '+').replace(/_/g, '/'));
+          if (decoded && decoded.length > 0 && decoded !== hashId) {
+            data = await env.NZIFDA_CERTIFIED.get(decoded, 'json');
+          }
+        } catch (e) {
+          // Not base64, continue
+        }
+      }
 
       let status = 'notfound';
       let companyName = '';
 
       if (data) {
         // SharePoint uses capitalized field names: CompanyName, Status
-        status = (data.Status || data.status || 'notfound').toLowerCase();
+        let rawStatus = (data.Status || data.status || 'notfound').toLowerCase().trim();
         companyName = data.CompanyName || data.company || '';
+        
+        // Normalize status - ensure it matches config keys exactly
+        // Map legacy status values to new format
+        const statusMap = {
+          'certified': 'compliant_operator',
+          'pending': 'compliant_operator_pending',
+          'suspended': 'compliant_operator_suspended',
+          'expired': 'compliant_operator_expired'
+        };
+        
+        // If it's a legacy status, map it; otherwise use as-is
+        status = statusMap[rawStatus] || rawStatus;
       }
 
       // Detect mobile or static request
@@ -231,7 +282,9 @@ function generateDesktopBadge(cfg, companyName, hashId, status) {
   const shortHash = hashId ? hashId.substring(0, 20) + '…' : '';
 
   // Encode certificate data for the link - use actual status value, not label
-  const certData = { hash: hashId, company: companyName, status: status };
+  // Truncate hash to prevent decoding - only use first 16 chars as identifier
+  const truncatedHash = hashId ? hashId.substring(0, 16) : '';
+  const certData = { hash: truncatedHash, company: companyName, status: status };
   const jsonStr = JSON.stringify(certData);
   const encodedData = base64Encode(jsonStr).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   const verifyUrl = `https://nzifda.org/index.html#certification?encoded=${encodedData}`;
@@ -419,7 +472,9 @@ function generateMobileBadge(cfg, companyName, hashId, isStatic = false, status)
   const shortHash = hashId ? hashId.substring(0, 18) + '…' : '';
 
   // Encode certificate data for the link - use actual status value, not label
-  const certData = { hash: hashId, company: companyName, status: status };
+  // Truncate hash to prevent decoding - only use first 16 chars as identifier
+  const truncatedHash = hashId ? hashId.substring(0, 16) : '';
+  const certData = { hash: truncatedHash, company: companyName, status: status };
   const jsonStr = JSON.stringify(certData);
   const encodedData = base64Encode(jsonStr).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   const verifyUrl = `https://nzifda.org/index.html#certification?encoded=${encodedData}`;
