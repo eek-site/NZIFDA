@@ -12,9 +12,9 @@ function generateFooter() {
                 <p style="color: #cbd5e1; margin-top: 1rem;">
                     New Zealand Insoluble Fuel Disposal Agency<br>
                     Independent Industry Association<br>
-                    Est. 2024<br>
-                    <span style="font-size: 0.9rem; color: #94a3b8;">Not a government agency</span>
+                    Est. 2024
                 </p>
+                <p style="color: #94a3b8; margin-top: 0.5rem; font-size: 0.85rem;">Not a government agency</p>
             </div>
             
             <div class="footer-section">
