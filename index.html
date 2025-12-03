@@ -1830,7 +1830,8 @@
                 const badgeUrl = `https://nzifda.org/badge/${encodeURIComponent(hashId)}`;
                 
                 let status = 'notfound';
-                let foundCompanyName = companyName;
+                // Prioritize decoded company name if available
+                let foundCompanyName = decodedCompanyName && decodedCompanyName.length > 0 ? decodedCompanyName : companyName;
                 
                 try {
                     const response = await fetch(badgeUrl);
@@ -1849,21 +1850,30 @@
                                 status = 'notfound';
                             }
                         } else {
-                            // Extract company name from SVG if we can find a better one
-                            const textMatches = svgText.match(/<text[^>]*x="[^"]*"[^>]*y="[^"]*"[^>]*>([^<]+)<\/text>/g);
-                            if (textMatches) {
-                                for (let match of textMatches) {
-                                    const textContent = match.replace(/<[^>]+>/g, '').trim();
-                                    // Look for company name (not NZIFDA, CERTIFIED, etc.)
-                                    if (textContent && 
-                                        textContent.length > 3 &&
-                                        textContent.length < 100 &&
-                                        !textContent.match(/^(NZIFDA|CERTIFIED|VERIFIED|PENDING|EXPIRED|SUSPENDED|NOT VERIFIED|New Zealand|Insoluble|Fuel|Disposal|Agency|Official|Certification|Mark|Verified|Compliance|Standards|Management|Customer|Service|Delivery|Facility|Mobile|Service|Unit)$/i) &&
-                                        !textContent.match(/^[A-Z\s]{1,3}$/)) { // Not just initials
-                                        foundCompanyName = textContent;
-                                        break;
+                            // Only extract company name from SVG if we don't already have a decoded company name
+                            // Prioritize the decoded company name over SVG text extraction
+                            if (!decodedCompanyName || decodedCompanyName.length === 0) {
+                                // Extract company name from SVG if we can find a better one
+                                const textMatches = svgText.match(/<text[^>]*x="[^"]*"[^>]*y="[^"]*"[^>]*>([^<]+)<\/text>/g);
+                                if (textMatches) {
+                                    for (let match of textMatches) {
+                                        const textContent = match.replace(/<[^>]+>/g, '').trim();
+                                        // Look for company name (not NZIFDA, CERTIFIED, etc.)
+                                        // Exclude NZIFDA-related text including "New Zealand Insoluble Fuel" phrases
+                                        if (textContent && 
+                                            textContent.length > 3 &&
+                                            textContent.length < 100 &&
+                                            !textContent.match(/^(NZIFDA|CERTIFIED|VERIFIED|PENDING|EXPIRED|SUSPENDED|NOT VERIFIED|New Zealand|Insoluble|Fuel|Disposal|Agency|Official|Certification|Mark|Verified|Compliance|Standards|Management|Customer|Service|Delivery|Facility|Mobile|Service|Unit|New Zealand Insoluble|New Zealand Insoluble Fuel|New Zealand Insoluble Fuel Disposal|New Zealand Insoluble Fuel Disposal Agency)$/i) &&
+                                            !textContent.match(/^[A-Z\s]{1,3}$/) &&
+                                            !textContent.includes('New Zealand Insoluble Fuel')) { // Not just initials, and not NZIFDA agency text
+                                            foundCompanyName = textContent;
+                                            break;
+                                        }
                                     }
                                 }
+                            } else {
+                                // We have a decoded company name - use it and don't overwrite with SVG text
+                                foundCompanyName = decodedCompanyName;
                             }
                             
                             // Determine status from badge colors and text
