@@ -14,7 +14,7 @@ function generateFooter() {
                     Independent Industry Association<br>
                     Est. 2024
                 </p>
-                <p style="color: #94a3b8; margin-top: 0.5rem; font-size: 0.85rem;">Not a government agency</p>
+                <p style="color: #94a3b8; margin-top: 0.5rem; font-size: 0.85rem;">Helping businesses comply with government regulations</p>
             </div>
             
             <div class="footer-section">
