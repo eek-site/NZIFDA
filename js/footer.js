@@ -11,8 +11,9 @@ function generateFooter() {
                 <h3>NZIFDA</h3>
                 <p style="color: #cbd5e1; margin-top: 1rem;">
                     New Zealand Insoluble Fuel Disposal Agency<br>
-                    Independent Industry Authority<br>
-                    Est. 2024
+                    Independent Industry Association<br>
+                    Est. 2024<br>
+                    <span style="font-size: 0.9rem; color: #94a3b8;">Not a government agency</span>
                 </p>
             </div>
             
