@@ -1307,12 +1307,45 @@
             </div>
         </section>
 
+        <!-- OEM Methodology Policy Statement -->
+        <section class="section" id="oem-policy" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 12px; padding: 3rem; margin-bottom: 3rem;">
+            <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+                <h2 style="font-family: 'Oswald', sans-serif; color: white; font-size: 2rem; margin-bottom: 1.5rem;">NZIFDA Methodology Policy</h2>
+                <div style="background: rgba(220, 38, 38, 0.15); border: 2px solid var(--danger); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+                    <h3 style="font-family: 'Oswald', sans-serif; color: var(--danger); font-size: 1.5rem; margin-bottom: 1rem;">⚠️ Filler Neck Extraction is NOT a Certified Process</h3>
+                    <p style="color: #e2e8f0; font-size: 1.1rem; margin-bottom: 1rem;">NZIFDA does not certify filler neck extraction as an approved fuel contamination remediation method. This method is not prescribed by vehicle manufacturers and bypasses critical anti-siphon safety devices.</p>
+                </div>
+                <div style="background: rgba(5, 150, 105, 0.15); border: 2px solid var(--success); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+                    <h3 style="font-family: 'Oswald', sans-serif; color: #10b981; font-size: 1.5rem; margin-bottom: 1rem;">✓ Manufacturer-Prescribed Methods Only</h3>
+                    <p style="color: #e2e8f0; font-size: 1.1rem; margin-bottom: 1rem;">NZIFDA certified technicians follow manufacturer-prescribed procedures for fuel system access:</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 6px;">
+                            <strong style="color: #10b981;">Method A:</strong>
+                            <p style="color: #cbd5e1; margin: 0.5rem 0 0 0; font-size: 0.95rem;">Fuel Pump Access Panel</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 6px;">
+                            <strong style="color: #10b981;">Method B:</strong>
+                            <p style="color: #cbd5e1; margin: 0.5rem 0 0 0; font-size: 0.95rem;">Full Tank Removal</p>
+                        </div>
+                    </div>
+                </div>
+                <p style="color: #94a3b8; margin-bottom: 1.5rem;">All approved extraction methods follow OEM service manual procedures. View manufacturer-specific guidelines in our OEM Standards database.</p>
+                <a href="oem/index.html" class="btn btn-primary" style="margin-right: 1rem;">View OEM Standards</a>
+                <a href="oem/vehicle-search.html" class="btn btn-secondary" style="border-color: white; color: white;">Search Your Vehicle</a>
+            </div>
+        </section>
+
         <!-- Standards Section -->
         <section class="section" id="standards">
             <div class="section-header">
                 <h2>Industry Standards & Protocols</h2>
             </div>
             <div class="standards-grid">
+                <div class="standard-item" style="border-left: 4px solid var(--danger);">
+                    <div class="standard-icon" style="background: var(--danger);">!</div>
+                    <h4>OEM-Prescribed Methods Only</h4>
+                    <p>All fuel extraction must follow manufacturer service manual procedures. Filler neck extraction is NOT a certified process. <a href="oem/index.html" style="color: var(--accent); font-weight: 600;">View OEM Standards →</a></p>
+                </div>
                 <div class="standard-item">
                     <div class="standard-icon">1</div>
                     <h4>Fixed Facility Requirement</h4>
@@ -1321,7 +1354,7 @@
                 <div class="standard-item">
                     <div class="standard-icon">2</div>
                     <h4>Fuel Extraction Protocol</h4>
-                    <p>Complete contaminated fuel removal using certified vacuum extraction systems at fixed facilities per industry specifications.</p>
+                    <p>Complete contaminated fuel removal via fuel pump access panel or tank removal per manufacturer specifications.</p>
                 </div>
                 <div class="standard-item">
                     <div class="standard-icon">3</div>
@@ -1378,6 +1411,7 @@
                         <select id="violation" name="violation" required>
                             <option value="">Select category...</option>
                             <option value="incomplete">Inadequate fuel extraction procedures</option>
+                            <option value="filler-neck">Using filler neck extraction (non-OEM method)</option>
                             <option value="pricing">Pricing transparency violations</option>
                             <option value="damage">Improper remediation resulting in damage</option>
                             <option value="disposal">Non-compliant waste disposal methods</option>
@@ -1415,6 +1449,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr style="background: rgba(220, 38, 38, 0.05);">
+                        <td><strong>OEM-Prescribed Extraction Methods</strong></td>
+                        <td class="compliance-check">✓</td>
+                        <td class="compliance-cross">✗</td>
+                        <td><strong>NZIFDA Standard - <a href="oem/index.html" style="color: var(--accent);">View Policy</a></strong></td>
+                    </tr>
                     <tr>
                         <td>Dangerous Goods License</td>
                         <td class="compliance-check">✓</td>
@@ -1524,6 +1564,18 @@
                     <li><a href="for-fuel-stations.html">For Fuel Stations</a></li>
                     <li><a href="for-insurers.html">For Insurers</a></li>
                     <li><a href="mediation.html">Mediation</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>OEM Standards</h3>
+                <ul>
+                    <li><a href="oem/index.html">OEM Standards Home</a></li>
+                    <li><a href="oem/vehicle-search.html">Vehicle Search</a></li>
+                    <li><a href="oem/toyota-group/toyota/index.html">Toyota Models</a></li>
+                    <li><a href="oem/ford-group/index.html">Ford Group</a></li>
+                    <li><a href="oem/volkswagen-group/index.html">VW Group</a></li>
+                    <li><a href="oem/renault-nissan-mitsubishi/index.html">Nissan/Mitsubishi</a></li>
                 </ul>
             </div>
             
