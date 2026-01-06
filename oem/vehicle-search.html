@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Search - OEM Fuel Contamination Standards | NZIFDA</title>
+    <meta name="description" content="Search for your vehicle to find manufacturer-prescribed fuel contamination remediation standards. NZIFDA certified procedures.">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="css/oem-styles.css">
+    <style>
+        .search-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .search-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 768px) {
+            .search-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        .search-select, .search-input {
+            padding: 1rem;
+            font-size: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Barlow', sans-serif;
+        }
+        .search-select:focus, .search-input:focus {
+            outline: none;
+            border-color: var(--oem-accent);
+        }
+        .search-btn {
+            padding: 1rem 2rem;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .search-btn:hover {
+            background: #b91c1c;
+        }
+        .results-container {
+            margin-top: 2rem;
+        }
+        .vehicle-result {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--oem-accent);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .vehicle-result:hover {
+            transform: translateX(5px);
+            border-left-color: var(--danger);
+        }
+        .vehicle-result h3 {
+            font-family: 'Oswald', sans-serif;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        .vehicle-result .details {
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+        .vehicle-result .fuel-type {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--surface-alt);
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+        .vehicle-result .fuel-type.diesel {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .vehicle-result .fuel-type.petrol {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-light);
+        }
+        .make-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .make-btn {
+            padding: 1rem;
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .make-btn:hover {
+            background: var(--oem-light);
+            border-color: var(--oem-accent);
+        }
+        .alphabet-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .alphabet-filter button {
+            width: 2.5rem;
+            height: 2.5rem;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .alphabet-filter button:hover,
+        .alphabet-filter button.active {
+            background: var(--oem-accent);
+            color: white;
+            border-color: var(--oem-accent);
+        }
+        .results-count {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/index.html" class="logo">
+                <div class="logo-text">
+                    <span class="nz">NZ</span><span class="if">IF</span><span class="da">DA</span>
+                    <span class="logo-subtitle">OEM Standards</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/oem/index.html" class="active">OEM Standards</a></li>
+                <li><a href="/certification.html">Certification</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="/index.html">Home</a>
+            <a href="/oem/index.html">OEM Standards</a>
+            <a href="/certification.html">Certification</a>
+            <a href="/contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <div class="page-header-content">
+            <h1>Find Your Vehicle</h1>
+            <p class="subtitle">Search for manufacturer-specific fuel contamination procedures</p>
+        </div>
+    </div>
+
+    <div class="breadcrumb">
+        <a href="/index.html">Home</a>
+        <span class="separator">›</span>
+        <a href="/oem/index.html">OEM Standards</a>
+        <span class="separator">›</span>
+        <span class="current">Vehicle Search</span>
+    </div>
+
+    <main class="main-content">
+        <!-- Search Box -->
+        <div class="search-container">
+            <h2 style="font-family: 'Oswald', sans-serif; margin-bottom: 1rem;">Search Your Vehicle</h2>
+            <div class="search-row">
+                <select id="makeSelect" class="search-select" onchange="filterModels()">
+                    <option value="">Select Make...</option>
+                </select>
+                <select id="modelSelect" class="search-select" onchange="showVehicleInfo()">
+                    <option value="">Select Model...</option>
+                </select>
+                <button class="search-btn" onclick="searchVehicle()">Search</button>
+            </div>
+            <p style="text-align: center; margin-top: 1rem; color: var(--text-light);">Or type to search:</p>
+            <input type="text" id="textSearch" class="search-input" style="width: 100%; margin-top: 0.5rem;" placeholder="Type make or model (e.g., 'Hilux', 'Ford Ranger', 'CX-5')..." onkeyup="textSearchVehicle()">
+        </div>
+
+        <!-- Quick Make Selection -->
+        <div class="info-card">
+            <h2>Popular Makes</h2>
+            <div class="make-grid" id="popularMakes"></div>
+        </div>
+
+        <!-- All Makes A-Z -->
+        <div class="info-card">
+            <h2>All Makes A-Z</h2>
+            <div class="alphabet-filter" id="alphabetFilter"></div>
+            <div class="make-grid" id="allMakes"></div>
+        </div>
+
+        <!-- Search Results -->
+        <div class="results-container" id="resultsContainer" style="display: none;">
+            <div class="info-card">
+                <h2>Search Results</h2>
+                <p class="results-count" id="resultsCount"></p>
+                <div id="searchResults"></div>
+            </div>
+        </div>
+
+        <!-- Vehicle Info Modal -->
+        <div id="vehicleInfo" style="display: none;"></div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>NZIFDA</h3>
+                <p>New Zealand Insoluble Fuel Disposal Agency</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/oem/index.html">OEM Standards</a></li>
+                    <li><a href="/certification.html">Certification</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-disclaimer">
+            <p><strong>Disclaimer:</strong> NZIFDA follows manufacturer-prescribed procedures for fuel system access. Work should be performed by qualified technicians.</p>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 NZIFDA. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="data/vehicles.js"></script>
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            populateMakeDropdown();
+            populatePopularMakes();
+            populateAllMakes();
+            createAlphabetFilter();
+        });
+
+        function populateMakeDropdown() {
+            const select = document.getElementById('makeSelect');
+            const makes = Object.keys(vehicleDatabase).sort();
+            makes.forEach(make => {
+                const option = document.createElement('option');
+                option.value = make;
+                option.textContent = make;
+                select.appendChild(option);
+            });
+        }
+
+        function filterModels() {
+            const make = document.getElementById('makeSelect').value;
+            const modelSelect = document.getElementById('modelSelect');
+            modelSelect.innerHTML = '<option value="">Select Model...</option>';
+            
+            if (make && vehicleDatabase[make]) {
+                const models = Object.keys(vehicleDatabase[make].models).sort();
+                models.forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model;
+                    option.textContent = model;
+                    modelSelect.appendChild(option);
+                });
+            }
+        }
+
+        function populatePopularMakes() {
+            const container = document.getElementById('popularMakes');
+            const popular = ['Toyota', 'Ford', 'Mazda', 'Nissan', 'Holden', 'Mitsubishi', 'Honda', 'Hyundai', 'Kia', 'Volkswagen', 'BMW', 'Mercedes-Benz', 'Subaru', 'Isuzu', 'Suzuki', 'Audi'];
+            
+            popular.forEach(make => {
+                if (vehicleDatabase[make]) {
+                    const btn = document.createElement('div');
+                    btn.className = 'make-btn';
+                    btn.textContent = make;
+                    btn.onclick = () => selectMake(make);
+                    container.appendChild(btn);
+                }
+            });
+        }
+
+        function populateAllMakes(filter = '') {
+            const container = document.getElementById('allMakes');
+            container.innerHTML = '';
+            const makes = Object.keys(vehicleDatabase).sort();
+            
+            makes.forEach(make => {
+                if (!filter || make.charAt(0).toUpperCase() === filter) {
+                    const btn = document.createElement('div');
+                    btn.className = 'make-btn';
+                    btn.textContent = make;
+                    btn.onclick = () => selectMake(make);
+                    container.appendChild(btn);
+                }
+            });
+        }
+
+        function createAlphabetFilter() {
+            const container = document.getElementById('alphabetFilter');
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+            
+            const allBtn = document.createElement('button');
+            allBtn.textContent = 'All';
+            allBtn.className = 'active';
+            allBtn.onclick = () => {
+                document.querySelectorAll('.alphabet-filter button').forEach(b => b.classList.remove('active'));
+                allBtn.classList.add('active');
+                populateAllMakes();
+            };
+            container.appendChild(allBtn);
+            
+            letters.forEach(letter => {
+                const btn = document.createElement('button');
+                btn.textContent = letter;
+                btn.onclick = () => {
+                    document.querySelectorAll('.alphabet-filter button').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    populateAllMakes(letter);
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function selectMake(make) {
+            document.getElementById('makeSelect').value = make;
+            filterModels();
+            showMakeResults(make);
+        }
+
+        function showMakeResults(make) {
+            const container = document.getElementById('resultsContainer');
+            const results = document.getElementById('searchResults');
+            const count = document.getElementById('resultsCount');
+            
+            container.style.display = 'block';
+            results.innerHTML = '';
+            
+            if (vehicleDatabase[make]) {
+                const models = Object.keys(vehicleDatabase[make].models);
+                count.textContent = `${models.length} model(s) found for ${make}`;
+                
+                models.sort().forEach(model => {
+                    const info = vehicleDatabase[make].models[model];
+                    results.appendChild(createResultCard(make, model, info));
+                });
+            }
+            
+            container.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function searchVehicle() {
+            const make = document.getElementById('makeSelect').value;
+            const model = document.getElementById('modelSelect').value;
+            
+            if (make) {
+                if (model) {
+                    showVehicleDetails(make, model);
+                } else {
+                    showMakeResults(make);
+                }
+            }
+        }
+
+        function textSearchVehicle() {
+            const query = document.getElementById('textSearch').value.toLowerCase().trim();
+            if (query.length < 2) {
+                document.getElementById('resultsContainer').style.display = 'none';
+                return;
+            }
+            
+            const container = document.getElementById('resultsContainer');
+            const results = document.getElementById('searchResults');
+            const count = document.getElementById('resultsCount');
+            
+            container.style.display = 'block';
+            results.innerHTML = '';
+            
+            let matches = [];
+            
+            Object.keys(vehicleDatabase).forEach(make => {
+                if (make.toLowerCase().includes(query)) {
+                    Object.keys(vehicleDatabase[make].models).forEach(model => {
+                        matches.push({ make, model, info: vehicleDatabase[make].models[model] });
+                    });
+                } else {
+                    Object.keys(vehicleDatabase[make].models).forEach(model => {
+                        if (model.toLowerCase().includes(query)) {
+                            matches.push({ make, model, info: vehicleDatabase[make].models[model] });
+                        }
+                    });
+                }
+            });
+            
+            count.textContent = `${matches.length} result(s) found for "${query}"`;
+            
+            matches.slice(0, 50).forEach(match => {
+                results.appendChild(createResultCard(match.make, match.model, match.info));
+            });
+            
+            if (matches.length > 50) {
+                const more = document.createElement('p');
+                more.style.textAlign = 'center';
+                more.style.color = 'var(--text-light)';
+                more.textContent = `Showing first 50 results. Please refine your search.`;
+                results.appendChild(more);
+            }
+        }
+
+        function createResultCard(make, model, info) {
+            const card = document.createElement('div');
+            card.className = 'vehicle-result';
+            card.onclick = () => showVehicleDetails(make, model);
+            
+            let fuelTypes = info.fuelTypes || ['Petrol'];
+            let fuelBadges = fuelTypes.map(f => {
+                let cls = f.toLowerCase().includes('diesel') ? 'diesel' : 'petrol';
+                if (f.toLowerCase().includes('electric')) cls = '';
+                return `<span class="fuel-type ${cls}">${f}</span>`;
+            }).join(' ');
+            
+            card.innerHTML = `
+                <h3>${make} ${model}</h3>
+                <div class="details">
+                    <p>${info.years || 'Various years'} • ${info.platform || 'Standard platform'}</p>
+                    ${fuelBadges}
+                </div>
+            `;
+            return card;
+        }
+
+        function showVehicleDetails(make, model) {
+            const info = vehicleDatabase[make]?.models[model];
+            if (!info) return;
+            
+            const makeInfo = vehicleDatabase[make];
+            const container = document.getElementById('resultsContainer');
+            const results = document.getElementById('searchResults');
+            const count = document.getElementById('resultsCount');
+            
+            container.style.display = 'block';
+            count.textContent = `${make} ${model}`;
+            
+            let fuelWarning = '';
+            if (info.fuelTypes?.some(f => f.toLowerCase().includes('diesel'))) {
+                fuelWarning = `
+                    <div class="warning-box">
+                        <h4>⚠️ DIESEL MODEL - CRITICAL WARNING</h4>
+                        <p>If petrol has been added to this diesel vehicle:</p>
+                        <ul>
+                            <li><strong>Do NOT start the engine</strong></li>
+                            <li><strong>Do NOT turn ignition to RUN</strong></li>
+                            <li><strong>Contact NZIFDA certified technician immediately</strong></li>
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            results.innerHTML = `
+                <div class="info-card" style="margin: 0;">
+                    <h2 style="border-bottom: 3px solid var(--oem-accent); padding-bottom: 0.75rem;">${make} ${model}</h2>
+                    
+                    ${fuelWarning}
+                    
+                    <div class="manufacturer-position" style="margin-top: 1.5rem;">
+                        <h4>⚠️ Manufacturer Position</h4>
+                        <p><strong>${make} prescribes fuel tank removal and/or fuel pump access panel removal as the procedure for accessing fuel tank contents.</strong></p>
+                        <p>Fuel contamination is excluded from ${make} warranty coverage.</p>
+                    </div>
+                    
+                    <h3>Vehicle Information</h3>
+                    <table class="specs-table">
+                        <tr><th>Make</th><td>${make}</td></tr>
+                        <tr><th>Model</th><td>${model}</td></tr>
+                        <tr><th>Years</th><td>${info.years || 'Various'}</td></tr>
+                        <tr><th>Fuel Types</th><td>${(info.fuelTypes || ['Petrol']).join(', ')}</td></tr>
+                        <tr><th>Platform</th><td>${info.platform || 'Standard'}</td></tr>
+                        <tr><th>Anti-Siphon Device</th><td>${info.antiSiphon || 'Yes (standard on modern vehicles)'}</td></tr>
+                        <tr><th>Fuel Pump Access Panel</th><td>${info.accessPanel || 'Varies by model year - check service manual'}</td></tr>
+                        <tr><th>Tank Capacity</th><td>${info.tankCapacity || 'Varies'}</td></tr>
+                    </table>
+                    
+                    <h3>NZIFDA Recommended Method</h3>
+                    <div class="method-card">
+                        <h4>✓ ${info.accessPanel === 'Yes' ? 'Method A: Fuel Pump Access Panel' : 'Method B: Full Tank Removal'}</h4>
+                        <p>${info.accessPanel === 'Yes' ? 
+                            'Access panel available - fuel pump module can be removed for extraction without full tank drop.' :
+                            'Tank drop required - no accessible fuel pump panel or tank inspection needed.'}</p>
+                    </div>
+                    
+                    <div class="method-card not-approved">
+                        <h4>✗ Filler Neck Extraction</h4>
+                        <p><strong>Not Approved</strong> - Anti-siphon devices prevent this method. Not a manufacturer-prescribed procedure.</p>
+                    </div>
+                    
+                    <h3>Related Models (Same Platform)</h3>
+                    <p>${info.relatedModels || 'Contact NZIFDA for platform-specific information.'}</p>
+                    
+                    <div class="cta-section" style="margin-top: 2rem;">
+                        <h4>Need ${make} ${model} Fuel Contamination Service?</h4>
+                        <p>Find an NZIFDA certified technician.</p>
+                        <a href="/contact.html" class="btn btn-primary">Contact NZIFDA</a>
+                    </div>
+                </div>
+            `;
+            
+            container.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
