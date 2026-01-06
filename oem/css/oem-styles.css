@@ -1,0 +1,811 @@
+/**
+ * NZIFDA OEM Standards - Shared Styles
+ * Fuel Contamination Remediation Guidelines
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Barlow:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary: #1a1a1a;
+    --danger: #dc2626;
+    --warning: #f59e0b;
+    --success: #16a34a;
+    --accent: #0369a1;
+    --surface: #f8fafc;
+    --surface-alt: #f1f5f9;
+    --border: #e2e8f0;
+    --text: #334155;
+    --text-dark: #0f172a;
+    --text-light: #64748b;
+    
+    /* OEM specific colors */
+    --oem-primary: #0c4a6e;
+    --oem-secondary: #075985;
+    --oem-accent: #0284c7;
+    --oem-light: #e0f2fe;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--surface);
+    color: var(--text);
+    line-height: 1.7;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d3748 100%);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+}
+
+.logo-text {
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.logo-text .nz { color: #fff; }
+.logo-text .if { color: #dc2626; }
+.logo-text .da { color: #3b82f6; }
+
+.logo-subtitle {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-top: 2px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--danger);
+}
+
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.mobile-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--primary);
+    padding: 1rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.mobile-nav.active {
+    display: block;
+}
+
+.mobile-nav a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.mobile-nav a:hover {
+    background: rgba(255,255,255,0.1);
+    color: var(--danger);
+}
+
+@media (max-width: 900px) {
+    .nav-links { display: none; }
+    .mobile-menu-toggle { display: block; }
+}
+
+/* Page Header */
+.page-header {
+    margin-top: 80px;
+    background: linear-gradient(135deg, var(--oem-primary) 0%, var(--oem-secondary) 100%);
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(255,255,255,0.05) 0%, transparent 50%);
+}
+
+.page-header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.page-header h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.page-header .subtitle {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.1rem;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.breadcrumb a {
+    color: var(--oem-accent);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb .separator {
+    color: var(--text-light);
+}
+
+.breadcrumb .current {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+/* Main Content */
+.main-content {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+/* Manufacturer Position Banner */
+.manufacturer-position {
+    background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%);
+    border: 2px solid #f59e0b;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.manufacturer-position h2 {
+    font-family: 'Oswald', sans-serif;
+    color: #92400e;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.manufacturer-position p {
+    color: #78350f;
+    margin-bottom: 0.75rem;
+}
+
+.manufacturer-position p:last-child {
+    margin-bottom: 0;
+}
+
+/* Info Cards */
+.info-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.info-card h2 {
+    font-family: 'Oswald', sans-serif;
+    color: var(--text-dark);
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 3px solid var(--oem-accent);
+}
+
+.info-card h3 {
+    font-family: 'Oswald', sans-serif;
+    color: var(--text-dark);
+    font-size: 1.25rem;
+    margin: 1.5rem 0 0.75rem;
+}
+
+/* Manufacturer Grid */
+.manufacturer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.manufacturer-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    border: 2px solid transparent;
+}
+
+.manufacturer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    border-color: var(--oem-accent);
+}
+
+.manufacturer-card h3 {
+    font-family: 'Oswald', sans-serif;
+    color: var(--text-dark);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.manufacturer-card .brand-count {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.manufacturer-card .brands-list {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.5;
+}
+
+/* Brand List */
+.brand-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.brand-item {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: all 0.3s;
+    text-decoration: none;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid var(--border);
+}
+
+.brand-item:hover {
+    background: var(--oem-light);
+    border-color: var(--oem-accent);
+    transform: translateX(5px);
+}
+
+.brand-item .brand-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--surface-alt);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--oem-primary);
+}
+
+.brand-item .brand-name {
+    font-weight: 600;
+}
+
+/* Method Cards */
+.method-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--success);
+}
+
+.method-card.not-approved {
+    border-left-color: var(--danger);
+    background: #fef2f2;
+}
+
+.method-card h3 {
+    font-family: 'Oswald', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.method-card.not-approved h3 {
+    color: var(--danger);
+}
+
+/* Specs Table */
+.specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+}
+
+.specs-table th,
+.specs-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.specs-table th {
+    background: var(--surface-alt);
+    font-weight: 600;
+    color: var(--text-dark);
+    width: 40%;
+}
+
+.specs-table tr:hover {
+    background: var(--surface);
+}
+
+/* Procedure Steps */
+.procedure-steps {
+    counter-reset: step;
+    list-style: none;
+    margin: 1.5rem 0;
+}
+
+.procedure-steps li {
+    position: relative;
+    padding-left: 3.5rem;
+    margin-bottom: 1rem;
+    min-height: 2rem;
+}
+
+.procedure-steps li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2rem;
+    height: 2rem;
+    background: var(--oem-accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+/* Warning Box */
+.warning-box {
+    background: #fef2f2;
+    border: 2px solid var(--danger);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.warning-box h4 {
+    color: var(--danger);
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Quote Box */
+.quote-box {
+    background: var(--surface-alt);
+    border-left: 4px solid var(--oem-accent);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+}
+
+.quote-box .source {
+    font-style: normal;
+    font-weight: 600;
+    margin-top: 0.75rem;
+    color: var(--text-dark);
+}
+
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(135deg, var(--oem-primary) 0%, var(--oem-secondary) 100%);
+    border-radius: 12px;
+    padding: 2.5rem;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.cta-section h2 {
+    font-family: 'Oswald', sans-serif;
+    color: white;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.cta-section p {
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 1.5rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 8px;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background: var(--danger);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #b91c1c;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: white;
+    color: var(--oem-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--surface);
+}
+
+/* Footer */
+.footer {
+    background: var(--primary);
+    color: white;
+    padding: 3rem 2rem 1.5rem;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+}
+
+.footer-section h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--danger);
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.footer-disclaimer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+/* Print Styles */
+@media print {
+    .header, .footer, .cta-section, .mobile-nav {
+        display: none;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .page-header {
+        margin-top: 0;
+        background: white;
+        color: black;
+        padding: 1rem 0;
+        border-bottom: 2px solid black;
+    }
+    
+    .page-header h1, .page-header .subtitle {
+        color: black;
+    }
+    
+    .main-content {
+        padding: 0;
+    }
+    
+    .info-card, .method-card, .manufacturer-card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        break-inside: avoid;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-header {
+        padding: 2rem 1rem;
+    }
+    
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .main-content {
+        padding: 0 1rem;
+    }
+    
+    .manufacturer-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .brand-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .specs-table th {
+        width: 35%;
+    }
+    
+    .cta-section {
+        padding: 1.5rem;
+    }
+}
+
+/* Model Cards */
+.model-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.model-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: all 0.3s;
+    text-decoration: none;
+    color: var(--text-dark);
+    border: 1px solid var(--border);
+}
+
+.model-card:hover {
+    background: var(--oem-light);
+    border-color: var(--oem-accent);
+    transform: translateY(-3px);
+}
+
+.model-card .model-name {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.model-card .fuel-types {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+/* Warranty Notice */
+.warranty-notice {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 1px solid var(--success);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+}
+
+.warranty-notice h4 {
+    color: var(--success);
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 0.5rem;
+}
+
+/* Search Box */
+.search-box {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.search-input {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Barlow', sans-serif;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--oem-accent);
+}
+
+/* Alphabetical Index */
+.alpha-index {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 8px;
+}
+
+.alpha-index a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: var(--surface-alt);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.alpha-index a:hover,
+.alpha-index a.active {
+    background: var(--oem-accent);
+    color: white;
+}
+
+/* Sub-brand indicator */
+.sub-brand-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background: var(--oem-light);
+    color: var(--oem-primary);
+    font-size: 0.75rem;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+}
+
+/* Status indicators */
+.status-approved {
+    color: var(--success);
+}
+
+.status-not-approved {
+    color: var(--danger);
+}
+
+/* Technical highlight */
+.tech-highlight {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 1.5rem;
+    border-radius: 8px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    overflow-x: auto;
+}
+
+.tech-highlight .keyword {
+    color: #f472b6;
+}
+
+.tech-highlight .value {
+    color: #4ade80;
+}

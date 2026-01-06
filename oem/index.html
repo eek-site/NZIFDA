@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OEM Fuel Contamination Standards | NZIFDA</title>
+    <meta name="description" content="Manufacturer-prescribed fuel contamination remediation standards. NZIFDA certified technicians follow OEM procedures for fuel system access.">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="css/oem-styles.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/index.html" class="logo">
+                <div class="logo-text">
+                    <span class="nz">NZ</span><span class="if">IF</span><span class="da">DA</span>
+                    <span class="logo-subtitle">OEM Standards</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/oem/index.html" class="active">OEM Standards</a></li>
+                <li><a href="/certification.html">Certification</a></li>
+                <li><a href="/for-consumers.html">For Consumers</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+        </nav>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="/index.html">Home</a>
+            <a href="/oem/index.html" class="active">OEM Standards</a>
+            <a href="/certification.html">Certification</a>
+            <a href="/for-consumers.html">For Consumers</a>
+            <a href="/for-operators.html">For Operators</a>
+            <a href="/contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <div class="page-header-content">
+            <h1>OEM Fuel Contamination Standards</h1>
+            <p class="subtitle">Manufacturer-Prescribed Procedures for Fuel System Access</p>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <!-- NZIFDA Position Banner -->
+        <div class="manufacturer-position">
+            <h2>⚠️ NZIFDA Position Statement</h2>
+            <p><strong>Manufacturers prescribe fuel tank removal and/or fuel pump access panel removal as the procedures for accessing fuel tank contents.</strong></p>
+            <p>NZIFDA certified technicians follow manufacturer-prescribed procedures for fuel contamination remediation. Filler neck extraction is <strong>not</strong> a manufacturer-prescribed method.</p>
+            <p>Fuel contamination (misfuelling) is classified as vehicle misuse and excluded from manufacturer warranties. Following manufacturer-prescribed procedures ensures the work is performed correctly.</p>
+        </div>
+
+        <!-- Search -->
+        <div class="search-box">
+            <input type="text" class="search-input" id="vehicleSearch" placeholder="Search for a vehicle make or model..." onkeyup="filterManufacturers()">
+        </div>
+
+        <!-- Alphabetical Index -->
+        <div class="alpha-index">
+            <a href="#a">A</a><a href="#b">B</a><a href="#c">C</a><a href="#d">D</a>
+            <a href="#f">F</a><a href="#g">G</a><a href="#h">H</a><a href="#i">I</a>
+            <a href="#j">J</a><a href="#k">K</a><a href="#l">L</a><a href="#m">M</a>
+            <a href="#n">N</a><a href="#o">O</a><a href="#p">P</a><a href="#r">R</a>
+            <a href="#s">S</a><a href="#t">T</a><a href="#v">V</a>
+        </div>
+
+        <!-- Why OEM Procedures -->
+        <div class="info-card">
+            <h2>Why Manufacturer-Prescribed Procedures?</h2>
+            <p>Modern vehicles include sophisticated fuel system security features that manufacturers have designed with specific service procedures in mind:</p>
+            
+            <h3>Anti-Siphon Technology</h3>
+            <p>Virtually all vehicles manufactured after 2000 include anti-siphon valves, rollover valves, and anti-siphon screens in the filler neck. These devices:</p>
+            <ul>
+                <li>Prevent fuel theft and accidental spillage</li>
+                <li>Block insertion of extraction equipment through the filler neck</li>
+                <li>Can be damaged by improper extraction attempts</li>
+            </ul>
+
+            <h3>Manufacturer Documentation</h3>
+            <p>Every manufacturer's service manual includes detailed procedures for:</p>
+            <ul>
+                <li>Fuel pressure relief procedures</li>
+                <li>Fuel tank draining (using fuel cart)</li>
+                <li>Fuel tank removal/installation with torque specifications</li>
+                <li>Fuel pump/sender removal via access panel or tank drop</li>
+                <li>Fuel filter replacement</li>
+            </ul>
+
+            <div class="warning-box">
+                <h4>⚠️ Filler Neck Extraction</h4>
+                <p>Filler neck extraction is <strong>not documented</strong> in any manufacturer's service manual. It is not an approved procedure. Manufacturers explicitly state not to force objects through the filler neck to avoid damaging anti-siphon mechanisms.</p>
+            </div>
+        </div>
+
+        <!-- Manufacturer Groups -->
+        <div class="info-card">
+            <h2>Manufacturer Groups</h2>
+            <p>Select a manufacturer group to view brand-specific fuel contamination remediation standards:</p>
+            
+            <div class="manufacturer-grid" id="manufacturerGrid">
+                <!-- Toyota Motor Corporation -->
+                <a href="toyota-group/index.html" class="manufacturer-card" data-brands="toyota lexus daihatsu hino">
+                    <h3>Toyota Motor Corporation</h3>
+                    <div class="brand-count">4 Brands</div>
+                    <div class="brands-list">Toyota, Lexus, Daihatsu, Hino</div>
+                </a>
+
+                <!-- Volkswagen Group -->
+                <a href="volkswagen-group/index.html" class="manufacturer-card" data-brands="volkswagen vw audi skoda seat cupra porsche bentley lamborghini">
+                    <h3>Volkswagen Group</h3>
+                    <div class="brand-count">9 Brands</div>
+                    <div class="brands-list">VW, Audi, ŠKODA, SEAT, CUPRA, Porsche, Bentley, Lamborghini, Ducati</div>
+                </a>
+
+                <!-- Stellantis -->
+                <a href="stellantis/index.html" class="manufacturer-card" data-brands="jeep chrysler dodge ram peugeot citroen ds opel vauxhall fiat abarth alfa romeo lancia maserati">
+                    <h3>Stellantis</h3>
+                    <div class="brand-count">14 Brands</div>
+                    <div class="brands-list">Jeep, Peugeot, Citroën, Fiat, Alfa Romeo, Maserati, Chrysler, Dodge, Ram, Opel, Vauxhall, DS, Abarth, Lancia</div>
+                </a>
+
+                <!-- Hyundai Motor Group -->
+                <a href="hyundai-group/index.html" class="manufacturer-card" data-brands="hyundai kia genesis">
+                    <h3>Hyundai Motor Group</h3>
+                    <div class="brand-count">3 Brands</div>
+                    <div class="brands-list">Hyundai, Kia, Genesis</div>
+                </a>
+
+                <!-- Renault-Nissan-Mitsubishi -->
+                <a href="renault-nissan-mitsubishi/index.html" class="manufacturer-card" data-brands="nissan infiniti mitsubishi renault dacia alpine">
+                    <h3>Renault-Nissan-Mitsubishi Alliance</h3>
+                    <div class="brand-count">6 Brands</div>
+                    <div class="brands-list">Nissan, Infiniti, Mitsubishi, Renault, Dacia, Alpine</div>
+                </a>
+
+                <!-- BMW Group -->
+                <a href="bmw-group/index.html" class="manufacturer-card" data-brands="bmw mini rolls-royce rolls royce">
+                    <h3>BMW Group</h3>
+                    <div class="brand-count">3 Brands</div>
+                    <div class="brands-list">BMW, MINI, Rolls-Royce</div>
+                </a>
+
+                <!-- Mercedes-Benz -->
+                <a href="mercedes-benz-group/index.html" class="manufacturer-card" data-brands="mercedes mercedes-benz amg maybach smart">
+                    <h3>Mercedes-Benz Group</h3>
+                    <div class="brand-count">4 Brands</div>
+                    <div class="brands-list">Mercedes-Benz, Mercedes-AMG, Mercedes-Maybach, Smart</div>
+                </a>
+
+                <!-- Ford -->
+                <a href="ford-group/index.html" class="manufacturer-card" data-brands="ford lincoln">
+                    <h3>Ford Motor Company</h3>
+                    <div class="brand-count">2 Brands</div>
+                    <div class="brands-list">Ford, Lincoln</div>
+                </a>
+
+                <!-- General Motors -->
+                <a href="general-motors/index.html" class="manufacturer-card" data-brands="chevrolet chevy gmc cadillac buick holden">
+                    <h3>General Motors</h3>
+                    <div class="brand-count">5 Brands</div>
+                    <div class="brands-list">Chevrolet, GMC, Cadillac, Buick, Holden (historical)</div>
+                </a>
+
+                <!-- Geely -->
+                <a href="geely-group/index.html" class="manufacturer-card" data-brands="volvo polestar lotus geely lynk">
+                    <h3>Geely Holding Group</h3>
+                    <div class="brand-count">5 Brands</div>
+                    <div class="brands-list">Volvo, Polestar, Lotus, Geely, Lynk & Co</div>
+                </a>
+
+                <!-- Tata (JLR) -->
+                <a href="tata-jlr/index.html" class="manufacturer-card" data-brands="jaguar land rover range rover defender discovery">
+                    <h3>Tata Motors (JLR)</h3>
+                    <div class="brand-count">5 Sub-brands</div>
+                    <div class="brands-list">Jaguar, Land Rover, Range Rover, Defender, Discovery</div>
+                </a>
+
+                <!-- Honda -->
+                <a href="honda-group/index.html" class="manufacturer-card" data-brands="honda acura">
+                    <h3>Honda Motor Company</h3>
+                    <div class="brand-count">2 Brands</div>
+                    <div class="brands-list">Honda, Acura</div>
+                </a>
+
+                <!-- Mazda -->
+                <a href="mazda/index.html" class="manufacturer-card" data-brands="mazda">
+                    <h3>Mazda Motor Corporation</h3>
+                    <div class="brand-count">1 Brand</div>
+                    <div class="brands-list">Mazda</div>
+                </a>
+
+                <!-- Subaru -->
+                <a href="subaru/index.html" class="manufacturer-card" data-brands="subaru">
+                    <h3>Subaru Corporation</h3>
+                    <div class="brand-count">1 Brand</div>
+                    <div class="brands-list">Subaru</div>
+                </a>
+
+                <!-- Suzuki -->
+                <a href="suzuki/index.html" class="manufacturer-card" data-brands="suzuki">
+                    <h3>Suzuki Motor Corporation</h3>
+                    <div class="brand-count">1 Brand</div>
+                    <div class="brands-list">Suzuki</div>
+                </a>
+
+                <!-- Tesla -->
+                <a href="tesla/index.html" class="manufacturer-card" data-brands="tesla">
+                    <h3>Tesla</h3>
+                    <div class="brand-count">Electric Vehicles</div>
+                    <div class="brands-list">Model S, Model 3, Model X, Model Y, Cybertruck</div>
+                </a>
+
+                <!-- Chinese Manufacturers -->
+                <a href="chinese-manufacturers/index.html" class="manufacturer-card" data-brands="byd mg saic gwm haval chery nio xpeng great wall">
+                    <h3>Chinese Manufacturers</h3>
+                    <div class="brand-count">8+ Brands</div>
+                    <div class="brands-list">BYD, MG (SAIC), GWM/Haval, Chery, NIO, XPeng</div>
+                </a>
+
+                <!-- Isuzu -->
+                <a href="isuzu/index.html" class="manufacturer-card" data-brands="isuzu">
+                    <h3>Isuzu Motors</h3>
+                    <div class="brand-count">1 Brand</div>
+                    <div class="brands-list">Isuzu (Commercial & Passenger)</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- NZIFDA Methods Summary -->
+        <div class="info-card">
+            <h2>NZIFDA Approved Extraction Methods</h2>
+            <p>Based on manufacturer-prescribed procedures, NZIFDA recognises the following methods:</p>
+
+            <div class="method-card">
+                <h3>✓ Method A: Fuel Pump Access Panel Extraction</h3>
+                <p><strong>Manufacturer Prescribed:</strong> YES — Service manuals document fuel pump removal via access panel</p>
+                <p>Applicable to vehicles with under-seat or boot access panels. Follows manufacturer procedure for fuel pump/sender removal.</p>
+            </div>
+
+            <div class="method-card">
+                <h3>✓ Method B: Full Tank Drop/Removal</h3>
+                <p><strong>Manufacturer Prescribed:</strong> YES — All service manuals document fuel tank removal procedure</p>
+                <p>The universal method applicable to ALL vehicles. Required when no access panel exists, or when engine has been started on contaminated fuel.</p>
+            </div>
+
+            <div class="method-card not-approved">
+                <h3>✗ Method C: Filler Neck Extraction</h3>
+                <p><strong>Manufacturer Prescribed:</strong> NO</p>
+                <p>Not an NZIFDA approved method. Manufacturers do not prescribe filler neck extraction for fuel system access. Anti-siphon devices prevent and can be damaged by this approach.</p>
+            </div>
+        </div>
+
+        <!-- Manufacturer Quotes -->
+        <div class="info-card">
+            <h2>Manufacturer Service Manual Extracts</h2>
+            
+            <div class="quote-box">
+                <p>"Fuel Tank Assembly, Removing And Installing — WARNING! Fire hazard! Do NOT have anything in the area that can ignite gasoline! If necessary, <strong>drain fuel tank using fuel cart</strong>. WARNING! <strong>Empty the fuel tank before removing it!</strong>"</p>
+                <div class="source">— Volkswagen/Audi Service Manual</div>
+            </div>
+
+            <div class="quote-box">
+                <p>"Fuel Tank Removal: Relieve fuel pressure in fuel feed line according to 'Fuel Pressure Relief Procedure'. Insert hose of a hand operated pump into fuel filler hose and drain fuel. <strong>CAUTION: Do not force pump hose into fuel tank.</strong>"</p>
+                <div class="source">— Suzuki Service Manual</div>
+            </div>
+
+            <div class="quote-box">
+                <p>"Before fuel tank removal: Remove fuel pump relay, crank engine to relieve pressure. Disconnect battery negative terminal. <strong>Use approved fuel cart to drain fuel tank.</strong> Note retainer ring alignment marks for reassembly."</p>
+                <div class="source">— Toyota/Lexus Service Manual</div>
+            </div>
+        </div>
+
+        <!-- Warranty Information -->
+        <div class="info-card">
+            <h2>Manufacturer Warranty Position</h2>
+            <p>Fuel contamination is classified as vehicle misuse and excluded from warranty coverage across all manufacturers:</p>
+            
+            <table class="specs-table">
+                <tr>
+                    <th>Manufacturer</th>
+                    <th>Warranty Position</th>
+                </tr>
+                <tr>
+                    <td>Stellantis (Mopar)</td>
+                    <td>"Warranties do not cover damage caused by contaminated fuels, or the use of fuels other than those recommended"</td>
+                </tr>
+                <tr>
+                    <td>General Motors</td>
+                    <td>"Damage due to the lack of maintenance or use of wrong fuel" excluded</td>
+                </tr>
+                <tr>
+                    <td>Toyota</td>
+                    <td>Misfuel classified as "misuse" - excluded from powertrain warranty</td>
+                </tr>
+                <tr>
+                    <td>Ford</td>
+                    <td>Warranty excludes "damage from using fuel other than recommended"</td>
+                </tr>
+                <tr>
+                    <td>BMW / Mercedes / VW</td>
+                    <td>Similar exclusions for improper fuel use</td>
+                </tr>
+            </table>
+
+            <div class="warranty-notice">
+                <h4>✓ NZIFDA Certification Ensures</h4>
+                <p>Technicians are trained in manufacturer-prescribed fuel system access procedures. Work is performed according to manufacturer service manual specifications. Documentation meets insurance and warranty requirements.</p>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2>Find an NZIFDA Certified Technician</h2>
+            <p>For professional fuel contamination remediation following manufacturer-prescribed procedures.</p>
+            <a href="/contact.html" class="btn btn-primary">Contact NZIFDA</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>NZIFDA</h3>
+                <p>New Zealand Insoluble Fuel Disposal Agency</p>
+                <p>Setting the standard for fuel contamination remediation.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/oem/index.html">OEM Standards</a></li>
+                    <li><a href="/certification.html">Certification</a></li>
+                    <li><a href="/for-consumers.html">For Consumers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="/resources.html">Documentation</a></li>
+                    <li><a href="/faq.html">FAQ</a></li>
+                    <li><a href="/insurance-reporting-guide.html">Insurance Guide</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-disclaimer">
+            <p><strong>Disclaimer:</strong> NZIFDA certified technicians follow manufacturer-prescribed procedures for fuel system access. Manufacturers prescribe fuel tank removal and/or fuel pump access panel removal as the procedures for accessing fuel tank contents. All work should be performed by qualified, NZIFDA-certified technicians. Specific procedures may vary by model year and market variant.</p>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 New Zealand Insoluble Fuel Disposal Agency (NZIFDA). All rights reserved.</p>
+            <p><a href="/privacy-policy.html">Privacy Policy</a> | <a href="/terms-of-service.html">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+
+        function filterManufacturers() {
+            const search = document.getElementById('vehicleSearch').value.toLowerCase();
+            const cards = document.querySelectorAll('.manufacturer-card');
+            
+            cards.forEach(card => {
+                const brands = card.getAttribute('data-brands').toLowerCase();
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const brandsList = card.querySelector('.brands-list').textContent.toLowerCase();
+                
+                if (brands.includes(search) || title.includes(search) || brandsList.includes(search)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
