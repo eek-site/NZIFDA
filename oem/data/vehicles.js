@@ -5,16 +5,17 @@ const vehicleDatabase = {
   "Toyota": {
     group: "Toyota Motor Corporation",
     groupUrl: "/oem/toyota-group/index.html",
+    brandUrl: "/oem/toyota-group/toyota/index.html",
     models: {
-      "Hilux": { years: "1997-2024", fuelTypes: ["Petrol", "Diesel"], platform: "IMV Platform", antiSiphon: "Yes", accessPanel: "No - Tank drop required", tankCapacity: "80L", relatedModels: "Fortuner, Innova share platform" },
-      "Corolla": { years: "1995-2024", fuelTypes: ["Petrol", "Hybrid"], platform: "TNGA-C", antiSiphon: "Yes", accessPanel: "Yes - Under rear seat", tankCapacity: "50L", relatedModels: "Corolla Cross, Auris, Levin" },
-      "RAV4": { years: "1994-2024", fuelTypes: ["Petrol", "Hybrid"], platform: "TNGA-K", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "55L", relatedModels: "Vanguard, Harrier" },
-      "Camry": { years: "1995-2024", fuelTypes: ["Petrol", "Hybrid"], platform: "TNGA-K", antiSiphon: "Yes", accessPanel: "Yes - Under rear seat", tankCapacity: "60L", relatedModels: "Aurion, Avalon" },
-      "Hiace": { years: "1995-2024", fuelTypes: ["Petrol", "Diesel"], platform: "H200/H300", antiSiphon: "Yes", accessPanel: "Varies", tankCapacity: "70L", relatedModels: "Regius, Granvia, RegiusAce" },
-      "Prius": { years: "1997-2024", fuelTypes: ["Hybrid"], platform: "TNGA-C", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "43L", relatedModels: "Prius Alpha, Prius C/Aqua" },
-      "Aqua": { years: "2011-2024", fuelTypes: ["Hybrid"], platform: "TNGA-B", antiSiphon: "Yes", accessPanel: "Yes - Under rear seat", tankCapacity: "36L", relatedModels: "Prius C, Yaris Hybrid" },
-      "Land Cruiser": { years: "1990-2024", fuelTypes: ["Petrol", "Diesel"], platform: "F Platform", antiSiphon: "Yes", accessPanel: "No - Tank drop required", tankCapacity: "93L (main) + 45L (sub)", relatedModels: "Land Cruiser Prado, Lexus LX" },
-      "Prado": { years: "1996-2024", fuelTypes: ["Petrol", "Diesel"], platform: "Land Cruiser Prado", antiSiphon: "Yes", accessPanel: "No", tankCapacity: "87L", relatedModels: "Land Cruiser, Lexus GX" },
+      "Hilux": { years: "1997-2024", fuelTypes: ["Petrol", "Diesel"], platform: "IMV Platform", antiSiphon: "Yes", accessPanel: "No - Tank drop required", tankCapacity: "80L", relatedModels: "Fortuner, Innova share platform", pageUrl: "/oem/toyota-group/toyota/hilux.html" },
+      "Corolla": { years: "1995-2024", fuelTypes: ["Petrol", "Hybrid"], platform: "TNGA-C", antiSiphon: "Yes", accessPanel: "Yes - Under rear seat", tankCapacity: "50L", relatedModels: "Corolla Cross, Auris, Levin", pageUrl: "/oem/toyota-group/toyota/corolla.html" },
+      "RAV4": { years: "1994-2024", fuelTypes: ["Petrol", "Hybrid"], platform: "TNGA-K", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "55L", relatedModels: "Vanguard, Harrier", pageUrl: "/oem/toyota-group/toyota/rav4.html" },
+      "Camry": { years: "1995-2024", fuelTypes: ["Petrol", "Hybrid"], platform: "TNGA-K", antiSiphon: "Yes", accessPanel: "Yes - Under rear seat", tankCapacity: "60L", relatedModels: "Aurion, Avalon", pageUrl: "/oem/toyota-group/toyota/camry.html" },
+      "Hiace": { years: "1995-2024", fuelTypes: ["Petrol", "Diesel"], platform: "H200/H300", antiSiphon: "Yes", accessPanel: "Varies", tankCapacity: "70L", relatedModels: "Regius, Granvia, RegiusAce", pageUrl: "/oem/toyota-group/toyota/hiace.html" },
+      "Prius": { years: "1997-2024", fuelTypes: ["Hybrid"], platform: "TNGA-C", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "43L", relatedModels: "Prius Alpha, Prius C/Aqua", pageUrl: "/oem/toyota-group/toyota/prius.html" },
+      "Aqua": { years: "2011-2024", fuelTypes: ["Hybrid"], platform: "TNGA-B", antiSiphon: "Yes", accessPanel: "Yes - Under rear seat", tankCapacity: "36L", relatedModels: "Prius C, Yaris Hybrid", pageUrl: "/oem/toyota-group/toyota/aqua.html" },
+      "Land Cruiser": { years: "1990-2024", fuelTypes: ["Petrol", "Diesel"], platform: "F Platform", antiSiphon: "Yes", accessPanel: "No - Tank drop required", tankCapacity: "93L (main) + 45L (sub)", relatedModels: "Land Cruiser Prado, Lexus LX", pageUrl: "/oem/toyota-group/toyota/land-cruiser.html" },
+      "Prado": { years: "1996-2024", fuelTypes: ["Petrol", "Diesel"], platform: "Land Cruiser Prado", antiSiphon: "Yes", accessPanel: "No", tankCapacity: "87L", relatedModels: "Land Cruiser, Lexus GX", pageUrl: "/oem/toyota-group/toyota/prado.html" },
       "Yaris": { years: "1999-2024", fuelTypes: ["Petrol", "Hybrid"], platform: "TNGA-B", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "42L", relatedModels: "Vitz, Echo, Yaris Cross" },
       "Vitz": { years: "1999-2019", fuelTypes: ["Petrol"], platform: "NBC/B Platform", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "42L", relatedModels: "Yaris, Echo" },
       "86": { years: "2012-2024", fuelTypes: ["Petrol"], platform: "Subaru Global Platform", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "50L", relatedModels: "Subaru BRZ, Scion FR-S, GR86" },
@@ -54,8 +55,9 @@ const vehicleDatabase = {
   "Ford": {
     group: "Ford Motor Company",
     groupUrl: "/oem/ford-group/index.html",
+    brandUrl: "/oem/ford-group/ford/index.html",
     models: {
-      "Ranger": { years: "1998-2024", fuelTypes: ["Petrol", "Diesel"], platform: "T6/T7 Platform", antiSiphon: "Yes", accessPanel: "No - Tank drop required", tankCapacity: "80L", relatedModels: "Mazda BT-50, Everest" },
+      "Ranger": { years: "1998-2024", fuelTypes: ["Petrol", "Diesel"], platform: "T6/T7 Platform", antiSiphon: "Yes", accessPanel: "No - Tank drop required", tankCapacity: "80L", relatedModels: "Mazda BT-50, Everest", pageUrl: "/oem/ford-group/ford/ranger.html" },
       "Falcon": { years: "1960-2016", fuelTypes: ["Petrol", "LPG"], platform: "EA-FG Platform", antiSiphon: "Yes", accessPanel: "Varies", tankCapacity: "68L", relatedModels: "Territory, Fairlane, LTD" },
       "Focus": { years: "1998-2024", fuelTypes: ["Petrol", "Diesel"], platform: "C2 Platform", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "53L", relatedModels: "C-Max, Kuga" },
       "Fiesta": { years: "1995-2023", fuelTypes: ["Petrol", "Diesel"], platform: "B3 Platform", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "42L", relatedModels: "Puma" },
@@ -75,8 +77,9 @@ const vehicleDatabase = {
   "Mazda": {
     group: "Mazda Motor Corporation",
     groupUrl: "/oem/mazda/index.html",
+    brandUrl: "/oem/mazda/mazda/index.html",
     models: {
-      "CX-5": { years: "2012-2024", fuelTypes: ["Petrol", "Diesel"], platform: "Skyactiv Platform", antiSiphon: "Yes", accessPanel: "Yes - Under rear seat", tankCapacity: "56L", relatedModels: "CX-50" },
+      "CX-5": { years: "2012-2024", fuelTypes: ["Petrol", "Diesel"], platform: "Skyactiv Platform", antiSiphon: "Yes", accessPanel: "Yes - Under rear seat", tankCapacity: "56L", relatedModels: "CX-50", pageUrl: "/oem/mazda/mazda/cx-5.html" },
       "BT-50": { years: "2006-2024", fuelTypes: ["Diesel"], platform: "T6/T7 (Ford)", antiSiphon: "Yes", accessPanel: "No - Tank drop required", tankCapacity: "80L", relatedModels: "Ford Ranger, Isuzu D-Max (new)" },
       "Mazda3": { years: "2003-2024", fuelTypes: ["Petrol", "Diesel", "Hybrid"], platform: "Skyactiv Platform", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "51L", relatedModels: "Axela" },
       "Axela": { years: "2003-2019", fuelTypes: ["Petrol", "Diesel", "Hybrid"], platform: "Skyactiv Platform", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "51L", relatedModels: "Mazda3" },
@@ -107,7 +110,7 @@ const vehicleDatabase = {
     group: "Renault-Nissan-Mitsubishi Alliance",
     groupUrl: "/oem/renault-nissan-mitsubishi/index.html",
     models: {
-      "Navara": { years: "1997-2024", fuelTypes: ["Petrol", "Diesel"], platform: "D40/D23 Platform", antiSiphon: "Yes", accessPanel: "No - Tank drop required", tankCapacity: "80L", relatedModels: "Frontier, NP300" },
+      "Navara": { years: "1997-2024", fuelTypes: ["Petrol", "Diesel"], platform: "D40/D23 Platform", antiSiphon: "Yes", accessPanel: "No - Tank drop required", tankCapacity: "80L", relatedModels: "Frontier, NP300", pageUrl: "/oem/renault-nissan-mitsubishi/nissan/navara.html" },
       "X-Trail": { years: "2000-2024", fuelTypes: ["Petrol", "Diesel", "Hybrid"], platform: "CMF-C Platform", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "55L", relatedModels: "Rogue" },
       "Qashqai": { years: "2006-2024", fuelTypes: ["Petrol", "Diesel", "Hybrid"], platform: "CMF-C Platform", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "55L", relatedModels: "Dualis" },
       "Dualis": { years: "2006-2013", fuelTypes: ["Petrol"], platform: "C Platform", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "55L", relatedModels: "Qashqai" },
@@ -172,7 +175,7 @@ const vehicleDatabase = {
     group: "Renault-Nissan-Mitsubishi Alliance",
     groupUrl: "/oem/renault-nissan-mitsubishi/index.html",
     models: {
-      "Triton": { years: "1978-2024", fuelTypes: ["Petrol", "Diesel"], platform: "ML/MN/MQ/MR Platform", antiSiphon: "Yes", accessPanel: "No - Tank drop required", tankCapacity: "75L", relatedModels: "L200, Strada" },
+      "Triton": { years: "1978-2024", fuelTypes: ["Petrol", "Diesel"], platform: "ML/MN/MQ/MR Platform", antiSiphon: "Yes", accessPanel: "No - Tank drop required", tankCapacity: "75L", relatedModels: "L200, Strada", pageUrl: "/oem/renault-nissan-mitsubishi/mitsubishi/triton.html" },
       "Outlander": { years: "2001-2024", fuelTypes: ["Petrol", "Diesel", "PHEV"], platform: "GS Platform", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "60L", relatedModels: "Eclipse Cross" },
       "ASX": { years: "2010-2024", fuelTypes: ["Petrol", "Diesel"], platform: "GS Platform", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "60L", relatedModels: "RVR" },
       "Pajero": { years: "1982-2021", fuelTypes: ["Petrol", "Diesel"], platform: "Pajero Platform", antiSiphon: "Yes", accessPanel: "No - Tank drop required", tankCapacity: "88L", relatedModels: "Montero, Shogun" },
@@ -262,7 +265,7 @@ const vehicleDatabase = {
     group: "Volkswagen Group",
     groupUrl: "/oem/volkswagen-group/index.html",
     models: {
-      "Golf": { years: "1974-2024", fuelTypes: ["Petrol", "Diesel", "Electric"], platform: "MQB Platform", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "50L", relatedModels: "GTI, R, e-Golf" },
+      "Golf": { years: "1974-2024", fuelTypes: ["Petrol", "Diesel", "Electric"], platform: "MQB Platform", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "50L", relatedModels: "GTI, R, e-Golf", pageUrl: "/oem/volkswagen-group/volkswagen/golf.html" },
       "Polo": { years: "1975-2024", fuelTypes: ["Petrol", "Diesel"], platform: "MQB A0 Platform", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "45L", relatedModels: "GTI" },
       "Tiguan": { years: "2007-2024", fuelTypes: ["Petrol", "Diesel"], platform: "MQB Platform", antiSiphon: "Yes", accessPanel: "Yes", tankCapacity: "58L", relatedModels: "Tiguan Allspace" },
       "Amarok": { years: "2010-2024", fuelTypes: ["Petrol", "Diesel"], platform: "T6/T7 (Ford)", antiSiphon: "Yes", accessPanel: "No - Tank drop required", tankCapacity: "80L", relatedModels: "Ford Ranger" },

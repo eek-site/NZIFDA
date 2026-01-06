@@ -143,6 +143,17 @@
             color: var(--text-light);
             margin-bottom: 1rem;
         }
+        .has-page {
+            display: inline-block;
+            font-size: 0.75rem;
+            background: #059669;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+            font-weight: 500;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
@@ -437,7 +448,14 @@
         function createResultCard(make, model, info) {
             const card = document.createElement('div');
             card.className = 'vehicle-result';
-            card.onclick = () => showVehicleDetails(make, model);
+            
+            // If dedicated page exists, link to it; otherwise show inline details
+            if (info.pageUrl) {
+                card.onclick = () => window.location.href = info.pageUrl;
+                card.style.cursor = 'pointer';
+            } else {
+                card.onclick = () => showVehicleDetails(make, model);
+            }
             
             let fuelTypes = info.fuelTypes || ['Petrol'];
             let fuelBadges = fuelTypes.map(f => {
@@ -446,8 +464,10 @@
                 return `<span class="fuel-type ${cls}">${f}</span>`;
             }).join(' ');
             
+            let hasPage = info.pageUrl ? '<span class="has-page">📄 Full Details Available</span>' : '';
+            
             card.innerHTML = `
-                <h3>${make} ${model}</h3>
+                <h3>${make} ${model} ${hasPage}</h3>
                 <div class="details">
                     <p>${info.years || 'Various years'} • ${info.platform || 'Standard platform'}</p>
                     ${fuelBadges}
@@ -459,6 +479,12 @@
         function showVehicleDetails(make, model) {
             const info = vehicleDatabase[make]?.models[model];
             if (!info) return;
+            
+            // If dedicated page exists, redirect to it
+            if (info.pageUrl) {
+                window.location.href = info.pageUrl;
+                return;
+            }
             
             const makeInfo = vehicleDatabase[make];
             const container = document.getElementById('resultsContainer');
