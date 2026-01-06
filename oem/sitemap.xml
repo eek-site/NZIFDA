@@ -8,6 +8,14 @@
         <priority>1.0</priority>
     </url>
     
+    <!-- Vehicle Search -->
+    <url>
+        <loc>https://nzifda.org/oem/vehicle-search.html</loc>
+        <lastmod>2026-01-06</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.95</priority>
+    </url>
+    
     <!-- Manufacturer Groups -->
     <url>
         <loc>https://nzifda.org/oem/toyota-group/</loc>
